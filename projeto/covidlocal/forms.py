@@ -15,20 +15,20 @@ class PacienteForm(forms.Form):
     sexos = forms.ChoiceField(label = 'Sexo',choices = sexos_escolhas);
 
     racas_escolhas = (
-        ("AMARELA", "AMARELA"),
-        ("BRANCA", "BRANCA"),
-        ("INDIGENA", "INDIGENA"),
-        ("NAO INFORMADA", "NAO INFORMADA"),
-        ("PARDA", "PARDA"),
-        ("PRETA", "PRETA")
+        ("AMARELA", "Amarela"),
+        ("BRANCA", "Branca"),
+        ("INDIGENA", "Indígena"),
+        ("NAO INFORMADA", "Não Informada"),
+        ("PARDA", "Parda"),
+        ("PRETA", "Preta")
     )
 
     racas = forms.ChoiceField(label = 'Raça',choices = racas_escolhas);
 
 
     zonas_escolhas = (
-        ("RURAL", "RURAL"),
-        ("URBANA", "URBANA")
+        ("RURAL", "Rural"),
+        ("URBANA", "Urbana")
     )
 
     zonas = forms.ChoiceField(label = 'Zona',choices = zonas_escolhas);
