@@ -10,4 +10,4 @@ from django.http import HttpResponse
     # path('login/', views.login, name = 'login')
 
 def cadastro_paciente(request):
-    return HttpRensponse("<h1>hello world!</h1>")
+    return HttpResponse("<h1>hello world!</h1>")
