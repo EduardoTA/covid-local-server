@@ -1,12 +1,15 @@
 from django.db import models
 
 class Paciente(models.Model):
-    #Se
-    # isCNS == true: id=CPF e id_cand=CNS
-    # isCNS == false: id=CNS e id_cand=CPF
-    id = models.IntegerField(unique=True, primary_key=True)
-    id_cand = models.IntegerField(blank=True, default=None, unique=True)
-    isCNS = models.BooleanField(default=False)
+    # #Se
+    # # isCNS == true: id=CPF e id_cand=CNS
+    # # isCNS == false: id=CNS e id_cand=CPF
+    # id = models.IntegerField(unique=True, primary_key=True)
+    # id_cand = models.IntegerField(blank=True, default=None, unique=True)
+    # isCNS = models.BooleanField(default=False)
+
+    CPF = models.IntegerField(blank=True, default=None, unique=True)
+    CNS = models.IntegerField(blank=True, default=None, unique=True)
 
     sexos = (
         ("FEMININO", "Feminino"),
