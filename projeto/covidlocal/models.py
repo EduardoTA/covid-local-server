@@ -1,5 +1,6 @@
 from django.db import models
 
+<<<<<<< HEAD
 class Paciente(models.Model):
     CNS = models.IntegerField()
     CPF = models.IntegerField()
@@ -21,3 +22,7 @@ class Paciente(models.Model):
     bairro = models.CharField(max_length=100)
     complemento = models.CharField(max_length=10)
     email = models.CharField(max_length=100)
+=======
+# Create your models here.
+
+>>>>>>> 6005166a9a5aa67242cd45ce6da13b6d18681673
