@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpRensponse
-from .models import Paciente
+from django.http import HttpResponse
+#from .models import Paciente
 
 # Create your views here.
 
