@@ -21,7 +21,7 @@ class PacienteForm(forms.ModelForm):
             'pais',
             'UF',
             'municipio',
-            'zona',
+            #'zona',
             'logradouro',
             'numero',
             'bairro',

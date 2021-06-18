@@ -1,7 +1,8 @@
+#from projeto.covidlocal.forms import PacienteForm
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Paciente
-#from .forms import PacienteForm
+from .forms import PacienteForm
 
 # Create your views here.
 
@@ -10,18 +11,18 @@ from .models import Paciente
     # path('cadastro_vacina/', views.cadastro_vacina, name = 'vacina'),
     # path('login/', views.login, name = 'login')
 
-def cadastro_paciente(request):
+def cadastro_vacina(request):
     return HttpResponse("<h1>hello world!</h1>")
 
-def cadastro_vacina(request):
-    # form = VacinaForm(request.POST or None)
+def cadastro_paciente(request):
+    form = PacienteForm(request.POST or None)
 
-    # if form.is_valid():
-    #     form.save()
-    # context{
-    #     'form': form
-    #}
-    return render(request, "cadastro_vacina.html", {})
+    if form.is_valid():
+        form.save()
+    context = {
+        'form': form
+    }
+    return render(request, "cadastro_paciente.html", context)
 
 def menu_inicial(request):
     return render(request, "menu_inicial.html", {})
