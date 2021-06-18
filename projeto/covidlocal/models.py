@@ -1,15 +1,34 @@
 from django.db import models
 
-<<<<<<< HEAD
 class Paciente(models.Model):
-    CNS = models.IntegerField()
-    CPF = models.IntegerField()
+    #Se
+    # isCNS == true: id=CPF e id_cand=CNS
+    # isCNS == false: id=CNS e id_cand=CPF
+    id = models.IntegerField(unique=True, primary_key=True)
+    id_cand = models.IntegerField(blank=True, default=None, unique=True)
+    isCNS = models.BooleanField(default=False)
+
+    sexos = (
+        ("FEMININO", "Feminino"),
+        ("MASCULINO", "Masculino"),
+        ("IGNORADO", "Ignorado")
+    )
+
+    racas = (
+        ("AMARELA", "AMARELA"),
+        ("BRANCA", "BRANCA"),
+        ("INDIGENA", "INDIGENA"),
+        ("NAO INFORMADA", "NAO INFORMADA"),
+        ("PARDA", "PARDA"),
+        ("PRETA", "PRETA")
+    )
+
     nome = models.CharField(max_length=100)
     nomeMae = models.CharField(max_length=100)
-    nomeSocial = models.CharField(max_length=100)
+    nomeSocial = models.CharField(max_length=100, blank=True)
     dataNascimento = models.IntegerField()
-    sexo = models.TextChoices('Feminino', 'Masculino', 'Ignorado')
-    raca = models.TextChoices('AMARELA', 'BRANCA', 'INDIGENA', 'NAO INFORMADA', 'PARDA', 'PRETA')
+    sexo = models.CharField(max_length=10, choices=sexos)
+    raca = models.CharField(max_length=20, choices=racas)
     telefone = models.IntegerField()
     gestante = models.BooleanField()
     puerpera = models.BooleanField()
@@ -20,9 +39,5 @@ class Paciente(models.Model):
     logradouro = models.CharField(max_length=100)
     numero = models.IntegerField()
     bairro = models.CharField(max_length=100)
-    complemento = models.CharField(max_length=10)
-    email = models.CharField(max_length=100)
-=======
-# Create your models here.
-
->>>>>>> 6005166a9a5aa67242cd45ce6da13b6d18681673
+    complemento = models.CharField(max_length=10, blank=True)
+    email = models.CharField(max_length=100, blank=True)
