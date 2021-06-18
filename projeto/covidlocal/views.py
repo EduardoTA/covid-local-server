@@ -8,10 +8,11 @@ def cadastro_vacina(request):
     return HttpResponse("<h1>hello world!</h1>")
 
 def cadastro_paciente(request):
-    form = PacienteForm(request.POST or None)
-
-    if form.is_valid():
-        form.save()
+    form = PacienteForm()
+    if request.method == "POST":
+        form = PacienteForm(request.POST)
+        if form.is_valid():
+            Paciente.objects.create(**form.cleaned_data)
     context = {
         'form': form
     }
