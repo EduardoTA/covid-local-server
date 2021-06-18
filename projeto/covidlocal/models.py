@@ -23,6 +23,11 @@ class Paciente(models.Model):
         ("PRETA", "PRETA")
     )
 
+    zonas = (
+        ("RURAL", "RURAL"),
+        ("URBANA", "URBANA")
+    )
+
     nome = models.CharField(max_length=100)
     nomeMae = models.CharField(max_length=100)
     nomeSocial = models.CharField(max_length=100, blank=True)
@@ -35,7 +40,7 @@ class Paciente(models.Model):
     pais = models.CharField(max_length=100)
     UF = models.CharField(max_length=2)
     municipio = models.CharField(max_length=100)
-    zona = models.TextChoices('Rural', 'Urbana')
+    zona = models.CharField(max_length=6, choices=zonas)
     logradouro = models.CharField(max_length=100)
     numero = models.IntegerField()
     bairro = models.CharField(max_length=100)
