@@ -12,9 +12,9 @@ class Paciente(models.Model):
     CNS = models.IntegerField(blank=True, default=None, unique=True)
 
     sexos = (
-        ("FEMININO", "Feminino"),
-        ("MASCULINO", "Masculino"),
-        ("IGNORADO", "Ignorado")
+        ("FEMININO", "FEMININO"),
+        ("MASCULINO", "MASCULINO"),
+        ("IGNORADO", "IGNORADO")
     )
 
     racas = (
@@ -38,8 +38,8 @@ class Paciente(models.Model):
     sexo = models.CharField(max_length=10, choices=sexos)
     raca = models.CharField(max_length=20, choices=racas)
     telefone = models.IntegerField()
-    gestante = models.BooleanField(blank=True)
-    puerpera = models.BooleanField(blank=True)
+    gestante = models.BooleanField()
+    puerpera = models.BooleanField()
     pais = models.CharField(max_length=100)
     UF = models.CharField(max_length=2)
     municipio = models.CharField(max_length=100)
