@@ -4,13 +4,6 @@ from django.http import HttpResponse
 from .models import Paciente
 from .forms import PacienteForm
 
-# Create your views here.
-
-    # path('admin/', admin.site.urls),
-    # path('cadastro_paciente/', views.cadastro_paciente, name = 'paciente'),
-    # path('cadastro_vacina/', views.cadastro_vacina, name = 'vacina'),
-    # path('login/', views.login, name = 'login')
-
 def cadastro_vacina(request):
     return HttpResponse("<h1>hello world!</h1>")
 
