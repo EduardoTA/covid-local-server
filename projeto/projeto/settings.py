@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'covidlocal',
+    'background_task',
+    'background_tasks',
 ]
 
 MIDDLEWARE = [
