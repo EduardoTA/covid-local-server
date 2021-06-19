@@ -43,8 +43,25 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'covidlocal',
-    'workers',
+    'django_q'
 ]
+
+# settings.py example
+Q_CLUSTER = {
+    'name': 'default',
+    'workers': 8,
+    'recycle': 500,
+    'timeout': 60,
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'cpu_affinity': 1,
+    'label': 'Django Q',
+    'redis': {
+        'host': '127.0.0.1',
+        'port': 6379,
+        'db': 0, }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,5 +1,5 @@
-from workers import task
+from time import sleep
 
-@task(schedule=10)
-def do_something():
-    print('I run every 10 seconds')
+def sincronizar():
+    sleep(10)
+    print("O servidor está sincronizando!")
