@@ -5,7 +5,7 @@ from .models import Paciente
 from .forms import PacienteForm
 
 def cadastro_vacina(request):
-    return HttpResponse("<h1>hello world!</h1>")
+    return render(request, "cadastro_vacina.html", {})
 
 def cadastro_paciente(request):
     form = PacienteForm()
