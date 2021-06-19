@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Paciente
 from .forms import PacienteForm
+from django.contrib import messages
 
 def cadastro_vacina(request):
     return render(request, "cadastro_vacina.html", {})
@@ -12,6 +13,7 @@ def cadastro_paciente(request):
         form = PacienteForm(request.POST)
         if form.is_valid():
             Paciente.objects.create(**form.cleaned_data)
+            messages.success(request, 'Cadastro criado com sucesso!')
     context = {
         'form': form
     }
