@@ -3,8 +3,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Paciente
 from .forms import PacienteForm
+from .tasks import *
 
 def cadastro_vacina(request):
+    say_hello('Foo')
     return render(request, "cadastro_vacina.html", {})
 
 def cadastro_paciente(request):

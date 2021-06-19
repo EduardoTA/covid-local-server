@@ -31,6 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+WORKERS_PURGE = 10
 
 # Application definition
 
@@ -42,8 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'covidlocal',
-    'background_task',
-    'background_tasks',
+    'workers',
 ]
 
 MIDDLEWARE = [
