@@ -55,3 +55,15 @@ class PacienteForm(forms.Form):
         if CPF == None and CNS == None:
             raise forms.ValidationError("CPF ou CNS devem ser inseridos")
 
+        sexo = self.cleaned_data.get("sexo")
+        gestante = self.cleaned_data.get("gestante")
+        puerpera = self.cleaned_data.get("puerpera")
+
+        if sexo == 'FEMININO' or puerpera or gestante:
+            if sexo != 'FEMININO':
+                raise forms.ValidationError("Apenas pacientes do sexo feminino podem ser puérperas ou gestantes")
+            elif puerpera and gestante:
+                raise forms.ValidationError("Paciente não pode estar com o campo Gestante e Puérpera marcados ao mesmo tempo")
+
+
+

@@ -3,6 +3,13 @@ body {
     margin: 0;
 }
 
+.formulario {
+    display: block;
+    margin-left: 250px;
+    padding: 1px 16px;
+    height: 1000px;
+}
+
 div {
     display: block;
     margin-left: 250px;
@@ -10,7 +17,7 @@ div {
     height: 1000px;
 }
 
-ul {
+.ul_base {
     list-style-type: none;
     margin: 0;
     padding: 20px 0 ;
@@ -21,7 +28,7 @@ ul {
     overflow: auto;
 }
 
-li a {
+.li_base a {
     display: block;
     font-size: 18px;
     color: #000;
@@ -29,7 +36,23 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
+.li_base a:hover {
     background-color: #555;
     color: white;
+}
+
+ul.messagelist {
+    padding: 0;
+    margin: 0;
+}
+
+ul.messagelist li {
+    display: block;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 10px 10px 10px 65px;
+    margin: 0 0 10px 0;
+    background: #006b1b;
+    background-size: 16px auto;
+    color: #eeeeee;
 }
