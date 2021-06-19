@@ -11,7 +11,7 @@ def cadastro_paciente(request):
     form = PacienteForm(request.POST or None)
 
     if form.is_valid():
-        form.save()
+        form.save(commit=False)
     context = {
         'form': form
     }

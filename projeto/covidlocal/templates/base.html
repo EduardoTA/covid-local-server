@@ -1,9 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title> Titulo</title>
+    {% load static %}
+    <link href="{% static "css/basestyle.css" %}" rel="stylesheet">
+    <title>Titulo Placeholder</title>
+</head>
 <body>
+    <ul>
+        <li><a href="cadastro_vacina">Cadastro Vacina</a></li>
+        <li> <a href="cadastro_paciente">Cadastro Paciente</a></li>
+        <li><a href="login">Login</a></li>
     {% block content %}
+    replace me
     {% endblock %}
 </body>
-</head>
+</html>

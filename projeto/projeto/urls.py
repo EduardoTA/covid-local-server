@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from covidlocal import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cadastro_paciente/', views.cadastro_paciente, name = 'paciente'),
     path('cadastro_vacina/', views.cadastro_vacina, name = 'vacina'),
-    #path('login/', views.login, name = 'login')
+    #path('login/', views.login, nam e = 'login')
     path('', views.menu_inicial, name = 'menu')
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
