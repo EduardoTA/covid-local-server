@@ -36,7 +36,7 @@ class PacienteForm(forms.Form):
     nome = forms.CharField(label = 'Nome')
     nomeMae = forms.CharField(label = 'Nome da Mãe')
     nomeSocial = forms.CharField(label = 'Nome Social', required= False)
-    dataNascimento = forms.DateField(label = 'Data de Nascimento (mm/dd/aaaa)')
+    dataNascimento = forms.DateField(label = 'Data de Nascimento (dd/mm/aaaa)')
     telefone = forms.IntegerField(label = 'Telefone')
     gestante = forms.BooleanField(label = 'Gestante', required= False)
     puerpera = forms.BooleanField(label = 'Puérpera', required = False)
