@@ -12,26 +12,26 @@ class PacienteForm(forms.Form):
         ("IGNORADO", "Ignorado")
     )
 
-    sexos = forms.ChoiceField(label = 'Sexo',choices = sexos_escolhas);
+    sexo = forms.ChoiceField(label = 'Sexo',choices = sexos_escolhas);
 
     racas_escolhas = (
-        ("AMARELA", "AMARELA"),
-        ("BRANCA", "BRANCA"),
-        ("INDIGENA", "INDIGENA"),
-        ("NAO INFORMADA", "NAO INFORMADA"),
-        ("PARDA", "PARDA"),
-        ("PRETA", "PRETA")
+        ("AMARELA", "Amarela"),
+        ("BRANCA", "Branca"),
+        ("INDIGENA", "Indígena"),
+        ("NAO INFORMADA", "Não Informada"),
+        ("PARDA", "Parda"),
+        ("PRETA", "Preta")
     )
 
-    racas = forms.ChoiceField(label = 'Raça',choices = racas_escolhas);
+    raca = forms.ChoiceField(label = 'Raça',choices = racas_escolhas);
 
 
     zonas_escolhas = (
-        ("RURAL", "RURAL"),
-        ("URBANA", "URBANA")
+        ("RURAL", "Rural"),
+        ("URBANA", "Urbana")
     )
 
-    zonas = forms.ChoiceField(label = 'Zona',choices = zonas_escolhas);
+    zona = forms.ChoiceField(label = 'Zona',choices = zonas_escolhas);
 
 
     nome = forms.CharField(label = 'Nome')
@@ -39,8 +39,8 @@ class PacienteForm(forms.Form):
     nomeSocial = forms.CharField(label = 'Nome Social')
     dataNascimento = forms.IntegerField(label = 'Data de Nascimento')
     telefone = forms.IntegerField(label = 'Telefone')
-    gestante = forms.BooleanField(label = 'Gestante')
-    puerpera = forms.BooleanField(label = 'Puérpera')
+    gestante = forms.BooleanField(label = 'Gestante', required= False)
+    puerpera = forms.BooleanField(label = 'Puérpera', required = False)
     pais = forms.CharField(label = 'País')
     UF = forms.CharField(label = 'UF')
     municipio = forms.CharField(label = 'Município')

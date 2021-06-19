@@ -12,9 +12,9 @@ class Paciente(models.Model):
     CNS = models.IntegerField(blank=True, default=None, unique=True)
 
     sexos = (
-        ("FEMININO", "Feminino"),
-        ("MASCULINO", "Masculino"),
-        ("IGNORADO", "Ignorado")
+        ("FEMININO", "FEMININO"),
+        ("MASCULINO", "MASCULINO"),
+        ("IGNORADO", "IGNORADO")
     )
 
     racas = (
