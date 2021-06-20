@@ -2,8 +2,8 @@ from django.db import models
 
 class Paciente(models.Model):
 
-    CPF = models.IntegerField(null=True,blank=True, default=None, unique=True)
-    CNS = models.IntegerField(null=True,blank=True, default=None, unique=True)
+    CPF = models.IntegerField(null=True,blank=True, default=None, unique=True, max_length=11)
+    CNS = models.IntegerField(null=True,blank=True, default=None, unique=True, max_length=15)
 
     sexos = (
         ("FEMININO", "FEMININO"),

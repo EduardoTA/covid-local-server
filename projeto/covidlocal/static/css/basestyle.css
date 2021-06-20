@@ -46,7 +46,7 @@ ul.messagelist {
     margin: 0;
 }
 
-ul.messagelist li {
+ul.messagelist li.success {
     display: block;
     font-weight: 400;
     font-size: 18px;
@@ -55,4 +55,9 @@ ul.messagelist li {
     background: #006b1b;
     background-size: 16px auto;
     color: #eeeeee;
+}
+
+ul.messagelist li.error {
+    background: #ff0000;
+    background-size: 16px auto;
 }
