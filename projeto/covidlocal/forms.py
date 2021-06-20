@@ -1,10 +1,9 @@
 from django import forms
-
 from .models import Paciente
 
 class PacienteForm(forms.Form):
-    CPF = forms.IntegerField(label = 'CPF')
-    CNS = forms.IntegerField(label = 'CNS')
+    CPF = forms.IntegerField(label = 'CPF', required= False)
+    CNS = forms.IntegerField(label = 'CNS', required= False)
 
     sexos_escolhas = (
         ("FEMININO", "Feminino"),
@@ -12,7 +11,7 @@ class PacienteForm(forms.Form):
         ("IGNORADO", "Ignorado")
     )
 
-    sexo = forms.ChoiceField(label = 'Sexo',choices = sexos_escolhas);
+    sexo = forms.ChoiceField(label = 'Sexo',choices = sexos_escolhas)
 
     racas_escolhas = (
         ("AMARELA", "Amarela"),
@@ -23,7 +22,7 @@ class PacienteForm(forms.Form):
         ("PRETA", "Preta")
     )
 
-    raca = forms.ChoiceField(label = 'Raça',choices = racas_escolhas);
+    raca = forms.ChoiceField(label = 'Raça',choices = racas_escolhas)
 
 
     zonas_escolhas = (
@@ -31,13 +30,13 @@ class PacienteForm(forms.Form):
         ("URBANA", "Urbana")
     )
 
-    zona = forms.ChoiceField(label = 'Zona',choices = zonas_escolhas);
+    zona = forms.ChoiceField(label = 'Zona',choices = zonas_escolhas)
 
 
     nome = forms.CharField(label = 'Nome')
     nomeMae = forms.CharField(label = 'Nome da Mãe')
-    nomeSocial = forms.CharField(label = 'Nome Social')
-    dataNascimento = forms.IntegerField(label = 'Data de Nascimento')
+    nomeSocial = forms.CharField(label = 'Nome Social', required= False)
+    dataNascimento = forms.DateField(label = 'Data de Nascimento (dd/mm/aaaa)')
     telefone = forms.IntegerField(label = 'Telefone')
     gestante = forms.BooleanField(label = 'Gestante', required= False)
     puerpera = forms.BooleanField(label = 'Puérpera', required = False)
@@ -47,5 +46,24 @@ class PacienteForm(forms.Form):
     logradouro = forms.CharField(label = 'Logradouro')
     numero = forms.IntegerField(label = 'Número')
     bairro = forms.CharField(label = 'Bairro')
-    complemento = forms.CharField(label = 'Complemento')
-    email = forms.CharField(label = 'E-mail')
+    complemento = forms.CharField(label = 'Complemento', required= False)
+    email = forms.EmailField(label = 'E-mail', required= False)
+
+    def clean(self):
+        CPF = self.cleaned_data.get("CPF")
+        CNS = self.cleaned_data.get("CNS")
+        if CPF == None and CNS == None:
+            raise forms.ValidationError("CPF ou CNS devem ser inseridos")
+
+        sexo = self.cleaned_data.get("sexo")
+        gestante = self.cleaned_data.get("gestante")
+        puerpera = self.cleaned_data.get("puerpera")
+
+        if sexo == 'FEMININO' or puerpera or gestante:
+            if sexo != 'FEMININO':
+                raise forms.ValidationError("Apenas pacientes do sexo feminino podem ser puérperas ou gestantes")
+            elif puerpera and gestante:
+                raise forms.ValidationError("Paciente não pode estar com o campo Gestante e Puérpera marcados ao mesmo tempo")
+
+
+

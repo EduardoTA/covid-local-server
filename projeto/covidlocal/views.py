@@ -1,4 +1,3 @@
-#from projeto.covidlocal.forms import PacienteForm
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Paciente
@@ -6,6 +5,7 @@ from .forms import PacienteForm
 from .tasks import *
 
 from django_q.tasks import async_task
+from django.contrib import messages
 
 def cadastro_vacina(request):
     async_task("covidlocal.tasks.sincronizar")
@@ -17,6 +17,7 @@ def cadastro_paciente(request):
         form = PacienteForm(request.POST)
         if form.is_valid():
             Paciente.objects.create(**form.cleaned_data)
+            messages.success(request, 'Cadastro criado com sucesso!')
     context = {
         'form': form
     }

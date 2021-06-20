@@ -1,15 +1,9 @@
 from django.db import models
 
 class Paciente(models.Model):
-    # #Se
-    # # isCNS == true: id=CPF e id_cand=CNS
-    # # isCNS == false: id=CNS e id_cand=CPF
-    # id = models.IntegerField(unique=True, primary_key=True)
-    # id_cand = models.IntegerField(blank=True, default=None, unique=True)
-    # isCNS = models.BooleanField(default=False)
 
-    CPF = models.IntegerField(blank=True, default=None, unique=True)
-    CNS = models.IntegerField(blank=True, default=None, unique=True)
+    CPF = models.IntegerField(null=True,blank=True, default=None, unique=True)
+    CNS = models.IntegerField(null=True,blank=True, default=None, unique=True)
 
     sexos = (
         ("FEMININO", "FEMININO"),
@@ -34,7 +28,7 @@ class Paciente(models.Model):
     nome = models.CharField(max_length=100)
     nomeMae = models.CharField(max_length=100)
     nomeSocial = models.CharField(max_length=100, blank=True)
-    dataNascimento = models.IntegerField()
+    dataNascimento = models.DateField()
     sexo = models.CharField(max_length=10, choices=sexos)
     raca = models.CharField(max_length=20, choices=racas)
     telefone = models.IntegerField()
