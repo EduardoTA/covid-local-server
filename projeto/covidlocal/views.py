@@ -14,10 +14,14 @@ def cadastro_vacina(request):
 def cadastro_paciente(request):
     form = PacienteForm()
     if request.method == "POST":
-        form = PacienteForm(request.POST)
-        if form.is_valid():
-            Paciente.objects.create(**form.cleaned_data)
-            messages.success(request, 'Cadastro criado com sucesso!')
+        try:
+            form = PacienteForm(request.POST)
+            if form.is_valid():
+                Paciente.objects.create(**form.cleaned_data)
+                messages.success(request, 'Cadastro criado com sucesso!')
+        except:
+            messages.error(request,'Paciente já cadastrado!')
+            pass
     context = {
         'form': form
     }
