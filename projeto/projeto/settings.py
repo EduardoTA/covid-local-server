@@ -49,8 +49,8 @@ INSTALLED_APPS = [
 # settings.py example
 Q_CLUSTER = {
     'name': 'default',
-    'workers': 8,
-    'recycle': 500,
+    'workers': 1,
+    'recycle': 1,
     'timeout': 60,
     'compress': True,
     'save_limit': 250,
