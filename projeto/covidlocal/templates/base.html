@@ -3,16 +3,29 @@
 <head>
     {% load static %}
     <link href="{% static "css/basestyle.css" %}" rel="stylesheet">
-    <title>Titulo Placeholder</title>
+    <title>Servidor Local VaciVida</title>
 </head>
 <body>
     <nav>
     <ul class = "ul_base">
+        {% if user.is_authenticated %}
         <li class = "li_base"><a href="/">Home</a></li>
         <li class = "li_base"><a href="/cadastro_paciente">Cadastro Paciente</a></li>
         <li class = "li_base"><a href="/cadastro_vacina">Cadastro Vacina</a></li>
-        <li class = "li_base"><a href="/admin">Admin</a></li>
-        <li class = "li_base"><a href="/login">Login</a></li>
+        {% else %}
+        <li class = "li_base"><a href="/login">Fazer Login</a></li>
+        {% endif %}
+        {% if user.is_superuser %}
+        <li class = "li_base"><a href="/admin">Página de Administrador</a></li>
+        <li class = "li_base"><a href="/cadastrar_usuario">Criar Usuário</a></li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <li class = "li_base"><a href="/logout">Logout</a></li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <!-- colocar o nome do usuário logado -->
+        <li class="usuario">{{ user.get_username }} </li>
+        {% endif %}
     </ul>
     </nav>
     {% block content %}

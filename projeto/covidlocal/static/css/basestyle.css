@@ -110,3 +110,9 @@ input[type=submit] {
     display: table;
     clear: both;
 }
+
+ul.base li.usuario {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
