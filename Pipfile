@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 django = "*"
+django-q = "*"
+flask = "*"
+requests = "*"
+django-constance = {extras = ["redis"], version = "*"}
 
 [dev-packages]
 

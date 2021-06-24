@@ -43,3 +43,6 @@ class Paciente(models.Model):
     bairro = models.CharField(max_length=100)
     complemento = models.CharField(max_length=10, blank=True)
     email = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return str(self.CPF)

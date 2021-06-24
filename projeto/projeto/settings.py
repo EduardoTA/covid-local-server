@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+WORKERS_PURGE = 10
 
 # Application definition
 
@@ -42,7 +44,39 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'covidlocal',
+    'django_q',
+    'constance'
 ]
+
+# settings.py example
+Q_CLUSTER = {
+    'name': 'default',
+    'workers': 1,
+    'recycle': 1,
+    'timeout': 60,
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'cpu_affinity': 1,
+    'label': 'Django Q',
+    'redis': {
+        'host': '127.0.0.1',
+        'port': 6379,
+        'db': 0, }
+}
+
+now = datetime.now()
+
+CONSTANCE_CONFIG = {
+    'ultima_sincronizacao': (now.strftime("%d/%m/%Y %H:%M:%S"), 'Quando a última sincronização foi', str),
+    'sincronizando': (False, 'Está sincronizando agora?', bool)
+}
+
+CONSTANCE_REDIS_CONNECTION = {
+    'host': '127.0.0.1',
+    'port': 6379,
+    'db': 0,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
