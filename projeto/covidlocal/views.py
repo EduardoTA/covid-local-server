@@ -49,3 +49,12 @@ def cadastrar_usuario(request):
     else:
         form = UserCreationForm()
     return render(request, 'cadastrar_usuario.html', {'form': form})
+
+@login_required
+def cadastro_vacina(request):
+    if request.method == 'POST':
+        q = request.POST.get('q')
+        paciente = Paciente.objects.filter(CPF__iexact=q).values()
+        form = PacienteForm('dados')
+        return render(request, 'cadastro_vacina.html', {'q':q,'paciente':paciente, 'form':form})
+    return render(request, "cadastro_vacina.html", {})
