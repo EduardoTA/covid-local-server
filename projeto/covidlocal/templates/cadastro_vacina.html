@@ -9,18 +9,16 @@
     <form method="POST" action="" id="searchform"> {% csrf_token %}
         <input class="searchfield" id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="CPF ou CNS"/>
     </form>
-    {% if q %}
-    {% include 'messages.html' %}
-    <h2>Cadastro de Paciente</h2>    
-    <form method="POST"> {% csrf_token %}
-        {{form.as_p}}
-        <input type='submit' value='Confirmar Dados do Paciente'/>
-    </form>
+    {% if q %}   
     {% for paciente in paciente %}
-        {{ paciente }}
+    <h2>Cadastro de Paciente</h2> 
+        <form method="POST"> {% csrf_token %}
+            {{ form.as_p }}
+            <input type='submit' value='Confirmar Dados do Paciente' name='confirma_cadastro'/>
+        </form>
     {% endfor %}
     {% else %}
-    <lh3>Favor digitar CPF, CNS ou Nome do Paciente</h3>
+    <h3>Favor digitar CPF, CNS ou Nome do Paciente</h3>
     {% endif %}
 </div>
 
