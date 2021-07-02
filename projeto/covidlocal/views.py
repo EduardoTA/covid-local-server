@@ -11,10 +11,10 @@ from django import forms
 from django_q.tasks import async_task
 from django.contrib import messages
 
-@login_required
-def cadastro_vacina(request):
-    async_task("covidlocal.tasks.sincronizar")
-    return render(request, "cadastro_vacina.html", {})
+#@login_required
+#def cadastro_vacina(request):
+#    async_task("covidlocal.tasks.sincronizar")
+#    return render(request, "cadastro_vacina.html", {})
 
 @login_required
 def cadastro_paciente(request):
@@ -58,41 +58,38 @@ def cadastro_vacina(request):
             try:
                 form = PacienteForm(request.POST)
                 if form.is_valid():
-                    Paciente.objects.update_or_create(**form.cleaned_data)
+                    form_dict = form.cleaned_data
+                    pk = ''
+                    if form_dict.get('CPF') != '':
+                        pk = form_dict.get('CPF')
+                    else:
+                        pk = form_dict.get('CNS')
+                    Paciente.objects.filter(CPF=pk).update(**form_dict)
                     messages.success(request, 'Cadastro criado com sucesso!')
             except:
-                messages.error(request,'Paciente já cadastrado!')
+                messages.error(request,'Erro!')
                 pass
                 1+1
             return render(request, 'cadastro_vacina.html', {'form':form})
         else:
-            q = request.POST.get('q')
+            pesquisa = request.POST.get('pesquisa')
             try:
-                paciente = Paciente.objects.filter(CPF__iexact=q)
-                data = {'CPF':paciente[0].CPF,
-                        'CNS':paciente[0].CNS,
-                        'sexo':paciente[0].sexo,
-                        'raca':paciente[0].raca,
-                        'zona':paciente[0].zona,
-                        'nome':paciente[0].nome,
-                        'nomeMae':paciente[0].nomeMae,
-                        'nomeSocial':paciente[0].nomeSocial,
-                        'dataNascimento':paciente[0].dataNascimento,
-                        'telefone':paciente[0].telefone,
-                        'gestante':paciente[0].gestante,
-                        'puerpera':paciente[0].puerpera,
-                        'pais':paciente[0].pais,
-                        'UF':paciente[0].UF,
-                        'municipio':paciente[0].municipio,
-                        'logradouro':paciente[0].logradouro,
-                        'numero':paciente[0].numero,
-                        'bairro':paciente[0].bairro,
-                        'complemento':paciente[0].complemento,
-                        'email':paciente[0].email,}
-                form = PacienteForm(data)
-                return render(request, 'cadastro_vacina.html', {'q':q,'paciente':paciente, 'form':form})
+                paciente = 0
+                if Paciente.objects.filter(CPF__iexact=pesquisa):
+                    paciente = Paciente.objects.filter(CPF__iexact=pesquisa).values()[0]
+                    paciente.pop('id')
+                if Paciente.objects.filter(CNS__iexact=pesquisa):
+                    paciente = Paciente.objects.filter(CNS__iexact=pesquisa).values()[0]
+                    paciente.pop('id')
+                form = PacienteForm(paciente)
+                return render(request, 'cadastro_vacina.html', 
+                {'pesquisa':pesquisa,'paciente':paciente, 'form':form})
+
             except:
                 messages.error(request,'Paciente ainda não está cadastrado!')
                 pass
-                return render(request, 'cadastro_vacina.html', {'q':q,'paciente':paciente})
+                return render(request, 'cadastro_vacina.html', 
+                {'pesquisa':pesquisa,'paciente':paciente})
+            
+
     return render(request, "cadastro_vacina.html", {})
