@@ -18,18 +18,20 @@ from django.contrib import messages
 
 @login_required
 def cadastro_paciente(request):
+    paciente = 0
     form = PacienteForm()
     if request.method == "POST":
         try:
             form = PacienteForm(request.POST)
             if form.is_valid():
-                Paciente.objects.create(**form.cleaned_data)
+                paciente = Paciente.objects.create(**form.cleaned_data)
                 messages.success(request, 'Cadastro criado com sucesso!')
         except:
             messages.error(request,'Paciente já cadastrado!')
             pass
     context = {
-        'form': form
+        'form': form,
+        'paciente': paciente
     }
     return render(request, "cadastro_paciente.html", context)
 
@@ -53,6 +55,7 @@ def cadastrar_usuario(request):
 
 @login_required
 def cadastro_vacina(request):
+    confirmado = 0
     if request.method == 'POST':
         if request.POST.get('confirma_cadastro'):
             try:
@@ -65,12 +68,13 @@ def cadastro_vacina(request):
                     else:
                         pk = form_dict.get('CNS')
                     Paciente.objects.filter(CPF=pk).update(**form_dict)
-                    messages.success(request, 'Cadastro criado com sucesso!')
+                    paciente = Paciente.objects.filter(CPF=pk).values()[0]
+                    messages.success(request, 'Dados confirmados com sucesso!')
+                    confirmado = 1
             except:
                 messages.error(request,'Erro!')
                 pass
-                1+1
-            return render(request, 'cadastro_vacina.html', {'form':form})
+            return render(request, 'cadastro_vacina.html', {'form':form, 'paciente': paciente, 'confirmado': confirmado})
         else:
             pesquisa = request.POST.get('pesquisa')
             try:
@@ -78,18 +82,18 @@ def cadastro_vacina(request):
                 if Paciente.objects.filter(CPF__iexact=pesquisa):
                     paciente = Paciente.objects.filter(CPF__iexact=pesquisa).values()[0]
                     paciente.pop('id')
-                if Paciente.objects.filter(CNS__iexact=pesquisa):
+                elif Paciente.objects.filter(CNS__iexact=pesquisa):
                     paciente = Paciente.objects.filter(CNS__iexact=pesquisa).values()[0]
                     paciente.pop('id')
+                else:
+                    messages.error(request,'Paciente ainda não está cadastrado!')
                 form = PacienteForm(paciente)
-                return render(request, 'cadastro_vacina.html', 
-                {'pesquisa':pesquisa,'paciente':paciente, 'form':form})
-
             except:
-                messages.error(request,'Paciente ainda não está cadastrado!')
+                messages.error(request,'Erro!')
                 pass
-                return render(request, 'cadastro_vacina.html', 
-                {'pesquisa':pesquisa,'paciente':paciente})
-            
+            return render(request, 'cadastro_vacina.html', {'pesquisa':pesquisa,'paciente':paciente, 'form':form, 'confirmado': confirmado})
+    return render(request, "cadastro_vacina.html", {'confirmado': confirmado})
 
-    return render(request, "cadastro_vacina.html", {})
+@login_required
+def cadastro_imunizacao(request):
+    return render(request, "cadastro_imunizacao.html", {})
