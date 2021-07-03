@@ -1,0 +1,97 @@
+input[type=text] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+input[type=number] {
+    display: inline-block;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+input[type=email] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit] {
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 20px;
+    font-size: x-large;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    float: right;
+}
+
+.formulario {
+    overflow-y: visible;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    margin-top: 50px;
+    margin-left: 400px;
+    margin-right: 200px;
+    margin-bottom: 40px;
+    height: max-content;
+    display: block;
+    padding: 30px;
+    padding-bottom: 100px;
+}
+
+.formulario h2 {
+    margin-top: 0px;
+}
+
+.bloco{
+    margin-top: 20px;
+}
+
+
+
+.titulos {
+    display: inline-block;
+    width: 20%;
+    vertical-align:top;
+    font-weight: bold;        
+}
+
+
+.campos {
+    display: inline-block;
+    width: 79%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #333; /* Modern Browsers */
+}

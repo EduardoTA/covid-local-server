@@ -1,10 +1,147 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static "css/form.css" %}" rel="stylesheet">
 <div class="formulario">
-    {% include 'messages.html' %}
     <h2>Cadastro de Paciente</h2>    
+    {% include 'messages.html' %}
     <form method="POST"> {% csrf_token %}
-        {{form.as_p}}
+        <div class='bloco'>
+            <hr>
+            <div class='titulos'>
+                <p>Identificação</p>
+            </div>
+            <div class='campos'>
+                {{ form.non_field_errors }}
+                <div class="fieldWrapper"> 
+                    {{ form.CPF.errors }}
+                    <label for="{{ form.CPF.id_for_label }}">CPF:</label><br>
+                    {{ form.CPF }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.CNS.errors }}
+                    <label for="{{ form.CNS.id_for_label }}">CNS:</label><br>
+                    {{ form.CNS }}
+                </div>
+            </div>
+        </div>
+        <div class="bloco">
+            <hr>
+            <div class='titulos'>
+                <p>Dados Básicos</p>
+            </div>
+            <div class="campos">
+                <div class="fieldWrapper"> 
+                    {{ form.nome.errors }}
+                    <label for="{{ form.nome.id_for_label }}">Nome:</label><br>
+                    {{ form.nome }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.nomeMae.errors }}
+                    <label for="{{ form.nomeMae.id_for_label }}">Nome da Mãe:</label><br>
+                    {{ form.nomeMae }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.nomeSocial.errors }}
+                    <label for="{{ form.nomeSocial.id_for_label }}">nomeSocial:</label><br>
+                    {{ form.nomeSocial }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.dataNascimento.errors }}
+                    <label for="{{ form.dataNascimento.id_for_label }}">dataNascimento:</label><br>
+                    {{ form.dataNascimento }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.telefone.errors }}
+                    <label for="{{ form.telefone.id_for_label }}">telefone:</label><br>
+                    {{ form.telefone }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.email.errors }}
+                    <label for="{{ form.email.id_for_label }}">email:</label><br>
+                    {{ form.email }}
+                </div>
+            </div>
+        </div>
+        <div class="bloco">
+            <hr>
+            <div class='titulos'>
+                <p>Dados Básicos</p>
+            </div>
+            <div class="campos">
+                <div class="fieldWrapper"> 
+                    {{ form.sexo.errors }}
+                    <label for="{{ form.sexo.id_for_label }}">sexo:</label><br>
+                    {{ form.sexo }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.raca.errors }}
+                    <label for="{{ form.raca.id_for_label }}">raca:</label><br>
+                    {{ form.raca }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.gestante.errors }}
+                    <label for="{{ form.gestante.id_for_label }}">gestante:</label><br>
+                    {{ form.gestante }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.puerpera.errors }}
+                    <label for="{{ form.puerpera.id_for_label }}">puerpera:</label><br>
+                    {{ form.puerpera }}
+                </div>
+            </div>
+        </div>
+        <div class="bloco">
+            <hr>
+            <div class='titulos'>
+                <p>Endereço</p>
+            </div>
+            <div class="campos">
+                <div class="fieldWrapper"> 
+                    {{ form.pais.errors }}
+                    <label for="{{ form.pais.id_for_label }}">pais:</label><br>
+                    {{ form.pais }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.UF.errors }}
+                    <label for="{{ form.UF.id_for_label }}">UF:</label><br>
+                    {{ form.UF }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.municipio.errors }}
+                    <label for="{{ form.municipio.id_for_label }}">municipio:</label><br>
+                    {{ form.municipio }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.logradouro.errors }}
+                    <label for="{{ form.logradouro.id_for_label }}">logradouro:</label><br>
+                    {{ form.logradouro }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.numero.errors }}
+                    <label for="{{ form.numero.id_for_label }}">numero:</label><br>
+                    {{ form.numero }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.bairro.errors }}
+                    <label for="{{ form.bairro.id_for_label }}">bairro:</label><br>
+                    {{ form.bairro }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.complemento.errors }}
+                    <label for="{{ form.complemento.id_for_label }}">complemento:</label><br>
+                    {{ form.complemento }}
+                </div>
+                <div class="fieldWrapper"> 
+                    {{ form.zona.errors }}
+                    <label for="{{ form.zona.id_for_label }}">zona:</label><br>
+                    {{ form.zona }}
+                </div>
+                <br>
+            </div>
+            <hr>
+        </div>
+       
         <input type='submit' value='Save'/>
     </form>
 </div>
