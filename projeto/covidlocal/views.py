@@ -12,7 +12,7 @@ from django.contrib import messages
 
 @login_required
 def cadastro_vacina(request):
-    async_task("covidlocal.tasks.sincronizar")
+    # async_task("covidlocal.tasks.sincronizar")
     return render(request, "cadastro_vacina.html", {})
 
 @login_required

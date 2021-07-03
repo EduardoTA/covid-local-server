@@ -9,6 +9,7 @@ django-q = "*"
 flask = "*"
 requests = "*"
 django-constance = {extras = ["redis"], version = "*"}
+validate-docbr = "*"
 
 [dev-packages]
 
