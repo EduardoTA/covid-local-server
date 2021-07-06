@@ -1,5 +1,25 @@
 from django.db import models
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from multiselectfield import MultiSelectField
+
+import json
+
+def get_paises():
+    with open('projeto/covidlocal/json/paises.json') as f:
+        json_data = json.load(f)
+        lista = []
+        for i in range(0,len(json_data["paises"])):
+            lista.append(tuple([json_data["paises"][i]["sigla"], json_data["paises"][i]["nome"]]))
+    return tuple(lista)
+
+def get_estados():
+    with open('projeto/covidlocal/json/estados.json') as f:
+        json_data = json.load(f)
+        lista = []
+        for i in range(0,len(json_data["estados"])):
+            lista.append(tuple([json_data["estados"][i]["sigla"], json_data["estados"][i]["nome"]]))
+    return tuple(lista)
 
 imunobiologicos = (
     ("ASTRAZENECA/OXFORD", "ASTRAZENECA/OXFORD"),
@@ -50,16 +70,13 @@ grupos = (
     ("TRABALHADOR DE SAUDE", "TRABALHADOR DE SAUDE")
 )
 
-estratégias = (
+estrategias = (
     ("CAMPANHA INDISCRIMINADA", "CAMPANHA INDISCRIMINADA"),
 )
 
-estados = (
-
-)
-
-paises = (
-
+comorbidades = (
+    ("Teste", "Teste"),
+    ("Teste0", "Teste0")
 )
 
 class Paciente(models.Model):
@@ -108,9 +125,38 @@ class Paciente(models.Model):
     def __str__(self):
         return str(self.CPF)
 
+class Imunobiológico(models.Model):
+    imunobiologico = models.CharField(max_length=20)
+    doses = models.SmallIntegerField()
+    dias_prox_dose = models.SmallIntegerField(blank=True)
+
+    def __str__(self):
+        return str(self.imunobiologico)
+
+    def clean(self, *args, **kwargs):
+        if self.doses == 1 and self.dias_prox_dose != None:
+            raise ValidationError(_('Para imunobiológico de dose única, não deve haver data para 2ª dose'))
+        elif self.doses == 2 and self.dias_prox_dose != None:
+            raise ValidationError(_('Configurar dias para a 2ª dose'))
+        super().clean(*args, **kwargs)
+    
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+class Perdas(models.Model):
+    estabelecimento = models.CharField(max_length=100)
+    data = models.DateField()
+    imunobiologico = models.ForeignKey(Imunobiológico, on_delete=models.CASCADE, null=True, blank=True, default=None)
+    lote = models.CharField(max_length=100)
+    falha_equip = models.IntegerField()
+    falha_trans = models.IntegerField()
+    falta_energ = models.IntegerField()
+    frasc_trans = models.IntegerField()
+
 class Lote(models.Model):
     lote = models.CharField(max_length=100)
-    imunobiologico = models.CharField(max_length=18, choices=imunobiologicos)
+    imunobiologico = models.ForeignKey(Imunobiológico, on_delete=models.CASCADE, null=True, blank=True, default=None)
 
 class Imunização(models.Model):
     doses = (
@@ -118,38 +164,31 @@ class Imunização(models.Model):
         (2,"2ª dose")
     )
 
-    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True, blank=True, default=None)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True, blank=True, default=None, verbose_name="Paciente")
     
-    dose = models.IntegerField(choices=doses)
-    imunobiologico = models.CharField(max_length=18, choices=imunobiologicos)
-    lote = models.ForeignKey(Lote, on_delete=models.CASCADE, null=True, blank=True, default=None)
+    comorbidades = MultiSelectField(choices = comorbidades, verbose_name="Comorbidades")
 
-    via_admn = models.CharField(max_length=20, choices=vias_admn)
-    local_admn = models.CharField(max_length=20, choices=locais_admn)
+    dose = models.IntegerField(choices=doses, verbose_name="Dose")
+    imunobiologico = models.ForeignKey(Imunobiológico, on_delete=models.CASCADE, null=True, blank=True, default=None, verbose_name="Imunobiológico")
+    lote = models.ForeignKey(Lote, on_delete=models.CASCADE, null=True, blank=True, default=None, verbose_name="Lote")
+
+    via_admn = models.CharField(max_length=20, choices=vias_admn, verbose_name="Via de Administração")
+    local_admn = models.CharField(max_length=20, choices=locais_admn, verbose_name="Local de Administração")
 
     vacinador = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         null=True, blank=True,
-        default=None
+        default=None,
+        verbose_name="Vacinador"
     )
 
-    grupo = models.CharField(max_length=100, choices=grupos)
+    grupo = models.CharField(max_length=100, choices=grupos, verbose_name="Grupo de Atendimento")
 
-    estratégia = models.CharField(max_length=100, choices=estratégias)
+    estrategia = models.CharField(max_length=100, choices=estrategias, verbose_name="Estratégia")
     
-    data_aplic = models.DateField()
-    data_apraz = models.DateField(blank=True)
+    data_aplic = models.DateField(verbose_name="Data de Aplicação")
+    data_apraz = models.DateField(blank=True, verbose_name="Data de Aprazamento")
 
-    estado_1_dose = models.TextField(max_length=100, choices=estados)
-    pais_1_dose = models.TextField(max_length=100, choices=paises)
-
-class Perdas(models.Model):
-    estabelecimento = models.CharField(max_length=100)
-    data = models.DateField()
-    imunobiologico = models.CharField(max_length=18, choices=imunobiologicos)
-    lote = models.CharField(max_length=100)
-    falha_equip = models.IntegerField()
-    falha_trans = models.IntegerField()
-    falta_energ = models.IntegerField()
-    frasc_trans = models.IntegerField()
+    estado_1_dose = models.TextField(max_length=100, choices=get_estados(), verbose_name="Estado Primeira Dose")
+    pais_1_dose = models.CharField(max_length=100, choices=get_paises(), verbose_name="País Primeira Dose")
