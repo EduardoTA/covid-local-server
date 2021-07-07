@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fafe191d9d0b60083fa75b9052c64715fcc1d34a19da0be82a463fa545b8da09"
+            "sha256": "6fa8f0dd3467b8ea00ca3e05657f2c55243d23fbecb6a289c306cd15d0821a65"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -89,7 +89,7 @@
         },
         "django-constance": {
             "extras": [
-                "redis"
+                "database"
             ],
             "hashes": [
                 "sha256:0a492454acc78799ce7b9f7a28a00c53427d513f34f8bf6fdc90a46d8864b2af",

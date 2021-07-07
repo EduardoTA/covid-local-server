@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'covidlocal',
-    'django_q',
-    'constance'
+    'django_q'
 ]
 
 # settings.py example
@@ -65,18 +64,21 @@ Q_CLUSTER = {
         'db': 0, }
 }
 
-now = datetime.now()
+#now = datetime.now()
 
-CONSTANCE_CONFIG = {
-    'ultima_sincronizacao': (now.strftime("%d/%m/%Y %H:%M:%S"), 'Quando a última sincronização foi', str),
-    'sincronizando': (False, 'Está sincronizando agora?', bool)
-}
+#CONSTANCE_CONFIG = {
+#    'ultima_sincronizacao': (now.strftime("%d/%m/%Y %H:%M:%S"), 'Quando a última sincronização foi', str),
+#    'sincronizando': (False, 'Está sincronizando agora?', bool),
+#    'estabecimento': ("Estabelecimento de teste", 'Nome do estabelecimento', str)
+#}
 
-CONSTANCE_REDIS_CONNECTION = {
-    'host': '127.0.0.1',
-    'port': 6379,
-    'db': 0,
-}
+#CONSTANCE_REDIS_CONNECTION = {
+#    'host': '127.0.0.1',
+#    'port': 6379,
+#    'db': 0,
+#}
+
+#CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

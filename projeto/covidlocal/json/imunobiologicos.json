@@ -1,0 +1,27 @@
+{
+    "imunobiologicos":[
+        {
+            "imunobiologico": "ASTRAZENECA/OXFORD/FIOCRUZ",
+            "doses": "2",
+            "dias_aprazamento": "84"
+        },
+        {
+            "imunobiologico": "CORONAVAC",
+            "doses": "2",
+            "dias_aprazamento": "28"
+        },
+        {
+            "imunobiologico": "JANSSEN",
+            "doses": "1"
+        },
+        {
+            "imunobiologico": "PFIZER",
+            "doses": "2",
+            "dias_aprazamento": "84"
+        },
+        {
+            "imunobiologico": "TESTE UNICA",
+            "doses": "1"
+        }
+    ]
+}

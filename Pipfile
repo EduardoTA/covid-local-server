@@ -8,7 +8,7 @@ django = "*"
 django-q = "*"
 flask = "*"
 requests = "*"
-django-constance = {extras = ["redis"], version = "*"}
+django-constance = {extras = ["database"], version = "*"}
 django-multiselectfield = "*"
 validate-docbr = "*"
 

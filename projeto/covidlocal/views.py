@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required,user_passes_test
-from .models import Paciente
-from .forms import PacienteForm
+from .models import Paciente, Imunizacao
+from .forms import ImunizacaoForm, PacienteForm
 from .tasks import *
 from django import forms
 
@@ -27,7 +27,8 @@ def cadastro_paciente(request):
             if form.is_valid():
                 paciente = Paciente.objects.create(**form.cleaned_data)
                 messages.success(request, 'Cadastro criado com sucesso!')
-        except:
+        except Exception as e:
+            print(e)
             messages.error(request,'Paciente já cadastrado!')
             pass
     context = {
@@ -55,7 +56,7 @@ def cadastrar_usuario(request):
     return render(request, 'cadastrar_usuario.html', {'form': form})
 
 @login_required
-def cadastro_vacina(request):
+def busca_cadastro(request):
     confirmado = 0
     if request.method == 'POST':
         if request.POST.get('confirma_cadastro'):
@@ -75,7 +76,7 @@ def cadastro_vacina(request):
             except:
                 messages.error(request,'Erro!')
                 pass
-            return render(request, 'cadastro_vacina.html', {'form':form, 'paciente': paciente, 'confirmado': confirmado})
+            return render(request, 'busca_cadastro.html', {'form':form, 'paciente': paciente, 'confirmado': confirmado})
         else:
             pesquisa = request.POST.get('pesquisa')
             try:
@@ -92,9 +93,15 @@ def cadastro_vacina(request):
             except:
                 messages.error(request,'Erro!')
                 pass
-            return render(request, 'cadastro_vacina.html', {'pesquisa':pesquisa,'paciente':paciente, 'form':form, 'confirmado': confirmado})
-    return render(request, "cadastro_vacina.html", {'confirmado': confirmado})
+            return render(request, 'busca_cadastro.html', {'pesquisa':pesquisa,'paciente':paciente, 'form':form, 'confirmado': confirmado})
+    return render(request, "busca_cadastro.html", {'confirmado': confirmado})
 
 @login_required
 def cadastro_imunizacao(request):
-    return render(request, "cadastro_imunizacao.html", {})
+    form = ImunizacaoForm()
+    if request.method == 'POST':
+        pass
+    context = {
+        'form': form
+    }
+    return render(request, "cadastro_imunizacao.html", context)

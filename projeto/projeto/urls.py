@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cadastro_paciente/', views.cadastro_paciente, name = 'paciente'),
-    path('cadastro_vacina/', views.cadastro_vacina, name = 'vacina'),
+    path('busca_cadastro/', views.busca_cadastro, name = 'busca'),
     path('', include('django.contrib.auth.urls')),
     path('cadastrar_usuario/', views.cadastrar_usuario, name = 'usuario'),
     path('', views.menu_inicial, name = 'menu'),

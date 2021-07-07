@@ -1,6 +1,7 @@
 from django import forms
 from django.forms.fields import URLField
-from .models import Paciente
+from django.forms.models import ModelForm
+from .models import Imunizacao, Paciente
 from validate_docbr import CNS as cns1
 from validate_docbr import CPF as cpf1
 
@@ -87,13 +88,13 @@ class PacienteForm(forms.Form):
         CPF = self.cleaned_data.get("CPF")
         CNS = self.cleaned_data.get("CNS")
 
-        if CPF == None and CNS == None:
+        if CPF == '' and CNS == '':
             raise forms.ValidationError("CPF ou CNS devem ser inseridos")
-        
-        if not cpf1().validate(CPF):
+
+        if not cpf1().validate(CPF) and not CPF == '':
             raise forms.ValidationError("CPF inválido")
-        
-        if not cns1().validate(CNS):
+
+        if not cns1().validate(CNS) and not CNS == '':
             raise forms.ValidationError("CNS inválida")
 
         sexo = self.cleaned_data.get("sexo")
@@ -115,4 +116,9 @@ class PacienteForm(forms.Form):
         
         if not str(telefone)[:2] in ddds:
             raise forms.ValidationError("Digite um DDD válido")
+
+class ImunizacaoForm(ModelForm):
+    class Meta:
+        model = Imunizacao
+        fields = [f.name for f in Imunizacao._meta.get_fields() if f.name != 'id']
         

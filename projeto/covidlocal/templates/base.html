@@ -4,6 +4,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     {% load static %}
     <link href="{% static "css/basestyle.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/form.css" %}" rel="stylesheet">
     <title>Servidor Local VaciVida</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
         {% if user.is_authenticated %}
         <li class = "li_base"><a href="/">Home</a></li>
         <li class = "li_base"><a href="/cadastro_paciente">Cadastro Paciente</a></li>
-        <li class = "li_base"><a href="/cadastro_vacina">Cadastro Vacina</a></li>
+        <li class = "li_base"><a href="/busca_cadastro">Cadastro Imunização</a></li>
         {% else %}
         <li class = "li_base"><a href="/login">Fazer Login</a></li>
         {% endif %}
