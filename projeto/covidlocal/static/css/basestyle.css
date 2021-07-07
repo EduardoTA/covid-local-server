@@ -1,3 +1,5 @@
+
+
 body {
     font-family: 'Helvetica', 'Arial', sans-serif;
     margin: 0;
@@ -63,4 +65,15 @@ li.usuario {
     position: fixed;
     bottom: 20px;
     left: 20px;
+}
+
+.ul_base {
+    display: block;
+}
+
+@media screen and (max-width:980px) {
+
+    .ul_base {
+        display: none;
+    }
 }
