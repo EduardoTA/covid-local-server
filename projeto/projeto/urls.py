@@ -26,5 +26,6 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('cadastrar_usuario/', views.cadastrar_usuario, name = 'usuario'),
     path('', views.menu_inicial, name = 'menu'),
-    path('cadastro_imunizacao/', views.cadastro_imunizacao, name = 'imunizacao')
+    path('cadastro_imunizacao/', views.cadastro_imunizacao, name = 'imunizacao'),
+    path('sincronizar/', views.sincronizar, name='sincronizar')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

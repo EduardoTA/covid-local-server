@@ -11,10 +11,11 @@ from django import forms
 from django_q.tasks import async_task
 from django.contrib import messages
 
-#@login_required
-#def cadastro_vacina(request):
-#    async_task("covidlocal.tasks.sincronizar")
-#    return render(request, "cadastro_vacina.html", {})
+@user_passes_test(lambda u: u.is_superuser)
+def sincronizar(request):
+    if request.method == "GET":
+        async_task("covidlocal.tasks.sincronizar")
+        return HttpResponse(status=201)
 
 @login_required
 def cadastro_paciente(request):
