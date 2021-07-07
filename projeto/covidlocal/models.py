@@ -80,8 +80,8 @@ comorbidades = (
 )
 
 class Paciente(models.Model):
-    CPF = models.IntegerField(null=True,blank=True, default=None, unique=True)
-    CNS = models.IntegerField(null=True,blank=True, default=None, unique=True)
+    CPF = models.CharField(null=True,blank=True, default=None, unique=True, max_length=11)
+    CNS = models.CharField(null=True,blank=True, default=None, unique=True, max_length=15)
 
     sexos = (
         ("FEMININO", "FEMININO"),
@@ -103,6 +103,36 @@ class Paciente(models.Model):
         ("URBANA", "URBANA")
     )
 
+    UFs = (
+        ("AC", "AC"),
+        ("AL", "AL"),
+        ("AM", "AM"),
+        ("AP", "AP"),
+        ("BA", "BA"),
+        ("CE", "CE"),
+        ("DF", "DF"),
+        ("ES", "ES"),
+        ("GO", "GO"),
+        ("MA", "MA"),
+        ("MT", "MT"),
+        ("MS", "MS"),
+        ("MG", "MG"),
+        ("PA", "PA"),
+        ("PB", "PB"),
+        ("PR", "PR"),
+        ("PE", "PE"),
+        ("PI", "PI"),
+        ("RJ", "RJ"),
+        ("RN", "RN"),
+        ("RS", "RS"),
+        ("RO", "RO"),
+        ("RR", "RR"),
+        ("SC", "SC"),
+        ("SP", "SP"),
+        ("SE", "SE"),
+        ("TO", "TO")
+    )
+
     nome = models.CharField(max_length=100)
     nomeMae = models.CharField(max_length=100)
     nomeSocial = models.CharField(max_length=100, blank=True)
@@ -113,7 +143,7 @@ class Paciente(models.Model):
     gestante = models.BooleanField()
     puerpera = models.BooleanField()
     pais = models.CharField(max_length=100)
-    UF = models.CharField(max_length=2)
+    UF = models.CharField(max_length=2, choices=UFs)
     municipio = models.CharField(max_length=100)
     zona = models.CharField(max_length=6, choices=zonas)
     logradouro = models.CharField(max_length=100)
