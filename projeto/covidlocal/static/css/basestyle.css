@@ -6,11 +6,11 @@ body {
 }
 
 
-div[class= ""] {
+div {
     display: block;
     margin-left: 250px;
     padding: 1px 16px;
-    height: 1000px;
+
 }
 
 .ul_base {
