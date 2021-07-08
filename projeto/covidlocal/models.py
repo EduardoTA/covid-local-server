@@ -127,6 +127,7 @@ class Paciente(models.Model):
     )
 
     UFs = (
+        ("", ""),
         ("AC", "AC"),
         ("AL", "AL"),
         ("AM", "AM"),
