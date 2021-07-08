@@ -7,20 +7,42 @@ from django.utils.translation import gettext as _
 import json
 
 def get_paises():
-    with open('projeto/covidlocal/json/paises.json') as f:
-        json_data = json.load(f)
-        lista = []
-        for i in range(0,len(json_data["paises"])):
-            lista.append(tuple([json_data["paises"][i]["sigla"], json_data["paises"][i]["nome"]]))
-    return tuple(lista)
+    try:
+        with open('projeto/covidlocal/json/paises.json') as f:
+            json_data = json.load(f)
+            lista = []
+            for i in range(0,len(json_data["paises"])):
+                lista.append(tuple([json_data["paises"][i]["sigla"], json_data["paises"][i]["nome"]]))
+        return tuple(lista)
+    except:
+        try:
+            with open('covidlocal/json/paises.json') as f:
+                json_data = json.load(f)
+                lista = []
+                for i in range(0,len(json_data["paises"])):
+                    lista.append(tuple([json_data["paises"][i]["sigla"], json_data["paises"][i]["nome"]]))
+            return tuple(lista)
+        except:
+            pass
 
 def get_estados():
-    with open('projeto/covidlocal/json/estados.json') as f:
-        json_data = json.load(f)
-        lista = []
-        for i in range(0,len(json_data["estados"])):
-            lista.append(tuple([json_data["estados"][i]["sigla"], json_data["estados"][i]["nome"]]))
-    return tuple(lista)
+    try:
+        with open('projeto/covidlocal/json/estados.json') as f:
+            json_data = json.load(f)
+            lista = []
+            for i in range(0,len(json_data["estados"])):
+                lista.append(tuple([json_data["estados"][i]["sigla"], json_data["estados"][i]["nome"]]))
+        return tuple(lista)
+    except:
+        try:
+            with open('covidlocal/json/estados.json') as f:
+                json_data = json.load(f)
+                lista = []
+                for i in range(0,len(json_data["estados"])):
+                    lista.append(tuple([json_data["estados"][i]["sigla"], json_data["estados"][i]["nome"]]))
+            return tuple(lista)
+        except:
+            pass
 
 # def get_imunobiologicos():
 #     with open('projeto/covidlocal/json/imunobiologicos.json') as f:
@@ -92,8 +114,23 @@ estrategias = (
 )
 
 comorbidades = (
-    ("Teste", "Teste"),
-    ("Teste0", "Teste0")
+    ("CIRROSE HEPATICA","CIRROSE HEPATICA"),
+    ("DIABETES MELLITUS","DIABETES MELLITUS"),
+    ("DOENCA NEUROLOGICA CRONICA","DOENCA NEUROLOGICA CRONICA"),
+    ("DOENCA RENAL CRONICA","DOENCA RENAL CRONICA"),
+    ("DOENCAS CARDIOVASCULARES E CEREBROVASCULARES","DOENCAS CARDIOVASCULARES E CEREBROVASCULARES"),
+    ("GESTANTE","GESTANTE"),
+    ("HEMOGLOBINOPATIA GRAVE","HEMOGLOBINOPATIA GRAVE"),
+    ("HIPERTENSAO","HIPERTENSAO"),
+    ("IMUNOSSUPRIMIDO","IMUNOSSUPRIMIDO"),
+    ("OBESIDADE GRAVE","OBESIDADE GRAVE"),
+    ("PACIENTE ONCOLOGICO","PACIENTE ONCOLOGICO"),
+    ("PESSOA VIVENDO COM HIV","PESSOA VIVENDO COM HIV"),
+    ("PNEUMOPATIA CRONICA GRAVE","PNEUMOPATIA CRONICA GRAVE"),
+    ("PUERPERA","PUERPERA"),
+    ("SINDROME DE DOWN","SINDROME DE DOWN"),
+    ("TERAPIA RENAL SUBSTITUTIVA/DIALISE","TERAPIA RENAL SUBSTITUTIVA/DIALISE"),
+    ("TRANSPLANTADO DE ORGAO SOLIDO E MEDULA OSSEA","TRANSPLANTADO DE ORGAO SOLIDO E MEDULA OSSEA")
 )
 
 class EmptyStringToNoneField(models.CharField):
@@ -213,7 +250,7 @@ class Lote(models.Model):
     imunobiologico = models.ForeignKey(Imunobiologico, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Imunobiológico")
 
     def __str__(self):
-        return str('Lote: '+str(self.lote)+', imuno.: '+self.imunobiologico)
+        return str('Lote: '+str(self.lote)+', imuno.: '+self.imunobiologico.imunobiologico)
 
 class Imunizacao(models.Model):
     doses = (
@@ -248,8 +285,8 @@ class Imunizacao(models.Model):
 
     estrategia = models.CharField(max_length=100, choices=estrategias, verbose_name="Estratégia")
     
-    data_aplic = models.DateField(verbose_name="Data de Aplicação")
-    data_apraz = models.DateField(blank=True, verbose_name="Data de Aprazamento")
+    data_aplic = models.DateField(null=True, verbose_name="Data de Aplicação")
+    data_apraz = models.DateField(null=True, blank=True, verbose_name="Data de Aprazamento")
 
     estado_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_estados(), verbose_name="Estado Primeira Dose")
     pais_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_paises(), verbose_name="País Primeira Dose")
@@ -258,33 +295,45 @@ class Imunizacao(models.Model):
         errors = {}
         # Verificação que dependem da existência de 'imunobiologico'
         try:
+            # Verificação se dose = UNICA somente para imuno. de dose única
             if int(self.imunobiologico.doses) == 1 and self.dose != "UNICA":
                 if 'dose' in errors:
                     errors['dose'].append(_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única"))
                 else:
                     errors['dose'] = [_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única")] 
+            
+            # Verificação se imuno. de 2 doses não tem campo dose = UNICA
             if int(self.imunobiologico.doses) == 2 and self.dose == "UNICA":
                 if 'dose' in errors:
                     errors['dose'].append(_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única"))
                 else:
                     errors['dose'] = [_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única")] 
+            
+            # Verificação se imuno. de dose única não tem data de aprazamento
             if int(self.imunobiologico.doses) == 1 and self.data_apraz != None:
                 if 'data_apraz' in errors:
                     errors['data_apraz'].append(_("Não pode haver data de aprazamento para imunobiológico de dose única"))
                 else:
                     errors['data_apraz'] = [_("Não pode haver data de aprazamento para imunobiológico de dose única")]
+            
+            # Verificação para data de aprazamento se for 2ª dose
             if self.dose == "2º DOSE" and self.data_apraz != None:
                 if 'data_apraz' in errors:
                     errors['data_apraz'].append(_("Não pode haver data de aprazamento 2ª dose"))
                 else:
                     errors['data_apraz'] = [_("Não pode haver data de aprazamento 2ª dose")]
             else:
-                # Verificação dias aprazamento
+                # Verificação data de aprazamento errada
                 if int(self.imunobiologico.dias_prox_dose) != int((self.data_apraz-self.data_aplic).days):
                     if 'data_apraz' in errors:
                         errors['data_apraz'].append(_("Data de Aprazamento errada"))
                     else:
                         errors['data_apraz'] = [_("Data de Aprazamento errada")]
+            
+            # Verificação se se está tentando registrar imunização para imuno. de dose única se o paciente
+            # já tomou a 1ª dose em outro estado ou país
+            if int(self.imunobiologico.doses) == 1 and (self.estado_1_dose != None or self.pais_1_dose != None):
+                raise ValidationError(_("Paciente não pode receber dose única, pois possui outra dose registrada"))
         except:
             pass
 
@@ -326,8 +375,53 @@ class Imunizacao(models.Model):
             else:
                 errors['dose'] = [_("1ª dose já foi tomada em outro país ou estado")]
 
-        print(errors)
-        raise ValidationError(errors)
+        # Verificação se a pessoa já fez alguma imunização
+        if Imunizacao.objects.filter(paciente=self.paciente):
+            # Verifica se paciente já tomou vacina de dose única
+            if Imunizacao.objects.filter(paciente=self.paciente, dose="UNICA"):
+                raise ValidationError("Paciente já recebeu dose única")
+            # Caso não tenha tomado vacina de dose única...
+
+            if len(Imunizacao.objects.filter(paciente=self.paciente)) == 2:
+                raise ValidationError("Paciente já recebeu duas doses")
+            
+            imunizacao_anterior = Imunizacao.objects.filter(paciente=self.paciente, dose="1º DOSE").first()
+            
+            self.comorbidades = imunizacao_anterior.comorbidades
+            self.CRM_medico_resp = imunizacao_anterior.CRM_medico_resp
+            self.num_BPC = imunizacao_anterior.num_BPC
+            self.dose = "2º DOSE"
+            self.grupo = imunizacao_anterior.grupo
+            self.estrategia = imunizacao_anterior.estrategia
+            self.data_apraz = None
+            self.estado_1_dose = None
+            self.pais_1_dose = None
+
+            if int((imunizacao_anterior.data_aplic - self.data_aplic).days) > 0:
+                if 'data_aplic' in errors:
+                    errors['data_aplic'].append(_("Data de Aplicação errada"))
+                else:
+                    errors['data_aplic'] = [_("Data de Aplicação errada")]
+            # if self.dose == "1º DOSE":
+            #     errors['dose'].append(_("Paciente já tomou 1ª dose"))
+            # else:
+            #     errors['dose'] = [_("Paciente já tomou 1ª dose")]
+            # if self.data_apraz != None:
+            #     errors['data_apraz'].append(_("Paciente já tomou 1ª dose"))
+            # else:
+            #     errors['data_apraz'] = [_("Paciente já tomou 1ª dose")]
+            # if self.estado_1_dose != None:
+            #     errors['estado_1_dose'].append(_("Paciente já tomou 1ª dose"))
+            # else:
+            #     errors['estado_1_dose'] = [_("Paciente já tomou 1ª dose")]
+            # if self.pais_1_dose != None:
+            #     errors['pais_1_dose'].append(_("Paciente já tomou 1ª dose"))
+            # else:
+            #     errors['pais_1_dose'] = [_("Paciente já tomou 1ª dose")]
+            
+
+        if errors:
+            raise ValidationError(errors)
         super().clean(*args, **kwargs)
     
     def save(self, *args, **kwargs):
@@ -335,4 +429,4 @@ class Imunizacao(models.Model):
         super().save(*args, **kwargs)
     
     def __str__(self):
-        return str('Lote: '+str(self.lote)+', imuno.: '+self.imunobiologico)
+        return str('CPF: '+str(self.paciente.CPF)+', Nome: '+self.paciente.nome + ', Imuno.: ' + self.imunobiologico.imunobiologico + ', dose: ' + self.dose)

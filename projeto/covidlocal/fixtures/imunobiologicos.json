@@ -1,0 +1,47 @@
+[
+    {
+        "model":"covidlocal.imunobiologico",
+        "pk":1,
+        "fields":{
+           "imunobiologico":"ASTRAZENECA/OXFORD/FIOCRUZ",
+           "doses":2,
+           "dias_prox_dose":84
+        }
+    },
+    {   
+        "model":"covidlocal.imunobiologico",
+        "pk":2,
+        "fields":{
+        "imunobiologico":"CORONAVAC",
+        "doses":2,
+        "dias_prox_dose":28
+        }
+    },
+    {
+        "model":"covidlocal.imunobiologico",
+        "pk":3,
+        "fields":{
+        "imunobiologico":"JANSSEN",
+        "doses":1,
+        "dias_prox_dose":null
+        }
+    },
+    {
+        "model":"covidlocal.imunobiologico",
+        "pk":4,
+        "fields":{
+        "imunobiologico":"PFIZER",
+        "doses":2,
+        "dias_prox_dose":84
+        }
+    },
+    {
+        "model":"covidlocal.imunobiologico",
+        "pk":5,
+        "fields":{
+        "imunobiologico":"TESTE UNICA",
+        "doses":1,
+        "dias_prox_dose":null
+        }
+    }
+]
