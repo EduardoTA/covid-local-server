@@ -29,13 +29,13 @@ def get_imunobiologicos():
             lista.append(tuple([json_data["imunobiologicos"][i]["imunobiologico"], json_data["imunobiologicos"][i]["imunobiologico"]]))
     return tuple(lista) 
 
-imunobiologicos = (
-    ("ASTRAZENECA/OXFORD", "ASTRAZENECA/OXFORD"),
-    ("CORONAVAC", "CORONAVAC"),
-    ("JANSSEN", "JANSSEN"),
-    ("PFIZER", "PFIZER"),
-    ("TESTE UNICA", "TESTE UNICA")
-)
+#imunobiologicos = (
+#    ("ASTRAZENECA/OXFORD", "ASTRAZENECA/OXFORD"),
+#    ("CORONAVAC", "CORONAVAC"),
+#    ("JANSSEN", "JANSSEN"),
+#    ("PFIZER", "PFIZER"),
+#    ("TESTE UNICA", "TESTE UNICA")
+#)
 
 vias_admn = (
     ("EV", "ENDOVENOSA"),
