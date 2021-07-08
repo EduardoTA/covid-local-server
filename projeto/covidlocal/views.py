@@ -98,10 +98,15 @@ def busca_cadastro(request):
 
 @login_required
 def cadastro_imunizacao(request):
-    form = ImunizacaoForm()
     if request.method == 'POST':
-        pass
-    context = {
-        'form': form
-    }
-    return render(request, "cadastro_imunizacao.html", context)
+        try:
+            form = ImunizacaoForm(request.POST)
+            if form.is_valid():
+                Imunizacao.objects.create(**form.cleaned_data)
+                messages.success(request, 'Imunização com sucesso!')
+        except Exception as e:
+            print(e)
+            messages.error(request,e)
+    else:
+        form = ImunizacaoForm()
+    return render(request, 'cadastro_imunizacao.html', {'form': form})

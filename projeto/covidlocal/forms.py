@@ -89,7 +89,7 @@ class PacienteForm(forms.Form):
         CNS = self.cleaned_data.get("CNS")
 
         if CPF == '' and CNS == '':
-            raise forms.ValidationError("CPF ou CNS devem ser inseridos")
+            raise forms.ValidationError({"CPF": "CPF ou CNS devem ser inseridos"})
 
         if not cpf1().validate(CPF) and not CPF == '':
             raise forms.ValidationError("CPF inválido")

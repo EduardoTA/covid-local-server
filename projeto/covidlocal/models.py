@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from multiselectfield import MultiSelectField
+from django.utils.translation import gettext as _
 
 import json
 
@@ -21,21 +22,29 @@ def get_estados():
             lista.append(tuple([json_data["estados"][i]["sigla"], json_data["estados"][i]["nome"]]))
     return tuple(lista)
 
-def get_imunobiologicos():
-    with open('projeto/covidlocal/json/imunobiologicos.json') as f:
-        json_data = json.load(f)
-        lista = []
-        for i in range(0,len(json_data["imunobiologicos"])):
-            lista.append(tuple([json_data["imunobiologicos"][i]["imunobiologico"], json_data["imunobiologicos"][i]["imunobiologico"]]))
-    return tuple(lista) 
+# def get_imunobiologicos():
+#     with open('projeto/covidlocal/json/imunobiologicos.json') as f:
+#         json_data = json.load(f)
+#         lista = []
+#         for i in range(0,len(json_data["imunobiologicos"])):
+#             lista.append(tuple([json_data["imunobiologicos"][i]["imunobiologico"], json_data["imunobiologicos"][i]["imunobiologico"]]))
+#     return tuple(lista)
 
-#imunobiologicos = (
-#    ("ASTRAZENECA/OXFORD", "ASTRAZENECA/OXFORD"),
-#    ("CORONAVAC", "CORONAVAC"),
-#    ("JANSSEN", "JANSSEN"),
-#    ("PFIZER", "PFIZER"),
-#    ("TESTE UNICA", "TESTE UNICA")
-#)
+# def get_numero_doses_imunobiologico(imunobiologico):
+#     with open('projeto/covidlocal/json/imunobiologicos.json') as f: 
+#         json_data = json.load(f)
+#         for i in range(0,len(json_data["imunobiologicos"])):
+#             if json_data["imunobiologicos"][i]["imunobiologico"] == imunobiologico:
+#                 return json_data["imunobiologicos"][i]["numero_doses"]
+                             
+
+# def get_dias_aprazamento_imunobiologico(imunobiologico):
+#     with open('projeto/covidlocal/json/imunobiologicos.json') as f: 
+#         json_data = json.load(f)
+#         for i in range(0,len(json_data["imunobiologicos"])):
+#             if json_data["imunobiologicos"][i]["imunobiologico"] == imunobiologico:
+#                 return json_data["imunobiologicos"][i]["dias_aprazamento"]
+
 
 vias_admn = (
     ("EV", "ENDOVENOSA"),
@@ -169,29 +178,29 @@ class Paciente(models.Model):
     def __str__(self):
         return str('CPF: '+str(self.CPF)+', Nome: '+self.nome)
 
-# class Imunobiologico(models.Model):
-#     imunobiologico = models.CharField(max_length=30)
-#     doses = models.IntegerField()
-#     dias_prox_dose = models.SmallIntegerField(blank=True)
+class Imunobiologico(models.Model):
+    imunobiologico = models.CharField(max_length=30)
+    doses = models.IntegerField()
+    dias_prox_dose = models.SmallIntegerField(null=True,blank=True)
 
-#     def __str__(self):
-#         return str(self.imunobiologico)
+    def __str__(self):
+        return str(self.imunobiologico)
 
-#     def clean(self, *args, **kwargs):
-#         if self.doses == 1 and self.dias_prox_dose != None:
-#             raise ValidationError(_('Para Imunobiologico de dose única, não deve haver data para 2ª dose'))
-#         elif self.doses == 2 and self.dias_prox_dose != None:
-#             raise ValidationError(_('Configurar dias para a 2ª dose'))
-#         super().clean(*args, **kwargs)
+    def clean(self, *args, **kwargs):
+        if self.doses == 1 and self.dias_prox_dose != None:
+            raise ValidationError({'dias_prox_dose': _('Para Imunobiologico de dose única, não deve haver data para 2ª dose')})
+        elif self.doses == 2 and self.dias_prox_dose == None:
+            raise ValidationError({'dias_prox_dose': _('Configurar dias para a 2ª dose')})
+        super().clean(*args, **kwargs)
     
-#     def save(self, *args, **kwargs):
-#         self.full_clean()
-#         super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
 class Perdas(models.Model):
     estabelecimento = models.CharField(max_length=100)
     data = models.DateField()
-    imunobiologico = models.TextField(default=None, max_length=100, choices=get_imunobiologicos(), verbose_name="Imunobiologico")
+    imunobiologico = models.ForeignKey(Imunobiologico, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Imunobiológico")
     lote = models.CharField(max_length=100)
     falha_equip = models.IntegerField()
     falha_trans = models.IntegerField()
@@ -200,22 +209,28 @@ class Perdas(models.Model):
 
 class Lote(models.Model):
     lote = models.CharField(max_length=100)
-    imunobiologico = models.TextField(default=None, max_length=100, choices=get_imunobiologicos(), verbose_name="Imunobiologico")
+    imunobiologico = models.ForeignKey(Imunobiologico, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Imunobiológico")
+
+    def __str__(self):
+        return str('Lote: '+str(self.lote)+', imuno.: '+self.imunobiologico)
 
 class Imunizacao(models.Model):
     doses = (
-        (1,"1ª dose"),
-        (2,"2ª dose")
+        ("UNICA","UNICA"),
+        ("1º DOSE","1º DOSE"),
+        ("2º DOSE","2º DOSE")
     )
 
-    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True, blank=True, default=None, verbose_name="Paciente")
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Paciente")
     
-    comorbidades = MultiSelectField(choices = comorbidades, verbose_name="Comorbidades") # Se grupo=COMORBIDADE
-    num_BPC = models.IntegerField(default=None, blank=True, verbose_name="Número do BPC") # Se grupo=PESSOA COM DEFICIENCIA PERMANENTEMENTE SEVERA
+    comorbidades = MultiSelectField(default=None, blank=True,choices = comorbidades, verbose_name="Comorbidades") # Se grupo=COMORBIDADE
+    CRM_medico_resp = models.IntegerField(null=True, default=None, blank=True, verbose_name="CRM médico responsável") # Se grupo=COMORBIDADE
+    
+    num_BPC = models.IntegerField(null=True, default=None, blank=True, verbose_name="Número do BPC") # Se grupo=PESSOA COM DEFICIENCIA PERMANENTEMENTE SEVERA
 
-    dose = models.IntegerField(choices=doses, verbose_name="Dose")
-    imunobiologico = models.TextField(default=None, max_length=100, choices=get_imunobiologicos(), verbose_name="Imunobiologico")
-    lote = models.ForeignKey(Lote, on_delete=models.CASCADE, null=True, blank=True, default=None, verbose_name="Lote")
+    dose = models.CharField(max_length=16, choices=doses, verbose_name="Dose")
+    imunobiologico = models.ForeignKey(Imunobiologico, on_delete=models.CASCADE, blank=False, default=None, verbose_name="Imunobiológico")
+    lote = models.ForeignKey(Lote, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Lote")
 
     via_admn = models.CharField(max_length=20, choices=vias_admn, verbose_name="Via de Administração")
     local_admn = models.CharField(max_length=20, choices=locais_admn, verbose_name="Local de Administração")
@@ -235,5 +250,88 @@ class Imunizacao(models.Model):
     data_aplic = models.DateField(verbose_name="Data de Aplicação")
     data_apraz = models.DateField(blank=True, verbose_name="Data de Aprazamento")
 
-    estado_1_dose = models.TextField(blank=True, max_length=100, choices=get_estados(), verbose_name="Estado Primeira Dose")
-    pais_1_dose = models.CharField(blank=True, max_length=100, choices=get_paises(), verbose_name="País Primeira Dose")
+    estado_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_estados(), verbose_name="Estado Primeira Dose")
+    pais_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_paises(), verbose_name="País Primeira Dose")
+
+    def clean(self, *args, **kwargs):
+        errors = {}
+        # Verificação que dependem da existência de 'imunobiologico'
+        try:
+            if int(self.imunobiologico.doses) == 1 and self.dose != "UNICA":
+                if 'dose' in errors:
+                    errors['dose'].append(_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única"))
+                else:
+                    errors['dose'] = [_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única")] 
+            if int(self.imunobiologico.doses) == 2 and self.dose == "UNICA":
+                if 'dose' in errors:
+                    errors['dose'].append(_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única"))
+                else:
+                    errors['dose'] = [_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única")] 
+            if int(self.imunobiologico.doses) == 1 and self.data_apraz != None:
+                if 'data_apraz' in errors:
+                    errors['data_apraz'].append(_("Não pode haver data de aprazamento para imunobiológico de dose única"))
+                else:
+                    errors['data_apraz'] = [_("Não pode haver data de aprazamento para imunobiológico de dose única")]
+            if self.dose == "2º DOSE" and self.data_apraz != None:
+                if 'data_apraz' in errors:
+                    errors['data_apraz'].append(_("Não pode haver data de aprazamento 2ª dose"))
+                else:
+                    errors['data_apraz'] = [_("Não pode haver data de aprazamento 2ª dose")]
+            else:
+                # Verificação dias aprazamento
+                if int(self.imunobiologico.dias_prox_dose) != int((self.data_apraz-self.data_aplic).days):
+                    if 'data_apraz' in errors:
+                        errors['data_apraz'].append(_("Data de Aprazamento errada"))
+                    else:
+                        errors['data_apraz'] = [_("Data de Aprazamento errada")]
+        except:
+            pass
+
+        # Verificação comorbidade
+        if len(self.comorbidades) != 0 and self.grupo != "COMORBIDADE":
+            if 'comorbidades' in errors:
+                errors['comorbidades'].append(_("Campo 'Comorbidades' somente se paciente for do grupo 'COMORBIDADE'"))
+            else:
+                errors['comorbidades'] = [_("Campo 'Comorbidades' somente se paciente for do grupo 'COMORBIDADE'")] 
+        
+        # Verificação CRM médico
+        if self.CRM_medico_resp != None and self.grupo != "COMORBIDADE":
+            if 'CRM_medico_resp' in errors:
+                errors['CRM_medico_resp'].append(_("Campo 'CRM_medico_resp' somente se paciente for do grupo 'COMORBIDADE'"))
+            else:
+                errors['CRM_medico_resp'] = [_("Campo 'CRM_medico_resp' somente se paciente for do grupo 'COMORBIDADE'")] 
+
+        # Verificação número do BPC
+        if self.num_BPC != None and self.grupo != "PESSOA COM DEFICIENCIA PERMANENTE SEVERA":
+            if 'num_BPC' in errors:
+                errors['num_BPC'].append(_("Campo 'Número BPC' somente se paciente for do grupo 'PESSOA COM DEFICIENCIA PERMANENTE SEVERA'"))
+            else:
+                errors['num_BPC'] = [_("Campo 'Número BPC' somente se paciente for do grupo 'PESSOA COM DEFICIENCIA PERMANENTE SEVERA'")] 
+
+        # # Verificação para 1ª dose tomada em outro país ou estado
+        if self.estado_1_dose != None and self.pais_1_dose != None:
+            if 'estado_1_dose' in errors:
+                errors['estado_1_dose'].append(_("Campos 'Estado Primeira Dose' e 'País Primeira Dose' não podem estar preenchidos ao mesmo tempo"))
+            else:
+                errors['estado_1_dose'] = [_("Campos 'Estado Primeira Dose' e 'País Primeira Dose' não podem estar preenchidos ao mesmo tempo")]
+            if 'pais_1_dose' in errors:
+                errors['pais_1_dose'].append(_("Campos 'Estado Primeira Dose' e 'País Primeira Dose' não podem estar preenchidos ao mesmo tempo"))
+            else:
+                errors['pais_1_dose'] = [_("Campos 'Estado Primeira Dose' e 'País Primeira Dose' não podem estar preenchidos ao mesmo tempo")] 
+
+        if (self.estado_1_dose != None or self.pais_1_dose != None) and self.dose == "1º DOSE":
+            if 'dose' in errors:
+                errors['dose'].append(_("1ª dose já foi tomada em outro país ou estado"))
+            else:
+                errors['dose'] = [_("1ª dose já foi tomada em outro país ou estado")]
+
+        print(errors)
+        raise ValidationError(errors)
+        super().clean(*args, **kwargs)
+    
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return str('Lote: '+str(self.lote)+', imuno.: '+self.imunobiologico)
