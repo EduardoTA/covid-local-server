@@ -47,6 +47,7 @@ class PacienteForm(forms.Form):
     pais = forms.CharField(label = 'País')
 
     UFs_escolhas = (
+        ("", ""),
         ("AC", "AC"),
         ("AL", "AL"),
         ("AM", "AM"),
@@ -76,7 +77,7 @@ class PacienteForm(forms.Form):
         ("TO", "TO")
     )
 
-    UF = forms.ChoiceField(label = 'UF', choices=UFs_escolhas)
+    UF = forms.ChoiceField(label = 'UF', choices=UFs_escolhas, required = False)
     municipio = forms.CharField(label = 'Município')
     logradouro = forms.CharField(label = 'Logradouro')
     numero = forms.IntegerField(label = 'Número')
