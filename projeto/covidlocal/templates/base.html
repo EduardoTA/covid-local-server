@@ -20,13 +20,12 @@
         {% if user.is_superuser %}
         <li class = "li_base"><a href="/admin">Página de Administrador</a></li>
         <li class = "li_base"><a href="/cadastrar_usuario">Criar Usuário</a></li>
-        <button name="sincronizar" type="button">Sincronizar</button>
+        <li class = "li_base"><a href="#" name="sincronizar">Sincronizar</a></li>
         {% endif %}
         {% if user.is_authenticated %}
         <li class = "li_base"><a href="/logout">Logout</a></li>
         {% endif %}
         {% if user.is_authenticated %}
-        <!-- colocar o nome do usuário logado -->
         <li class="usuario">{{ user.get_username }} </li>
         {% endif %}
     </ul>

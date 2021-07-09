@@ -77,6 +77,10 @@ def busca_cadastro(request):
                 messages.error(request,'Erro!')
                 pass
             return render(request, 'busca_cadastro.html', {'form':form, 'paciente': paciente, 'confirmado': confirmado})
+        elif request.POST.get('imuniza'):
+            return redirect('/cadastro_imunizacao', {})
+        elif request.POST.get('cadastra'):
+            return redirect('/cadastro_paciente', {})
         else:
             pesquisa = request.POST.get('pesquisa')
             try:
