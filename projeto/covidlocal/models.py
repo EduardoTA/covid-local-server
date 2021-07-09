@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from multiselectfield import MultiSelectField
 from django.utils.translation import gettext as _
+import datetime
 
 import json
 
@@ -248,9 +249,10 @@ class Perdas(models.Model):
 class Lote(models.Model):
     lote = models.CharField(max_length=100)
     imunobiologico = models.ForeignKey(Imunobiologico, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Imunobiológico")
+    validade = models.DateField(null=True, verbose_name="Data de Validade do Lote")
 
     def __str__(self):
-        return str('Lote: '+str(self.lote)+', imuno.: '+self.imunobiologico.imunobiologico)
+        return str('Lote: '+str(self.lote)+', imuno.: '+self.imunobiologico.imunobiologico + ', val.: ' + str(self.validade))
 
 class Imunizacao(models.Model):
     doses = (
@@ -322,21 +324,45 @@ class Imunizacao(models.Model):
                     errors['data_apraz'].append(_("Não pode haver data de aprazamento 2ª dose"))
                 else:
                     errors['data_apraz'] = [_("Não pode haver data de aprazamento 2ª dose")]
-            else:
+            if self.dose == "1º DOSE":
                 # Verificação data de aprazamento errada
-                if int(self.imunobiologico.dias_prox_dose) != int((self.data_apraz-self.data_aplic).days):
+                if not self.data_apraz:
                     if 'data_apraz' in errors:
-                        errors['data_apraz'].append(_("Data de Aprazamento errada"))
+                        errors['data_apraz'].append(_("Insira data de aprazamento"))
                     else:
-                        errors['data_apraz'] = [_("Data de Aprazamento errada")]
-            
+                        errors['data_apraz'] = [_("Insira data de aprazamento")]
+                elif int((self.data_apraz - self.data_aplic).days):
+                    data_certa = str(self.data_aplic+datetime.timedelta(days=self.imunobiologico.dias_prox_dose))
+                    mensagem = _("Data de Aprazamento errada, a certa é ")+data_certa
+                    if int((self.data_apraz - self.data_aplic).days) != int(self.imunobiologico.dias_prox_dose):
+                        if 'data_apraz' in errors:
+                            errors['data_apraz'].append(mensagem)
+                        else:
+                            errors['data_apraz'] = [mensagem]
+                else:
+                    data_certa = str(self.data_aplic+datetime.timedelta(days=self.imunobiologico.dias_prox_dose))
+                    mensagem = _("Data de Aprazamento errada, a certa é ")+data_certa
+                    if 'data_apraz' in errors:
+                        errors['data_apraz'].append(mensagem)
+                    else:
+                        errors['data_apraz'] = [mensagem]
+
+            print(str(self.lote.imunobiologico) !=  str(self.imunobiologico.imunobiologico))
+            # Verificação de lote
+            if str(self.lote.imunobiologico) !=  str(self.imunobiologico.imunobiologico):
+                if 'lote' in errors:
+                    errors['lote'].append(_("Escolha lote válido para o imunobiologico"))
+                else:
+                    errors['lote'] = [_("Escolha lote válido para o imunobiologico")]
+
             # Verificação se se está tentando registrar imunização para imuno. de dose única se o paciente
             # já tomou a 1ª dose em outro estado ou país
             if int(self.imunobiologico.doses) == 1 and (self.estado_1_dose != None or self.pais_1_dose != None):
                 raise ValidationError(_("Paciente não pode receber dose única, pois possui outra dose registrada"))
-        except:
+        except Exception as e:
+            print(e)
             pass
-
+        
         # Verificação comorbidade
         if len(self.comorbidades) != 0 and self.grupo != "COMORBIDADE":
             if 'comorbidades' in errors:
@@ -382,11 +408,14 @@ class Imunizacao(models.Model):
                 raise ValidationError("Paciente já recebeu dose única")
             # Caso não tenha tomado vacina de dose única...
 
+            # Verifica se paciente já as duas doses
             if len(Imunizacao.objects.filter(paciente=self.paciente)) == 2:
                 raise ValidationError("Paciente já recebeu duas doses")
             
+            # Query da 1ª dose
             imunizacao_anterior = Imunizacao.objects.filter(paciente=self.paciente, dose="1º DOSE").first()
             
+            # Copia valores de alguns campos da 1ª dose
             self.comorbidades = imunizacao_anterior.comorbidades
             self.CRM_medico_resp = imunizacao_anterior.CRM_medico_resp
             self.num_BPC = imunizacao_anterior.num_BPC
@@ -397,32 +426,17 @@ class Imunizacao(models.Model):
             self.estado_1_dose = None
             self.pais_1_dose = None
 
+            # Verifica se data de aplicação da 2ª dose é antes da 1ª dose
             if int((imunizacao_anterior.data_aplic - self.data_aplic).days) > 0:
                 if 'data_aplic' in errors:
                     errors['data_aplic'].append(_("Data de Aplicação errada"))
                 else:
                     errors['data_aplic'] = [_("Data de Aplicação errada")]
-            # if self.dose == "1º DOSE":
-            #     errors['dose'].append(_("Paciente já tomou 1ª dose"))
-            # else:
-            #     errors['dose'] = [_("Paciente já tomou 1ª dose")]
-            # if self.data_apraz != None:
-            #     errors['data_apraz'].append(_("Paciente já tomou 1ª dose"))
-            # else:
-            #     errors['data_apraz'] = [_("Paciente já tomou 1ª dose")]
-            # if self.estado_1_dose != None:
-            #     errors['estado_1_dose'].append(_("Paciente já tomou 1ª dose"))
-            # else:
-            #     errors['estado_1_dose'] = [_("Paciente já tomou 1ª dose")]
-            # if self.pais_1_dose != None:
-            #     errors['pais_1_dose'].append(_("Paciente já tomou 1ª dose"))
-            # else:
-            #     errors['pais_1_dose'] = [_("Paciente já tomou 1ª dose")]
-            
 
         if errors:
             raise ValidationError(errors)
         super().clean(*args, **kwargs)
+        #raise ValidationError("Teste")
     
     def save(self, *args, **kwargs):
         self.full_clean()

@@ -4,8 +4,9 @@
     {% include 'messages.html' %}
     <h2>Registrar Imunização</h2>    
     <form method="POST"> {% csrf_token %}
-        {{form.as_p}}
         {{form.errors}}
+        {{form.as_p}}
+        
         <input type='submit' formnovalidate  value='Registrar Imunização'/>
     </form>
 </div>
