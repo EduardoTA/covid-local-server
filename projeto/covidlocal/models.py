@@ -7,13 +7,14 @@ import datetime
 
 import json
 
-def get_paises():
+def get_paises_exceto_brasil():
     try:
         with open('projeto/covidlocal/json/paises.json') as f:
             json_data = json.load(f)
             lista = []
             for i in range(0,len(json_data["paises"])):
-                lista.append(tuple([json_data["paises"][i]["sigla"], json_data["paises"][i]["nome"]]))
+                if json_data["paises"][i]["nome"] != "Brasil":
+                    lista.append(tuple([json_data["paises"][i]["sigla"], json_data["paises"][i]["nome"]]))
         return tuple(lista)
     except:
         try:
@@ -291,100 +292,111 @@ class Imunizacao(models.Model):
     data_apraz = models.DateField(null=True, blank=True, verbose_name="Data de Aprazamento")
 
     estado_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_estados(), verbose_name="Estado Primeira Dose")
-    pais_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_paises(), verbose_name="País Primeira Dose")
+    pais_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_paises_exceto_brasil(), verbose_name="País Primeira Dose")
 
     def clean(self, *args, **kwargs):
         errors = {}
-        # Verificação que dependem da existência de 'imunobiologico'
+
+        # Se estado de 1ª dose ou país de 1ª dose estiverem preenchidos, então dose automaticamente troca para 2ª
+        if (self.estado_1_dose != None or self.pais_1_dose != None) and self.dose == "1º DOSE":
+            self.dose = "2º DOSE"
+            #if 'dose' in errors:
+            #    errors['dose'].append(_("1ª dose já foi tomada em outro país ou estado"))
+            #else:
+            #    errors['dose'] = [_("1ª dose já foi tomada em outro país ou estado")]
+
+        # Verificações que dependem de imunobiologico != None, ou seja, foi escolhido um imunobiológico
         try:
-            # Verificação se dose = UNICA somente para imuno. de dose única
+            # Exceção se dose não for UNICA para imunobiologico de dose única
             if int(self.imunobiologico.doses) == 1 and self.dose != "UNICA":
                 if 'dose' in errors:
                     errors['dose'].append(_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única"))
                 else:
                     errors['dose'] = [_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única")] 
             
-            # Verificação se imuno. de 2 doses não tem campo dose = UNICA
+            # Exceção se dose = UNICA para imunobiologico de 2 doses
             if int(self.imunobiologico.doses) == 2 and self.dose == "UNICA":
                 if 'dose' in errors:
                     errors['dose'].append(_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única"))
                 else:
                     errors['dose'] = [_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única")] 
             
-            # Verificação se imuno. de dose única não tem data de aprazamento
+            # Exceção se imunobiológico de dose única e houver uma data de aprazamento
             if int(self.imunobiologico.doses) == 1 and self.data_apraz != None:
                 if 'data_apraz' in errors:
                     errors['data_apraz'].append(_("Não pode haver data de aprazamento para imunobiológico de dose única"))
                 else:
                     errors['data_apraz'] = [_("Não pode haver data de aprazamento para imunobiológico de dose única")]
             
-            # Verificação para data de aprazamento se for 2ª dose
-            if self.dose == "2º DOSE" and self.data_apraz != None:
-                if 'data_apraz' in errors:
-                    errors['data_apraz'].append(_("Não pode haver data de aprazamento 2ª dose"))
-                else:
-                    errors['data_apraz'] = [_("Não pode haver data de aprazamento 2ª dose")]
+            # Se for 2ª dose, anular data de aprazamento
+            if self.dose == "2º DOSE":
+                self.data_apraz = None
+            
+            # Se for 1ª dose...
             if self.dose == "1º DOSE":
-                # Verificação data de aprazamento errada
-                if not self.data_apraz:
-                    if 'data_apraz' in errors:
-                        errors['data_apraz'].append(_("Insira data de aprazamento"))
-                    else:
-                        errors['data_apraz'] = [_("Insira data de aprazamento")]
-                elif int((self.data_apraz - self.data_aplic).days):
-                    data_certa = str(self.data_aplic+datetime.timedelta(days=self.imunobiologico.dias_prox_dose))
-                    mensagem = _("Data de Aprazamento errada, a certa é ")+data_certa
-                    if int((self.data_apraz - self.data_aplic).days) != int(self.imunobiologico.dias_prox_dose):
-                        if 'data_apraz' in errors:
-                            errors['data_apraz'].append(mensagem)
-                        else:
-                            errors['data_apraz'] = [mensagem]
-                else:
-                    data_certa = str(self.data_aplic+datetime.timedelta(days=self.imunobiologico.dias_prox_dose))
-                    mensagem = _("Data de Aprazamento errada, a certa é ")+data_certa
-                    if 'data_apraz' in errors:
-                        errors['data_apraz'].append(mensagem)
-                    else:
-                        errors['data_apraz'] = [mensagem]
+                # Mesmo que a data de aprazamento esteja errada, ela é automaticamente trocada para a certa
+                self.data_apraz = self.data_aplic+datetime.timedelta(days=self.imunobiologico.dias_prox_dose)
 
-            print(str(self.lote.imunobiologico) !=  str(self.imunobiologico.imunobiologico))
-            # Verificação de lote
+                # Verificação data de aprazamento errada...
+                # Se não houver data de aprazamento
+                # if not self.data_apraz:
+                #     if 'data_apraz' in errors:
+                #         errors['data_apraz'].append(_("Insira data de aprazamento"))
+                #     else:
+                #         errors['data_apraz'] = [_("Insira data de aprazamento")]
+                # # O if-else abaixo verifica se a data de aprazamento está certa, dado o imunobiológico escolhido
+                # elif int((self.data_apraz - self.data_aplic).days):
+                #     data_certa = str(self.data_aplic+datetime.timedelta(days=self.imunobiologico.dias_prox_dose))
+                #     mensagem = _("Data de Aprazamento errada, a certa é ")+data_certa
+                #     if int((self.data_apraz - self.data_aplic).days) != int(self.imunobiologico.dias_prox_dose):
+                #         if 'data_apraz' in errors:
+                #             errors['data_apraz'].append(mensagem)
+                #         else:
+                #             errors['data_apraz'] = [mensagem]
+                # else:
+                #     data_certa = str(self.data_aplic+datetime.timedelta(days=self.imunobiologico.dias_prox_dose))
+                #     mensagem = _("Data de Aprazamento errada, a certa é ")+data_certa
+                #     if 'data_apraz' in errors:
+                #         errors['data_apraz'].append(mensagem)
+                #     else:
+                #         errors['data_apraz'] = [mensagem]
+
+            # Exceção se imunobiológico do lote escolhido for diferente do imunobiológico da imunização atual
             if str(self.lote.imunobiologico) !=  str(self.imunobiologico.imunobiologico):
                 if 'lote' in errors:
                     errors['lote'].append(_("Escolha lote válido para o imunobiologico"))
                 else:
                     errors['lote'] = [_("Escolha lote válido para o imunobiologico")]
 
-            # Verificação se se está tentando registrar imunização para imuno. de dose única se o paciente
+            # Verificação se se está tentando registrar imunização para imunobiológico de dose única se o paciente
             # já tomou a 1ª dose em outro estado ou país
             if int(self.imunobiologico.doses) == 1 and (self.estado_1_dose != None or self.pais_1_dose != None):
                 raise ValidationError(_("Paciente não pode receber dose única, pois possui outra dose registrada"))
         except Exception as e:
-            print(e)
             pass
         
-        # Verificação comorbidade
+        # Exceção se comorbidades forem escolhidas e grupo do paciente não é "COMORBIDADE"
         if len(self.comorbidades) != 0 and self.grupo != "COMORBIDADE":
             if 'comorbidades' in errors:
                 errors['comorbidades'].append(_("Campo 'Comorbidades' somente se paciente for do grupo 'COMORBIDADE'"))
             else:
                 errors['comorbidades'] = [_("Campo 'Comorbidades' somente se paciente for do grupo 'COMORBIDADE'")] 
         
-        # Verificação CRM médico
+        # Exceção se houver número de CRM de médico e grupo do paciente não é "COMORBIDADE"
         if self.CRM_medico_resp != None and self.grupo != "COMORBIDADE":
             if 'CRM_medico_resp' in errors:
                 errors['CRM_medico_resp'].append(_("Campo 'CRM_medico_resp' somente se paciente for do grupo 'COMORBIDADE'"))
             else:
                 errors['CRM_medico_resp'] = [_("Campo 'CRM_medico_resp' somente se paciente for do grupo 'COMORBIDADE'")] 
 
-        # Verificação número do BPC
+        # Exceção se houver número BPC de médico e grupo do paciente não é "PESSOA COM DEFICIENCIA PERMANENTE SEVERA"
         if self.num_BPC != None and self.grupo != "PESSOA COM DEFICIENCIA PERMANENTE SEVERA":
             if 'num_BPC' in errors:
                 errors['num_BPC'].append(_("Campo 'Número BPC' somente se paciente for do grupo 'PESSOA COM DEFICIENCIA PERMANENTE SEVERA'"))
             else:
                 errors['num_BPC'] = [_("Campo 'Número BPC' somente se paciente for do grupo 'PESSOA COM DEFICIENCIA PERMANENTE SEVERA'")] 
 
-        # # Verificação para 1ª dose tomada em outro país ou estado
+        # Exceção se for selecionado país e estado de 1ª dose ao mesmo tempo
         if self.estado_1_dose != None and self.pais_1_dose != None:
             if 'estado_1_dose' in errors:
                 errors['estado_1_dose'].append(_("Campos 'Estado Primeira Dose' e 'País Primeira Dose' não podem estar preenchidos ao mesmo tempo"))
@@ -395,11 +407,6 @@ class Imunizacao(models.Model):
             else:
                 errors['pais_1_dose'] = [_("Campos 'Estado Primeira Dose' e 'País Primeira Dose' não podem estar preenchidos ao mesmo tempo")] 
 
-        if (self.estado_1_dose != None or self.pais_1_dose != None) and self.dose == "1º DOSE":
-            if 'dose' in errors:
-                errors['dose'].append(_("1ª dose já foi tomada em outro país ou estado"))
-            else:
-                errors['dose'] = [_("1ª dose já foi tomada em outro país ou estado")]
 
         # Verificação se a pessoa já fez alguma imunização
         if Imunizacao.objects.filter(paciente=self.paciente):
@@ -408,7 +415,7 @@ class Imunizacao(models.Model):
                 raise ValidationError("Paciente já recebeu dose única")
             # Caso não tenha tomado vacina de dose única...
 
-            # Verifica se paciente já as duas doses
+            # Verifica se paciente já tomou as duas doses
             if len(Imunizacao.objects.filter(paciente=self.paciente)) == 2:
                 raise ValidationError("Paciente já recebeu duas doses")
             
