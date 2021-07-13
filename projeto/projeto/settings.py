@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'covidlocal',
-    'django_q'
+    'django_q',
+    'rest_framework',
 ]
 
 # settings.py example
