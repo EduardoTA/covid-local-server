@@ -1,14 +1,14 @@
 from rest_framework import viewsets
-from covidlocal import models
-from covidlocal.api import serializers
+from .. import models
+from . import serializers
 
 class PacienteViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.PacienteSerializer
     queryset = models.Paciente.objects.all()
 
 class ImunizacaoViewSet(viewsets.ModelViewSet):
-    serializer_class = serializers.ImunizacaoSerializer
     queryset = models.Imunizacao.objects.all()
+    serializer_class = serializers.ImunizacaoSerializer
 
 class LoteViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.LoteSerializer
