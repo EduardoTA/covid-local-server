@@ -6,7 +6,9 @@ from .. import models
 class PacienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Paciente
-        fields = '__all__'
+        fields = ['CPF','CNS','nome','nomeMae','nomeSocial','dataNascimento','sexo','raca',
+                  'telefone','gestante','puerpera','pais','UF','municipio','zona','logradouro',
+                  'numero','bairro','complemento','email']
 
 class LoteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,7 +31,7 @@ class ImunizacaoSerializer(serializers.ModelSerializer):
         fields = ['paciente_CPF', 'paciente_CNS', 'comorbidades', 'CRM_medico_resp',
                   'num_BPC', 'dose', 'imunobiologico', 'lote', 'via_admn', 'local_admn',
                   'vacinador', 'grupo', 'estrategia', 'data_aplic', 'data_apraz',
-                  'estado_1_dose', 'pais_1_dose']
+                  'estado_1_dose', 'pais_1_dose','modificado']
     
     def get_paciente_CPF(self, obj):
         return Paciente.objects.filter(id=obj['paciente_id']).first().CPF

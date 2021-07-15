@@ -121,5 +121,5 @@ class PacienteForm(forms.Form):
 class ImunizacaoForm(ModelForm):
     class Meta:
         model = Imunizacao
-        fields = [f.name for f in Imunizacao._meta.get_fields() if f.name != 'id']
+        fields = [f.name for f in Imunizacao._meta.get_fields() if ((f.name != 'id') and f.name != 'modificado')]
         

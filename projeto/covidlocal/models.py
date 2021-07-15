@@ -214,6 +214,7 @@ class Paciente(models.Model):
     bairro = models.CharField(max_length=100)
     complemento = models.CharField(max_length=10, blank=True)
     email = models.CharField(max_length=100, blank=True)
+    modificado = models.BooleanField()
 
     def __str__(self):
         return str('CPF: '+str(self.CPF)+', Nome: '+self.nome)
@@ -293,6 +294,7 @@ class Imunizacao(models.Model):
 
     estado_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_estados(), verbose_name="Estado Primeira Dose")
     pais_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_paises_exceto_brasil(), verbose_name="País Primeira Dose")
+    modificado = models.BooleanField()
 
     def clean(self, *args, **kwargs):
         errors = {}

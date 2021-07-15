@@ -22,15 +22,18 @@ def cadastro_paciente(request):
     paciente = 0
     form = PacienteForm()
     if request.method == "POST":
-        try:
-            form = PacienteForm(request.POST)
-            if form.is_valid():
-                paciente = Paciente.objects.create(**form.cleaned_data)
-                messages.success(request, 'Cadastro criado com sucesso!')
-        except Exception as e:
-            print(e)
-            messages.error(request,'Paciente já cadastrado!')
-            pass
+        if request.POST.get('form_cadastro'):
+            try:
+                form = PacienteForm(request.POST)
+                if form.is_valid():
+                    paciente = Paciente.objects.create(modificado=True,**form.cleaned_data)
+                    messages.success(request, 'Cadastro criado com sucesso!')
+            except Exception as e:
+                print(e)
+                messages.error(request,'Paciente já cadastrado!')
+                pass
+        elif request.POST.get('imunizar'):
+            return redirect('/cadastro_imunizacao', {})
     context = {
         'form': form,
         'paciente': paciente
@@ -58,6 +61,7 @@ def cadastrar_usuario(request):
 @login_required
 def busca_cadastro(request):
     confirmado = 0
+    pesquisa = ""
     if request.method == 'POST':
         if request.POST.get('confirma_cadastro'):
             try:
@@ -69,7 +73,7 @@ def busca_cadastro(request):
                         pk = form_dict.get('CPF')
                     else:
                         pk = form_dict.get('CNS')
-                    Paciente.objects.filter(CPF=pk).update(**form_dict)
+                    Paciente.objects.filter(CPF=pk).update(modificado=True,**form_dict)
                     paciente = Paciente.objects.filter(CPF=pk).values()[0]
                     messages.success(request, 'Dados confirmados com sucesso!')
                     confirmado = 1
@@ -88,11 +92,16 @@ def busca_cadastro(request):
                 if Paciente.objects.filter(CPF__iexact=pesquisa):
                     paciente = Paciente.objects.filter(CPF__iexact=pesquisa).values()[0]
                     paciente.pop('id')
+                    paciente.pop('modificado')
                 elif Paciente.objects.filter(CNS__iexact=pesquisa):
                     paciente = Paciente.objects.filter(CNS__iexact=pesquisa).values()[0]
                     paciente.pop('id')
+                    paciente.pop('modificado')
                 else:
-                    messages.error(request,'Paciente ainda não está cadastrado!')
+                    if pesquisa == "":
+                        messages.error(request,'Favor digitar CPF ou CNS!')
+                    else:
+                        messages.error(request,'Paciente ainda não está cadastrado!')
                 form = PacienteForm(paciente)
             except:
                 messages.error(request,'Erro!')
@@ -106,8 +115,8 @@ def cadastro_imunizacao(request):
         try:
             form = ImunizacaoForm(request.POST)
             if form.is_valid():
-                Imunizacao.objects.create(**form.cleaned_data)
-                messages.success(request, 'Imunização com sucesso!')
+                Imunizacao.objects.create(modificado = True, **form.cleaned_data)
+                messages.success(request, 'Imunização realizada com sucesso!')
         except Exception as e:
             print(e)
             messages.error(request,e)
