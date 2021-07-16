@@ -52,7 +52,8 @@ class ImunizacaoSerializer(serializers.ModelSerializer):
         return Lote.objects.filter(id=obj['lote_id']).first().lote
     
     def get_vacinador(self, obj):
-        return User.objects.filter(id=obj['vacinador']).first().username
+        print(User.objects.filter(id=obj['vacinador_id']).first())
+        return User.objects.filter(id=obj['vacinador_id']).first().username
 
 class PerdasSerializer(serializers.ModelSerializer):
     class Meta:
