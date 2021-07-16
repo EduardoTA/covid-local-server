@@ -17,10 +17,10 @@ def sincronizar():
             serialized_obj = PacienteSerializer(paciente)
             json1 = json.dumps(serialized_obj.data)
             response = requests.post('https://serverremoto.herokuapp.com/api/Pacientes/', data=json1,headers=headers)
-            print(response.json())
+            print(json1)
             print('\n')
-            print(response)
-            print('\n')
+            #print(response)
+            #print('\n')
 
     numero_de_imunizacoes = Imunizacao.objects.all().count()
     for i in range(0,numero_de_imunizacoes):
@@ -29,10 +29,10 @@ def sincronizar():
         serialized_obj = ImunizacaoSerializer(imunizacoes)
         json1 = json.dumps(serialized_obj.data)
         response = requests.post('https://serverremoto.herokuapp.com/api/Imunizacoes/', data=json1,headers=headers)
-        print(response.json())
+        print(json1)
         print('\n')
-        print(response)
-        print('\n')
+        #print(response)
+        #print('\n')
 
     response = requests.get('https://serverremoto.herokuapp.com/api/Pacientes/',headers=headers)
     for element in response.json():

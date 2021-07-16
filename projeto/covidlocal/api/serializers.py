@@ -25,25 +25,34 @@ class ImunizacaoSerializer(serializers.ModelSerializer):
     paciente_CNS = serializers.SerializerMethodField()
     imunobiologico = serializers.SerializerMethodField() 
     lote = serializers.SerializerMethodField() 
+    vacinador = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Imunizacao
         fields = ['paciente_CPF', 'paciente_CNS', 'comorbidades', 'CRM_medico_resp',
                   'num_BPC', 'dose', 'imunobiologico', 'lote', 'via_admn', 'local_admn',
                   'vacinador', 'grupo', 'estrategia', 'data_aplic', 'data_apraz',
-                  'estado_1_dose', 'pais_1_dose','modificado']
+                  'estado_1_dose', 'pais_1_dose'#,'modificado'
+                 ]
     
     def get_paciente_CPF(self, obj):
+        #return 0
         return Paciente.objects.filter(id=obj['paciente_id']).first().CPF
 
     def get_paciente_CNS(self, obj):
+        #return 0
         return Paciente.objects.filter(id=obj['paciente_id']).first().CNS
 
     def get_imunobiologico(self, obj):
+        #return 0
         return Imunobiologico.objects.filter(id=obj['imunobiologico_id']).first().imunobiologico
     
     def get_lote(self, obj):
+        #return 0
         return Lote.objects.filter(id=obj['lote_id']).first().lote
+    
+    def get_vacinador(self, obj):
+        return User.objects.filter(id=obj['vacinador']).first().username
 
 class PerdasSerializer(serializers.ModelSerializer):
     class Meta:
