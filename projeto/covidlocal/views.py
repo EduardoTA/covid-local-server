@@ -15,6 +15,7 @@ from django.contrib import messages
 def sincronizar(request):
     if request.method == "GET":
         async_task("covidlocal.tasks.sincronizar")
+        async_task("covidlocal.tasks.atualiza_local")
         return HttpResponse(status=201)
 
 @login_required

@@ -5,6 +5,18 @@ from .models import Paciente,Imunizacao
 from rest_framework import serializers
 import requests
 import json
+from django.contrib import messages
+
+def atualiza_local():
+    headers = {'content-type': 'application/json'}
+    response = requests.get('https://serverremoto.herokuapp.com/api/Atualizar/', headers=headers)
+    json = response.json()
+    for element in json:
+        element.pop('id')
+        if element.get('atualiza'):
+            # messages.error(request,'Favor reiniciar Servidor Local')
+
+
 
 def sincronizar():
     headers = {'content-type': 'application/json'}
@@ -16,7 +28,7 @@ def sincronizar():
             paciente.pop('modificado')
             serialized_obj = PacienteSerializer(paciente)
             json1 = json.dumps(serialized_obj.data)
-            response = requests.post('https://serverremoto.herokuapp.com/api/Pacientes/', data=json1,headers=headers)
+            response = requests.patch('https://serverremoto.herokuapp.com/api/Pacientes/', data=json1,headers=headers)
             print(response.json())
             print('\n')
             print(response)
@@ -29,6 +41,8 @@ def sincronizar():
         serialized_obj = ImunizacaoSerializer(imunizacoes)
         json1 = json.dumps(serialized_obj.data)
         response = requests.post('https://serverremoto.herokuapp.com/api/Imunizacoes/', data=json1,headers=headers)
+        print(json1)
+        print('\n')
         print(response.json())
         print('\n')
         print(response)
