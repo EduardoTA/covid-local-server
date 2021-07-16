@@ -1,4 +1,4 @@
-from ..models import Imunizacao, Imunobiologico, Paciente, Lote
+from ..models import Imunizacao, Imunobiologico, Paciente, Lote, AtualizaServer
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .. import models
@@ -58,4 +58,9 @@ class ImunizacaoSerializer(serializers.ModelSerializer):
 class PerdasSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Perdas
+        fields = '__all__'
+
+class AtualizaServerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.AtualizaServer
         fields = '__all__'

@@ -5,8 +5,8 @@
 <link rel="stylesheet" href="{% static "css/form.css" %}" rel="stylesheet">
 
 <div class="formulario">
-    <h2>Cadastro de Paciente</h2>    
     {% include 'messages.html' %}
+    <h2>Cadastro de Paciente</h2>    
     <form method="POST"> {% csrf_token %}
         <div class='bloco'>
             <hr>

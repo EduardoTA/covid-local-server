@@ -15,11 +15,13 @@ from django.contrib import messages
 def sincronizar(request):
     if request.method == "GET":
         async_task("covidlocal.tasks.sincronizar")
-        async_task("covidlocal.tasks.atualiza_local")
         return HttpResponse(status=201)
 
 @login_required
 def cadastro_paciente(request):
+    data = AtualizaServer.objects.all()[0]
+    if data.data_atualizacao != data.versao_local:
+        messages.error(request, 'Favor atualizar o servidor remoto')
     paciente = 0
     form = PacienteForm()
     if request.method == "POST":
@@ -42,10 +44,16 @@ def cadastro_paciente(request):
     return render(request, "cadastro_paciente.html", context)
 
 def menu_inicial(request):
+    data = AtualizaServer.objects.all()[0]
+    if data.data_atualizacao != data.versao_local:
+        messages.error(request, 'Favor atualizar o servidor remoto')
     return render(request, "menu_inicial.html", {})
 
 @user_passes_test(lambda u: u.is_superuser)
 def cadastrar_usuario(request):
+    data = AtualizaServer.objects.all()[0]
+    if data.data_atualizacao != data.versao_local:
+        messages.error(request, 'Favor atualizar o servidor remoto')
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -61,6 +69,9 @@ def cadastrar_usuario(request):
 
 @login_required
 def busca_cadastro(request):
+    data = AtualizaServer.objects.all()[0]
+    if data.data_atualizacao != data.versao_local:
+        messages.error(request, 'Favor atualizar o servidor remoto')
     confirmado = 0
     pesquisa = ""
     if request.method == 'POST':
@@ -70,17 +81,39 @@ def busca_cadastro(request):
                 if form.is_valid():
                     form_dict = form.cleaned_data
                     pk = ''
+                    paciente = 0
                     if form_dict.get('CPF') != '':
                         pk = form_dict.get('CPF')
+                        Paciente.objects.filter(CPF=pk).update(modificado=True,**form_dict)
+                        paciente = Paciente.objects.filter(CPF=pk).values()[0]
                     else:
                         pk = form_dict.get('CNS')
-                    Paciente.objects.filter(CPF=pk).update(modificado=True,**form_dict)
-                    paciente = Paciente.objects.filter(CPF=pk).values()[0]
+                        Paciente.objects.filter(CNS=pk).update(modificado=True,**form_dict)
+                        paciente = Paciente.objects.filter(CNS=pk).values()[0]
                     messages.success(request, 'Dados confirmados com sucesso!')
                     confirmado = 1
             except:
-                messages.error(request,'Erro!')
                 pass
+                try:
+                    form = PacienteForm(request.POST)
+                    if form.is_valid():
+                        form_dict = form.cleaned_data
+                        pk = ''
+                        paciente = 0
+                        if form_dict.get('CNS') != '':
+                            pk = form_dict.get('CNS')
+                            Paciente.objects.filter(CNS=pk).update(modificado=True,**form_dict)
+                            paciente = Paciente.objects.filter(CNS=pk).values()[0]
+                        else:
+                            pk = form_dict.get('CPF')
+                            Paciente.objects.filter(CPF=pk).update(modificado=True,**form_dict)
+                            paciente = Paciente.objects.filter(CPF=pk).values()[0]
+                        messages.success(request, 'Dados confirmados com sucesso!')
+                        confirmado = 1
+                except:
+                    pass
+                    messages.error(request,'Não é possível alterar CNS caso não tenha CPF nem alterar CPF caso não tenha CNS!')
+
             return render(request, 'busca_cadastro.html', {'form':form, 'paciente': paciente, 'confirmado': confirmado})
         elif request.POST.get('imuniza'):
             return redirect('/cadastro_imunizacao', {})
@@ -112,6 +145,9 @@ def busca_cadastro(request):
 
 @login_required
 def cadastro_imunizacao(request):
+    data = AtualizaServer.objects.all()[0]
+    if data.data_atualizacao != data.versao_local:
+        messages.error(request, 'Favor atualizar o servidor remoto')
     if request.method == 'POST':
         try:
             form = ImunizacaoForm(request.POST)

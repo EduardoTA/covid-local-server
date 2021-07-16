@@ -1,7 +1,7 @@
 from django.http import request, response
-from .api.serializers import ImunizacaoSerializer,PacienteSerializer
+from .api.serializers import ImunizacaoSerializer,PacienteSerializer, AtualizaServerSerializer
 from time import sleep
-from .models import Paciente,Imunizacao
+from .models import AtualizaServer, Paciente,Imunizacao
 from rest_framework import serializers
 import requests
 import json
@@ -9,13 +9,15 @@ from django.contrib import messages
 
 def atualiza_local():
     headers = {'content-type': 'application/json'}
+    data = 0
     response = requests.get('https://serverremoto.herokuapp.com/api/Atualizar/', headers=headers)
     json = response.json()
     for element in json:
         element.pop('id')
-        if element.get('atualiza'):
-            # messages.error(request,'Favor reiniciar Servidor Local')
-            1+1
+        data = AtualizaServer.objects.all()[0]
+        data.data_atualizacao = element.get('data_atualizacao')
+        data.save()
+
 
 
 
