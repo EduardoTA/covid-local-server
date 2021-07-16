@@ -15,6 +15,7 @@ def atualiza_local():
         element.pop('id')
         if element.get('atualiza'):
             # messages.error(request,'Favor reiniciar Servidor Local')
+            1+1
 
 
 
@@ -31,6 +32,8 @@ def sincronizar():
             response = requests.patch('https://serverremoto.herokuapp.com/api/Pacientes/', data=json1,headers=headers)
             print(response.json())
             print('\n')
+            print('Envio de Paciente:')
+            print(json1)
             print(response)
             print('\n')
 
@@ -40,27 +43,26 @@ def sincronizar():
         imunizacoes.pop('id')
         serialized_obj = ImunizacaoSerializer(imunizacoes)
         json1 = json.dumps(serialized_obj.data)
-        response = requests.post('https://serverremoto.herokuapp.com/api/Imunizacoes/', data=json1,headers=headers)
+        response = requests.patch('https://serverremoto.herokuapp.com/api/Imunizacoes/', data=json1,headers=headers)
+        print('\n')
+        print('Envio de Imunização:')
         print(json1)
-        print('\n')
-        print(response.json())
-        print('\n')
         print(response)
         print('\n')
 
-    response = requests.get('https://serverremoto.herokuapp.com/api/Pacientes/',headers=headers)
-    for element in response.json():
-        element.pop('id')
-        if Paciente.objects.filter(CPF__iexact=element.get('CPF')):
-            Paciente.objects.filter(CPF__iexact=element.get('CPF')).update(modificado=False,**element)
-            paciente = Paciente.objects.filter(CPF__iexact=element.get('CPF')).values()[0]
-        elif Paciente.objects.filter(CNS__iexact=element.get('CNS')):
-            Paciente.objects.filter(CNS__iexact=element.get('CNS')).update(modificado=False,**element)
-            paciente = Paciente.objects.filter(CPF__iexact=element.get('CNS')).values()[0]
-        else:
-            Paciente.objects.create(modificado = False, **element)
-        print(element)
-        print('\n')
+    # response = requests.get('https://serverremoto.herokuapp.com/api/Pacientes/',headers=headers)
+    # for element in response.json():
+    #     element.pop('id')
+    #     if Paciente.objects.filter(CPF__iexact=element.get('CPF')):
+    #         Paciente.objects.filter(CPF__iexact=element.get('CPF')).update(modificado=False,**element)
+    #         paciente = Paciente.objects.filter(CPF__iexact=element.get('CPF')).values()[0]
+    #     elif Paciente.objects.filter(CNS__iexact=element.get('CNS')):
+    #         Paciente.objects.filter(CNS__iexact=element.get('CNS')).update(modificado=False,**element)
+    #         paciente = Paciente.objects.filter(CPF__iexact=element.get('CNS')).values()[0]
+    #     else:
+    #         Paciente.objects.create(modificado = False, **element)
+    #     print(element)
+    #     print('\n')
         
 
 
