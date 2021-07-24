@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.db.models.query_utils import Q
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -7,6 +8,8 @@ from .models import Paciente, Imunizacao
 from .forms import ImunizacaoForm, PacienteForm
 from .tasks import *
 from django import forms
+from django.urls import reverse
+from urllib.parse import urlencode
 
 from django_q.tasks import async_task
 from django.contrib import messages
@@ -116,7 +119,19 @@ def busca_cadastro(request):
 
             return render(request, 'busca_cadastro.html', {'form':form, 'paciente': paciente, 'confirmado': confirmado})
         elif request.POST.get('imuniza'):
-            return redirect('/cadastro_imunizacao', {})
+            form = PacienteForm(request.POST)
+            if form.is_valid():
+                form_dict = form.cleaned_data
+                pk = ''
+                paciente1 = 0
+                if form_dict.get('CPF') != '':
+                    pk = form_dict.get('CPF')
+                    paciente1 = Paciente.objects.filter(CPF=pk).values()[0]
+                else:
+                    pk = form_dict.get('CNS')
+                    paciente1 = Paciente.objects.filter(CNS=pk).values()[0]
+
+            return redirect('imunizacao', paciente_CPF = paciente1.get('CPF'), paciente_CNS = paciente1.get('CNS'))
         elif request.POST.get('cadastra'):
             return redirect('/cadastro_paciente', {})
         else:
@@ -144,7 +159,9 @@ def busca_cadastro(request):
     return render(request, "busca_cadastro.html", {'confirmado': confirmado})
 
 @login_required
-def cadastro_imunizacao(request):
+def cadastro_imunizacao(request, paciente_CPF, paciente_CNS):
+    print(paciente_CPF)
+    print(paciente_CNS)
     data = AtualizaServer.objects.all()[0]
     if data.data_atualizacao != data.versao_local:
         messages.error(request, 'Favor atualizar o servidor remoto')
