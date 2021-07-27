@@ -47,7 +47,7 @@ class PacienteForm(forms.Form):
     telefone = forms.IntegerField(label = 'Telefone')
     gestante = forms.BooleanField(label = 'Gestante', required=False)
     puerpera = forms.BooleanField(label = 'Puérpera', required = False)
-    pais = forms.ChoiceField(label = 'País', choices=get_choices('paises'), initial='Brasil')
+    pais = forms.ChoiceField(label = 'País', choices=get_choices('paises'))
 
     UFs_escolhas = (
         ("", ""),
@@ -87,11 +87,6 @@ class PacienteForm(forms.Form):
     bairro = forms.CharField(label = 'Bairro')
     complemento = forms.CharField(label = 'Complemento', required= False)
     email = forms.EmailField(label = 'E-mail', required= False)
-
-    def clean_pais(self):
-        if not self['pais'].html_name in self.data:
-            return self.fields['pais'].initial
-        return self.cleaned_data['pais']
 
     def clean(self):
         CPF = self.cleaned_data.get("CPF")
