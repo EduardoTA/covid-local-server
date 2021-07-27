@@ -152,7 +152,7 @@ ul.messagelist li.success {
     color: rgb(67, 18, 83);
 }
 
-ul.errorlist li.error {
+ul.messagelist li.error {
     display: block;
     font-weight: 400;
     font-size: 18px;
