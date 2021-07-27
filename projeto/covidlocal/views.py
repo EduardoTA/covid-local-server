@@ -14,12 +14,14 @@ from urllib.parse import urlencode
 from django_q.tasks import async_task
 from django.contrib import messages
 
+# Esta view é chamada quando o botão de sincronização é chamado
 @user_passes_test(lambda u: u.is_superuser)
 def sincronizar(request):
     if request.method == "GET":
         async_task("covidlocal.tasks.sincronizar")
         return HttpResponse(status=201)
 
+# Esta é a view de cadastro de paciente
 @login_required
 def cadastro_paciente(request):
     data = AtualizaServer.objects.all()[0]
@@ -46,12 +48,14 @@ def cadastro_paciente(request):
     }
     return render(request, "cadastro_paciente.html", context)
 
+# Esta é a view da home da aplicação web
 def menu_inicial(request):
     data = AtualizaServer.objects.all()[0]
     if data.data_atualizacao != data.versao_local:
         messages.error(request, 'Favor atualizar o servidor remoto')
     return render(request, "menu_inicial.html", {})
 
+# Esta é a view do cadastro de usuário (admin e vacinadores)
 @user_passes_test(lambda u: u.is_superuser)
 def cadastrar_usuario(request):
     data = AtualizaServer.objects.all()[0]
@@ -70,6 +74,7 @@ def cadastrar_usuario(request):
         form = UserCreationForm()
     return render(request, 'cadastrar_usuario.html', {'form': form})
 
+# Esta é a view de busca de cadastro, que é chamada antes da imunização
 @login_required
 def busca_cadastro(request):
     data = AtualizaServer.objects.all()[0]
@@ -158,6 +163,7 @@ def busca_cadastro(request):
             return render(request, 'busca_cadastro.html', {'pesquisa':pesquisa,'paciente':paciente, 'form':form, 'confirmado': confirmado})
     return render(request, "busca_cadastro.html", {'confirmado': confirmado})
 
+# Esta é a view de cadastro de imunização, chamada logo após a busca de paciente
 @login_required
 def cadastro_imunizacao(request, paciente_CPF, paciente_CNS):
     print(paciente_CPF)

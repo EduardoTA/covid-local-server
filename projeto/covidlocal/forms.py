@@ -5,18 +5,7 @@ from .models import Imunizacao, Paciente
 from validate_docbr import CNS as cns1
 from validate_docbr import CPF as cpf1
 
-# class PacienteForm(ModelForm):
-#     class Meta:
-#         model = Paciente
-#         fields = [f.name for f in Paciente._meta.get_fields() if ((f.name != 'id') and f.name != 'modificado')]
-
-print([f.name for f in Paciente._meta.get_fields()])
-
-# class PacienteForm(ModelForm):
-#     class Meta:
-#         model = Paciente
-#         fields = [f.name for f in Paciente._meta.get_fields() if ((f.name != 'id') and f.name != 'modificado' and f.name != 'imunizacao')]
-
+# Forms do Paciente
 class PacienteForm(forms.Form):
     CPF = forms.CharField(label = 'CPF', required= False)
     CNS = forms.CharField(label = 'CNS', required= False)
@@ -130,8 +119,9 @@ class PacienteForm(forms.Form):
         if not str(telefone)[:2] in ddds:
             raise forms.ValidationError("Digite um DDD válido")
 
+# Forms baseado no model Imunização
 class ImunizacaoForm(ModelForm):
     class Meta:
         model = Imunizacao
-        fields = [f.name for f in Imunizacao._meta.get_fields() if ((f.name != 'id') and f.name != 'modificado')]
+        fields = [f.name for f in Imunizacao._meta.get_fields() if ((f.name != 'id') and f.name != 'modificado')] # campos 'id' e 'modificado' não devem ser vísiveis ao usuário
         

@@ -1,3 +1,5 @@
+# Este é o arquivo chamado no batch de iniciação
+
 import os, django
 from django.utils import timezone
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "projeto.settings")

@@ -147,7 +147,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-BR'
 
-TIME_ZONE = 'America/Fortaleza'
+TIME_ZONE = 'America/Fortaleza' # Fuso horário de São Paulo
 
 USE_I18N = True
 
