@@ -1,0 +1,22 @@
+[
+    {
+        "display":"ENDOVENOSA",
+        "value":"EV"
+    },
+    {
+        "display":"INTRADERMICA",
+        "value":"ID"
+    },
+    {
+        "display":"INTRAMUSCULAR",
+        "value":"IM"
+    },
+    {
+        "display":"ORAL",
+        "value":"O"
+    },
+    {
+        "display":"SUBCUTANEA",
+        "value":"SC"
+    }
+]

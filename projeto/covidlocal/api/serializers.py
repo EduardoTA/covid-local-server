@@ -55,10 +55,10 @@ class ImunizacaoSerializer(serializers.ModelSerializer):
         # print(User.objects.filter(id=obj['vacinador_id']).first())
         return User.objects.filter(id=obj['vacinador_id']).first().username
 
-class PerdasSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Perdas
-        fields = '__all__'
+# class PerdasSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = models.Perdas
+#         fields = '__all__'
 
 class AtualizaServerSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,112 +1,110 @@
-{
-    "estados":[
-       {
-          "nome":"Acre",
-          "sigla":"AC"
-       },
-       {
-          "nome":"Alagoas",
-          "sigla":"AL"
-       },
-       {
-          "nome":"Amapa",
-          "sigla":"AP"
-       },
-       {
-          "nome":"Amazonas",
-          "sigla":"AM"
-       },
-       {
-          "nome":"Bahia",
-          "sigla":"BA"
-       },
-       {
-          "nome":"Ceara",
-          "sigla":"CE"
-       },
-       {
-          "nome":"Distrito Federal",
-          "sigla":"DF"
-       },
-       {
-          "nome":"Espirito Santo",
-          "sigla":"ES"
-       },
-       {
-          "nome":"Goias",
-          "sigla":"GO"
-       },
-       {
-          "nome":"Maranhao",
-          "sigla":"MA"
-       },
-       {
-          "nome":"Mato Grosso",
-          "sigla":"MT"
-       },
-       {
-          "nome":"Mato Grosso do Sul",
-          "sigla":"MS"
-       },
-       {
-          "nome":"Minas Gerais",
-          "sigla":"MG"
-       },
-       {
-          "nome":"Para",
-          "sigla":"PA"
-       },
-       {
-          "nome":"Paraiba",
-          "sigla":"PB"
-       },
-       {
-          "nome":"Parana",
-          "sigla":"PR"
-       },
-       {
-          "nome":"Pernambuco",
-          "sigla":"PE"
-       },
-       {
-          "nome":"Piaui",
-          "sigla":"PI"
-       },
-       {
-          "nome":"Rio de Janeiro",
-          "sigla":"RJ"
-       },
-       {
-          "nome":"Rio Grande do Norte",
-          "sigla":"RN"
-       },
-       {
-          "nome":"Rio Grande do Sul",
-          "sigla":"RS"
-       },
-       {
-          "nome":"Rondonia",
-          "sigla":"RO"
-       },
-       {
-          "nome":"Roraima",
-          "sigla":"RR"
-       },
-       {
-          "nome":"Santa Catarina",
-          "sigla":"SC"
-       },
-       {
-          "nome":"Sao Paulo",
-          "sigla":"SP"
-       },
-       {
-          "nome":"Sergipe",
-          "sigla":"SE"
-       },
-       {
-          "nome":"Tocantins",
-          "sigla":"TO"
-       }
-    ]
- }
+[
+   {
+       "display":"Acre",
+       "value":"AC"
+   },
+   {
+       "display":"Alagoas",
+       "value":"AL"
+   },
+   {
+       "display":"Amapa",
+       "value":"AP"
+   },
+   {
+       "display":"Amazonas",
+       "value":"AM"
+   },
+   {
+       "display":"Bahia",
+       "value":"BA"
+   },
+   {
+       "display":"Ceara",
+       "value":"CE"
+   },
+   {
+       "display":"Distrito Federal",
+       "value":"DF"
+   },
+   {
+       "display":"Espirito Santo",
+       "value":"ES"
+   },
+   {
+       "display":"Goias",
+       "value":"GO"
+   },
+   {
+       "display":"Maranhao",
+       "value":"MA"
+   },
+   {
+       "display":"Mato Grosso",
+       "value":"MT"
+   },
+   {
+       "display":"Mato Grosso do Sul",
+       "value":"MS"
+   },
+   {
+       "display":"Minas Gerais",
+       "value":"MG"
+   },
+   {
+       "display":"Para",
+       "value":"PA"
+   },
+   {
+       "display":"Paraiba",
+       "value":"PB"
+   },
+   {
+       "display":"Parana",
+       "value":"PR"
+   },
+   {
+       "display":"Pernambuco",
+       "value":"PE"
+   },
+   {
+       "display":"Piaui",
+       "value":"PI"
+   },
+   {
+       "display":"Rio de Janeiro",
+       "value":"RJ"
+   },
+   {
+       "display":"Rio Grande do Norte",
+       "value":"RN"
+   },
+   {
+       "display":"Rio Grande do Sul",
+       "value":"RS"
+   },
+   {
+       "display":"Rondonia",
+       "value":"RO"
+   },
+   {
+       "display":"Roraima",
+       "value":"RR"
+   },
+   {
+       "display":"Santa Catarina",
+       "value":"SC"
+   },
+   {
+       "display":"Sao Paulo",
+       "value":"SP"
+   },
+   {
+       "display":"Sergipe",
+       "value":"SE"
+   },
+   {
+       "display":"Tocantins",
+       "value":"TO"
+   }
+]

@@ -1,0 +1,70 @@
+[
+    {
+        "display":"CIRROSE HEPATICA",
+        "value":"CIRROSE HEPATICA"
+    },
+    {
+        "display":"DIABETES MELLITUS",
+        "value":"DIABETES MELLITUS"
+    },
+    {
+        "display":"DOENCA NEUROLOGICA CRONICA",
+        "value":"DOENCA NEUROLOGICA CRONICA"
+    },
+    {
+        "display":"DOENCA RENAL CRONICA",
+        "value":"DOENCA RENAL CRONICA"
+    },
+    {
+        "display":"DOENCAS CARDIOVASCULARES E CEREBROVASCULARES",
+        "value":"DOENCAS CARDIOVASCULARES E CEREBROVASCULARES"
+    },
+    {
+        "display":"GESTANTE",
+        "value":"GESTANTE"
+    },
+    {
+        "display":"HEMOGLOBINOPATIA GRAVE",
+        "value":"HEMOGLOBINOPATIA GRAVE"
+    },
+    {
+        "display":"HIPERTENSAO",
+        "value":"HIPERTENSAO"
+    },
+    {
+        "display":"IMUNOSSUPRIMIDO",
+        "value":"IMUNOSSUPRIMIDO"
+    },
+    {
+        "display":"OBESIDADE GRAVE",
+        "value":"OBESIDADE GRAVE"
+    },
+    {
+        "display":"PACIENTE ONCOLOGICO",
+        "value":"PACIENTE ONCOLOGICO"
+    },
+    {
+        "display":"PESSOA VIVENDO COM HIV",
+        "value":"PESSOA VIVENDO COM HIV"
+    },
+    {
+        "display":"PNEUMOPATIA CRONICA GRAVE",
+        "value":"PNEUMOPATIA CRONICA GRAVE"
+    },
+    {
+        "display":"PUERPERA",
+        "value":"PUERPERA"
+    },
+    {
+        "display":"SINDROME DE DOWN",
+        "value":"SINDROME DE DOWN"
+    },
+    {
+        "display":"TERAPIA RENAL SUBSTITUTIVA/DIALISE",
+        "value":"TERAPIA RENAL SUBSTITUTIVA/DIALISE"
+    },
+    {
+        "display":"TRANSPLANTADO DE ORGAO SOLIDO E MEDULA OSSEA",
+        "value":"TRANSPLANTADO DE ORGAO SOLIDO E MEDULA OSSEA"
+    }
+]

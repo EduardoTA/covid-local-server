@@ -1,987 +1,986 @@
-{
-    "paises":[
+[
     {
-       "nome":"Afeganistao",
-       "sigla":"AF"
+        "display":"Afeganistao",
+        "value":"AF"
     },
     {
-       "nome":"Africa do Sul",
-       "sigla":"ZA"
+        "display":"Africa do Sul",
+        "value":"ZA"
     },
     {
-       "nome":"Albania",
-       "sigla":"AL"
+        "display":"Albania",
+        "value":"AL"
     },
     {
-       "nome":"Alemanha",
-       "sigla":"DE"
+        "display":"Alemanha",
+        "value":"DE"
     },
     {
-       "nome":"Andorra",
-       "sigla":"AD"
+        "display":"Andorra",
+        "value":"AD"
     },
     {
-       "nome":"Angola",
-       "sigla":"AO"
+        "display":"Angola",
+        "value":"AO"
     },
     {
-       "nome":"Anguilla",
-       "sigla":"AI"
+        "display":"Anguilla",
+        "value":"AI"
     },
     {
-       "nome":"Antartida",
-       "sigla":"AQ"
+        "display":"Antartida",
+        "value":"AQ"
     },
     {
-       "nome":"Antigua e Barbuda",
-       "sigla":"AG"
+        "display":"Antigua e Barbuda",
+        "value":"AG"
     },
     {
-       "nome":"Antilhas Holandesas",
-       "sigla":"AN"
+        "display":"Antilhas Holandesas",
+        "value":"AN"
     },
     {
-       "nome":"Arabia Saudita",
-       "sigla":"SA"
+        "display":"Arabia Saudita",
+        "value":"SA"
     },
     {
-       "nome":"Argelia",
-       "sigla":"DZ"
+        "display":"Argelia",
+        "value":"DZ"
     },
     {
-       "nome":"Argentina",
-       "sigla":"AR"
+        "display":"Argentina",
+        "value":"AR"
     },
     {
-       "nome":"Armenia",
-       "sigla":"AM"
+        "display":"Armenia",
+        "value":"AM"
     },
     {
-       "nome":"Aruba",
-       "sigla":"AW"
+        "display":"Aruba",
+        "value":"AW"
     },
     {
-       "nome":"Australia",
-       "sigla":"AU"
+        "display":"Australia",
+        "value":"AU"
     },
     {
-       "nome":"Austria",
-       "sigla":"AT"
+        "display":"Austria",
+        "value":"AT"
     },
     {
-       "nome":"Azerbaijao",
-       "sigla":"AZ  "
+        "display":"Azerbaijao",
+        "value":"AZ  "
     },
     {
-       "nome":"Bahamas",
-       "sigla":"BS"
+        "display":"Bahamas",
+        "value":"BS"
     },
     {
-       "nome":"Bahrein",
-       "sigla":"BH"
+        "display":"Bahrein",
+        "value":"BH"
     },
     {
-       "nome":"Bangladesh",
-       "sigla":"BD"
+        "display":"Bangladesh",
+        "value":"BD"
     },
     {
-       "nome":"Barbados",
-       "sigla":"BB"
+        "display":"Barbados",
+        "value":"BB"
     },
     {
-       "nome":"Belarus",
-       "sigla":"BY"
+        "display":"Belarus",
+        "value":"BY"
     },
     {
-       "nome":"Belgica",
-       "sigla":"BE"
+        "display":"Belgica",
+        "value":"BE"
     },
     {
-       "nome":"Belize",
-       "sigla":"BZ"
+        "display":"Belize",
+        "value":"BZ"
     },
     {
-       "nome":"Benin",
-       "sigla":"BJ"
+        "display":"Benin",
+        "value":"BJ"
     },
     {
-       "nome":"Bermudas",
-       "sigla":"BM"
+        "display":"Bermudas",
+        "value":"BM"
     },
     {
-       "nome":"Bolivia",
-       "sigla":"BO"
+        "display":"Bolivia",
+        "value":"BO"
     },
     {
-       "nome":"Bosnia-Herzegovina",
-       "sigla":"BA"
+        "display":"Bosnia-Herzegovina",
+        "value":"BA"
     },
     {
-       "nome":"Botsuana",
-       "sigla":"BW"
+        "display":"Botsuana",
+        "value":"BW"
     },
     {
-       "nome":"Brasil",
-       "sigla":"BR"
+        "display":"Brasil",
+        "value":"BR"
     },
     {
-       "nome":"Brunei",
-       "sigla":"BN"
+        "display":"Brunei",
+        "value":"BN"
     },
     {
-       "nome":"Bulgaria",
-       "sigla":"BG"
+        "display":"Bulgaria",
+        "value":"BG"
     },
     {
-       "nome":"Burkina Fasso",
-       "sigla":"BF"
+        "display":"Burkina Fasso",
+        "value":"BF"
     },
     {
-       "nome":"Burundi",
-       "sigla":"BI"
+        "display":"Burundi",
+        "value":"BI"
     },
     {
-       "nome":"Butao",
-       "sigla":"BT"
+        "display":"Butao",
+        "value":"BT"
     },
     {
-       "nome":"Cabo Verde",
-       "sigla":"CV"
+        "display":"Cabo Verde",
+        "value":"CV"
     },
     {
-       "nome":"Camaroes",
-       "sigla":"CM"
+        "display":"Camaroes",
+        "value":"CM"
     },
     {
-       "nome":"Camboja",
-       "sigla":"KH"
+        "display":"Camboja",
+        "value":"KH"
     },
     {
-       "nome":"Canada",
-       "sigla":"CA"
+        "display":"Canada",
+        "value":"CA"
     },
     {
-       "nome":"Cazaquistao",
-       "sigla":"KZ"
+        "display":"Cazaquistao",
+        "value":"KZ"
     },
     {
-       "nome":"Chade",
-       "sigla":"TD"
+        "display":"Chade",
+        "value":"TD"
     },
     {
-       "nome":"Chile",
-       "sigla":"CL"
+        "display":"Chile",
+        "value":"CL"
     },
     {
-       "nome":"China",
-       "sigla":"CN"
+        "display":"China",
+        "value":"CN"
     },
     {
-       "nome":"Chipre",
-       "sigla":"CY"
+        "display":"Chipre",
+        "value":"CY"
     },
     {
-       "nome":"Cingapura",
-       "sigla":"SG"
+        "display":"Cingapura",
+        "value":"SG"
     },
     {
-       "nome":"Colombia",
-       "sigla":"CO"
+        "display":"Colombia",
+        "value":"CO"
     },
     {
-       "nome":"Congo",
-       "sigla":"CG"
+        "display":"Congo",
+        "value":"CG"
     },
     {
-       "nome":"Coreia do Norte",
-       "sigla":"KP"
+        "display":"Coreia do Norte",
+        "value":"KP"
     },
     {
-       "nome":"Coreia do Sul",
-       "sigla":"KR"
+        "display":"Coreia do Sul",
+        "value":"KR"
     },
     {
-       "nome":"Costa do Marfim",
-       "sigla":"CI"
+        "display":"Costa do Marfim",
+        "value":"CI"
     },
     {
-       "nome":"Costa Rica",
-       "sigla":"CR"
+        "display":"Costa Rica",
+        "value":"CR"
     },
     {
-       "nome":"Croacia (Hrvatska)",
-       "sigla":"HR"
+        "display":"Croacia (Hrvatska)",
+        "value":"HR"
     },
     {
-       "nome":"Cuba",
-       "sigla":"CU"
+        "display":"Cuba",
+        "value":"CU"
     },
     {
-       "nome":"Dinamarca",
-       "sigla":"DK"
+        "display":"Dinamarca",
+        "value":"DK"
     },
     {
-       "nome":"Djibuti",
-       "sigla":"DJ"
+        "display":"Djibuti",
+        "value":"DJ"
     },
     {
-       "nome":"Dominica",
-       "sigla":"DM"
+        "display":"Dominica",
+        "value":"DM"
     },
     {
-       "nome":"Egito",
-       "sigla":"EG"
+        "display":"Egito",
+        "value":"EG"
     },
     {
-       "nome":"El Salvador",
-       "sigla":"SV"
+        "display":"El Salvador",
+        "value":"SV"
     },
     {
-       "nome":"Emirados Arabes Unidos",
-       "sigla":"AE"
+        "display":"Emirados Arabes Unidos",
+        "value":"AE"
     },
     {
-       "nome":"Equador",
-       "sigla":"EC"
+        "display":"Equador",
+        "value":"EC"
     },
     {
-       "nome":"Eritreia",
-       "sigla":"ER"
+        "display":"Eritreia",
+        "value":"ER"
     },
     {
-       "nome":"Eslovaquia",
-       "sigla":"SK"
+        "display":"Eslovaquia",
+        "value":"SK"
     },
     {
-       "nome":"Eslovenia",
-       "sigla":"SI"
+        "display":"Eslovenia",
+        "value":"SI"
     },
     {
-       "nome":"Espanha",
-       "sigla":"ES"
+        "display":"Espanha",
+        "value":"ES"
     },
     {
-       "nome":"Estados Unidos",
-       "sigla":"US"
+        "display":"Estados Unidos",
+        "value":"US"
     },
     {
-       "nome":"Estonia",
-       "sigla":"EE"
+        "display":"Estonia",
+        "value":"EE"
     },
     {
-       "nome":"Etiopia",
-       "sigla":"ET"
+        "display":"Etiopia",
+        "value":"ET"
     },
     {
-       "nome":"Fiji",
-       "sigla":"FJ"
+        "display":"Fiji",
+        "value":"FJ"
     },
     {
-       "nome":"Filipinas",
-       "sigla":"PH"
+        "display":"Filipinas",
+        "value":"PH"
     },
     {
-       "nome":"Finlandia",
-       "sigla":"FI"
+        "display":"Finlandia",
+        "value":"FI"
     },
     {
-       "nome":"Franca",
-       "sigla":"FR"
+        "display":"Franca",
+        "value":"FR"
     },
     {
-       "nome":"Gabao",
-       "sigla":"GA"
+        "display":"Gabao",
+        "value":"GA"
     },
     {
-       "nome":"Gambia",
-       "sigla":"GM"
+        "display":"Gambia",
+        "value":"GM"
     },
     {
-       "nome":"Gana",
-       "sigla":"GH"
+        "display":"Gana",
+        "value":"GH"
     },
     {
-       "nome":"Georgia",
-       "sigla":"GE"
+        "display":"Georgia",
+        "value":"GE"
     },
     {
-       "nome":"Gibraltar",
-       "sigla":"GI"
+        "display":"Gibraltar",
+        "value":"GI"
     },
     {
-       "nome":"Gra-Bretanha (Reino Unido, UK)",
-       "sigla":"GB"
+        "display":"Gra-Bretanha (Reino Unido, UK)",
+        "value":"GB"
     },
     {
-       "nome":"Granada",
-       "sigla":"GD"
+        "display":"Granada",
+        "value":"GD"
     },
     {
-       "nome":"Grecia",
-       "sigla":"GR"
+        "display":"Grecia",
+        "value":"GR"
     },
     {
-       "nome":"Groelandia",
-       "sigla":"GL"
+        "display":"Groelandia",
+        "value":"GL"
     },
     {
-       "nome":"Guadalupe",
-       "sigla":"GP"
+        "display":"Guadalupe",
+        "value":"GP"
     },
     {
-       "nome":"Guam (Territorio dos Estados Unidos)",
-       "sigla":"GU"
+        "display":"Guam (Territorio dos Estados Unidos)",
+        "value":"GU"
     },
     {
-       "nome":"Guatemala",
-       "sigla":"GT"
+        "display":"Guatemala",
+        "value":"GT"
     },
     {
-       "nome":"Guernsey",
-       "sigla":"G"
+        "display":"Guernsey",
+        "value":"G"
     },
     {
-       "nome":"Guiana",
-       "sigla":"GY"
+        "display":"Guiana",
+        "value":"GY"
     },
     {
-       "nome":"Guiana Francesa",
-       "sigla":"GF"
+        "display":"Guiana Francesa",
+        "value":"GF"
     },
     {
-       "nome":"Guine",
-       "sigla":"GN"
+        "display":"Guine",
+        "value":"GN"
     },
     {
-       "nome":"Guine Equatorial",
-       "sigla":"GQ"
+        "display":"Guine Equatorial",
+        "value":"GQ"
     },
     {
-       "nome":"Guine-Bissau",
-       "sigla":"GW"
+        "display":"Guine-Bissau",
+        "value":"GW"
     },
     {
-       "nome":"Haiti",
-       "sigla":"HT"
+        "display":"Haiti",
+        "value":"HT"
     },
     {
-       "nome":"Holanda",
-       "sigla":"NL"
+        "display":"Holanda",
+        "value":"NL"
     },
     {
-       "nome":"Honduras",
-       "sigla":"HN"
+        "display":"Honduras",
+        "value":"HN"
     },
     {
-       "nome":"Hong Kong",
-       "sigla":"HK"
+        "display":"Hong Kong",
+        "value":"HK"
     },
     {
-       "nome":"Hungria",
-       "sigla":"HU"
+        "display":"Hungria",
+        "value":"HU"
     },
     {
-       "nome":"Iemen",
-       "sigla":"YE"
+        "display":"Iemen",
+        "value":"YE"
     },
     {
-       "nome":"Ilha Bouvet (Territorio da Noruega)",
-       "sigla":"BV"
+        "display":"Ilha Bouvet (Territorio da Noruega)",
+        "value":"BV"
     },
     {
-       "nome":"Ilha do Homem",
-       "sigla":"IM"
+        "display":"Ilha do Homem",
+        "value":"IM"
     },
     {
-       "nome":"Ilha Natal",
-       "sigla":"CX"
+        "display":"Ilha Natal",
+        "value":"CX"
     },
     {
-       "nome":"Ilha Pitcairn",
-       "sigla":"PN"
+        "display":"Ilha Pitcairn",
+        "value":"PN"
     },
     {
-       "nome":"Ilha Reuniao",
-       "sigla":"RE"
+        "display":"Ilha Reuniao",
+        "value":"RE"
     },
     {
-       "nome":"Ilhas Aland",
-       "sigla":"AX"
+        "display":"Ilhas Aland",
+        "value":"AX"
     },
     {
-       "nome":"Ilhas Cayman",
-       "sigla":"KY"
+        "display":"Ilhas Cayman",
+        "value":"KY"
     },
     {
-       "nome":"Ilhas Cocos",
-       "sigla":"CC"
+        "display":"Ilhas Cocos",
+        "value":"CC"
     },
     {
-       "nome":"Ilhas Comores",
-       "sigla":"KM"
+        "display":"Ilhas Comores",
+        "value":"KM"
     },
     {
-       "nome":"Ilhas Cook",
-       "sigla":"CK"
+        "display":"Ilhas Cook",
+        "value":"CK"
     },
     {
-       "nome":"Ilhas Faroes",
-       "sigla":"FO"
+        "display":"Ilhas Faroes",
+        "value":"FO"
     },
     {
-       "nome":"Ilhas Falkland (Malvinas)",
-       "sigla":"FK"
+        "display":"Ilhas Falkland (Malvinas)",
+        "value":"FK"
     },
     {
-       "nome":"Ilhas Georgia do Sul e Sandwich do Sul",
-       "sigla":"GS"
+        "display":"Ilhas Georgia do Sul e Sandwich do Sul",
+        "value":"GS"
     },
     {
-       "nome":"Ilhas Heard e McDonald (Territorio da Australia)",
-       "sigla":"HM"
+        "display":"Ilhas Heard e McDonald (Territorio da Australia)",
+        "value":"HM"
     },
     {
-       "nome":"Ilhas Marianas do Norte",
-       "sigla":"MP"
+        "display":"Ilhas Marianas do Norte",
+        "value":"MP"
     },
     {
-       "nome":"Ilhas Marshall",
-       "sigla":"MH"
+        "display":"Ilhas Marshall",
+        "value":"MH"
     },
     {
-       "nome":"Ilhas Menores dos Estados Unidos",
-       "sigla":"UM"
+        "display":"Ilhas Menores dos Estados Unidos",
+        "value":"UM"
     },
     {
-       "nome":"Ilhas Norfolk",
-       "sigla":"NF"
+        "display":"Ilhas Norfolk",
+        "value":"NF"
     },
     {
-       "nome":"Ilhas Seychelles",
-       "sigla":"SC"
+        "display":"Ilhas Seychelles",
+        "value":"SC"
     },
     {
-       "nome":"Ilhas Solomao",
-       "sigla":"SB"
+        "display":"Ilhas Solomao",
+        "value":"SB"
     },
     {
-       "nome":"Ilhas Svalbard e Jan Mayen",
-       "sigla":"SJ"
+        "display":"Ilhas Svalbard e Jan Mayen",
+        "value":"SJ"
     },
     {
-       "nome":"Ilhas Tokelau",
-       "sigla":"TK"
+        "display":"Ilhas Tokelau",
+        "value":"TK"
     },
     {
-       "nome":"Ilhas Turks e Caicos",
-       "sigla":"TC"
+        "display":"Ilhas Turks e Caicos",
+        "value":"TC"
     },
     {
-       "nome":"Ilhas Virgens (Estados Unidos)",
-       "sigla":"VI"
+        "display":"Ilhas Virgens (Estados Unidos)",
+        "value":"VI"
     },
     {
-       "nome":"Ilhas Virgens (Inglaterra)",
-       "sigla":"VG"
+        "display":"Ilhas Virgens (Inglaterra)",
+        "value":"VG"
     },
     {
-       "nome":"Ilhas Wallis e Futuna",
-       "sigla":"WF"
+        "display":"Ilhas Wallis e Futuna",
+        "value":"WF"
     },
     {
-       "nome":"india",
-       "sigla":"IN"
+        "display":"india",
+        "value":"IN"
     },
     {
-       "nome":"Indonesia",
-       "sigla":"ID"
+        "display":"Indonesia",
+        "value":"ID"
     },
     {
-       "nome":"Ira",
-       "sigla":"IR"
+        "display":"Ira",
+        "value":"IR"
     },
     {
-       "nome":"Iraque",
-       "sigla":"IQ"
+        "display":"Iraque",
+        "value":"IQ"
     },
     {
-       "nome":"Irlanda",
-       "sigla":"IE"
+        "display":"Irlanda",
+        "value":"IE"
     },
     {
-       "nome":"Islandia",
-       "sigla":"IS"
+        "display":"Islandia",
+        "value":"IS"
     },
     {
-       "nome":"Israel",
-       "sigla":"IL"
+        "display":"Israel",
+        "value":"IL"
     },
     {
-       "nome":"Italia",
-       "sigla":"IT"
+        "display":"Italia",
+        "value":"IT"
     },
     {
-       "nome":"Jamaica",
-       "sigla":"JM"
+        "display":"Jamaica",
+        "value":"JM"
     },
     {
-       "nome":"Japao",
-       "sigla":"JP"
+        "display":"Japao",
+        "value":"JP"
     },
     {
-       "nome":"Jersey",
-       "sigla":"JE"
+        "display":"Jersey",
+        "value":"JE"
     },
     {
-       "nome":"Jordania",
-       "sigla":"JO"
+        "display":"Jordania",
+        "value":"JO"
     },
     {
-       "nome":"Kenia",
-       "sigla":"KE"
+        "display":"Kenia",
+        "value":"KE"
     },
     {
-       "nome":"Kiribati",
-       "sigla":"KI"
+        "display":"Kiribati",
+        "value":"KI"
     },
     {
-       "nome":"Kuait",
-       "sigla":"KW"
+        "display":"Kuait",
+        "value":"KW"
     },
     {
-       "nome":"Laos",
-       "sigla":"LA"
+        "display":"Laos",
+        "value":"LA"
     },
     {
-       "nome":"Latvia",
-       "sigla":"LV"
+        "display":"Latvia",
+        "value":"LV"
     },
     {
-       "nome":"Lesoto",
-       "sigla":"LS"
+        "display":"Lesoto",
+        "value":"LS"
     },
     {
-       "nome":"Libano",
-       "sigla":"LB"
+        "display":"Libano",
+        "value":"LB"
     },
     {
-       "nome":"Liberia",
-       "sigla":"LR"
+        "display":"Liberia",
+        "value":"LR"
     },
     {
-       "nome":"Libia",
-       "sigla":"LY"
+        "display":"Libia",
+        "value":"LY"
     },
     {
-       "nome":"Liechtenstein",
-       "sigla":"LI"
+        "display":"Liechtenstein",
+        "value":"LI"
     },
     {
-       "nome":"Lituania",
-       "sigla":"LT"
+        "display":"Lituania",
+        "value":"LT"
     },
     {
-       "nome":"Luxemburgo",
-       "sigla":"LU"
+        "display":"Luxemburgo",
+        "value":"LU"
     },
     {
-       "nome":"Macau",
-       "sigla":"MO"
+        "display":"Macau",
+        "value":"MO"
     },
     {
-       "nome":"Macedonia (Republica Yugoslava)",
-       "sigla":"MK"
+        "display":"Macedonia (Republica Yugoslava)",
+        "value":"MK"
     },
     {
-       "nome":"Madagascar",
-       "sigla":"MG"
+        "display":"Madagascar",
+        "value":"MG"
     },
     {
-       "nome":"Malasia",
-       "sigla":"MY"
+        "display":"Malasia",
+        "value":"MY"
     },
     {
-       "nome":"Malaui",
-       "sigla":"MW"
+        "display":"Malaui",
+        "value":"MW"
     },
     {
-       "nome":"Maldivas",
-       "sigla":"MV"
+        "display":"Maldivas",
+        "value":"MV"
     },
     {
-       "nome":"Mali",
-       "sigla":"ML"
+        "display":"Mali",
+        "value":"ML"
     },
     {
-       "nome":"Malta",
-       "sigla":"MT"
+        "display":"Malta",
+        "value":"MT"
     },
     {
-       "nome":"Marrocos",
-       "sigla":"MA"
+        "display":"Marrocos",
+        "value":"MA"
     },
     {
-       "nome":"Martinica",
-       "sigla":"MQ"
+        "display":"Martinica",
+        "value":"MQ"
     },
     {
-       "nome":"Mauricio",
-       "sigla":"MU"
+        "display":"Mauricio",
+        "value":"MU"
     },
     {
-       "nome":"Mauritania",
-       "sigla":"MR"
+        "display":"Mauritania",
+        "value":"MR"
     },
     {
-       "nome":"Mayotte",
-       "sigla":"YT"
+        "display":"Mayotte",
+        "value":"YT"
     },
     {
-       "nome":"Mexico",
-       "sigla":"MX"
+        "display":"Mexico",
+        "value":"MX"
     },
     {
-       "nome":"Micronesia",
-       "sigla":"FM"
+        "display":"Micronesia",
+        "value":"FM"
     },
     {
-       "nome":"Mocambique",
-       "sigla":"MZ"
+        "display":"Mocambique",
+        "value":"MZ"
     },
     {
-       "nome":"Moldova",
-       "sigla":"MD"
+        "display":"Moldova",
+        "value":"MD"
     },
     {
-       "nome":"Monaco",
-       "sigla":"MC"
+        "display":"Monaco",
+        "value":"MC"
     },
     {
-       "nome":"Mongolia",
-       "sigla":"MN"
+        "display":"Mongolia",
+        "value":"MN"
     },
     {
-       "nome":"Montenegro",
-       "sigla":"ME"
+        "display":"Montenegro",
+        "value":"ME"
     },
     {
-       "nome":"Montserrat",
-       "sigla":"MS"
+        "display":"Montserrat",
+        "value":"MS"
     },
     {
-       "nome":"Myanma",
-       "sigla":"MM"
+        "display":"Myanma",
+        "value":"MM"
     },
     {
-       "nome":"Namibia",
-       "sigla":"NA"
+        "display":"Namibia",
+        "value":"NA"
     },
     {
-       "nome":"Nauru",
-       "sigla":"NR"
+        "display":"Nauru",
+        "value":"NR"
     },
     {
-       "nome":"Nepal",
-       "sigla":"NP"
+        "display":"Nepal",
+        "value":"NP"
     },
     {
-       "nome":"Nicaragua",
-       "sigla":"NI"
+        "display":"Nicaragua",
+        "value":"NI"
     },
     {
-       "nome":"Niger",
-       "sigla":"NE"
+        "display":"Niger",
+        "value":"NE"
     },
     {
-       "nome":"Nigeria",
-       "sigla":"NG"
+        "display":"Nigeria",
+        "value":"NG"
     },
     {
-       "nome":"Niue",
-       "sigla":"NU"
+        "display":"Niue",
+        "value":"NU"
     },
     {
-       "nome":"Noruega",
-       "sigla":"NO"
+        "display":"Noruega",
+        "value":"NO"
     },
     {
-       "nome":"Nova Caledonia",
-       "sigla":"NC"
+        "display":"Nova Caledonia",
+        "value":"NC"
     },
     {
-       "nome":"Nova Zelandia",
-       "sigla":"NZ"
+        "display":"Nova Zelandia",
+        "value":"NZ"
     },
     {
-       "nome":"Oma",
-       "sigla":"OM"
+        "display":"Oma",
+        "value":"OM"
     },
     {
-       "nome":"Palau",
-       "sigla":"PW"
+        "display":"Palau",
+        "value":"PW"
     },
     {
-       "nome":"Panama",
-       "sigla":"PA"
+        "display":"Panama",
+        "value":"PA"
     },
     {
-       "nome":"Papua-Nova Guine",
-       "sigla":"PG"
+        "display":"Papua-Nova Guine",
+        "value":"PG"
     },
     {
-       "nome":"Paquistao",
-       "sigla":"PK"
+        "display":"Paquistao",
+        "value":"PK"
     },
     {
-       "nome":"Paraguai",
-       "sigla":"PY"
+        "display":"Paraguai",
+        "value":"PY"
     },
     {
-       "nome":"Peru",
-       "sigla":"PE"
+        "display":"Peru",
+        "value":"PE"
     },
     {
-       "nome":"Polinesia Francesa",
-       "sigla":"PF"
+        "display":"Polinesia Francesa",
+        "value":"PF"
     },
     {
-       "nome":"Polonia",
-       "sigla":"PL"
+        "display":"Polonia",
+        "value":"PL"
     },
     {
-       "nome":"Porto Rico",
-       "sigla":"PR"
+        "display":"Porto Rico",
+        "value":"PR"
     },
     {
-       "nome":"Portugal",
-       "sigla":"PT"
+        "display":"Portugal",
+        "value":"PT"
     },
     {
-       "nome":"Qatar",
-       "sigla":"QA"
+        "display":"Qatar",
+        "value":"QA"
     },
     {
-       "nome":"Quirguistao",
-       "sigla":"KG"
+        "display":"Quirguistao",
+        "value":"KG"
     },
     {
-       "nome":"Republica Centro-Africana",
-       "sigla":"CF"
+        "display":"Republica Centro-Africana",
+        "value":"CF"
     },
     {
-       "nome":"Republica Democratica do Congo",
-       "sigla":"CD"
+        "display":"Republica Democratica do Congo",
+        "value":"CD"
     },
     {
-       "nome":"Republica Dominicana",
-       "sigla":"DO"
+        "display":"Republica Dominicana",
+        "value":"DO"
     },
     {
-       "nome":"Republica Tcheca",
-       "sigla":"CZ"
+        "display":"Republica Tcheca",
+        "value":"CZ"
     },
     {
-       "nome":"Romenia",
-       "sigla":"RO"
+        "display":"Romenia",
+        "value":"RO"
     },
     {
-       "nome":"Ruanda",
-       "sigla":"RW"
+        "display":"Ruanda",
+        "value":"RW"
     },
     {
-       "nome":"Russia (antiga URSS) - Federacao Russa",
-       "sigla":"RU"
+        "display":"Russia (antiga URSS) - Federacao Russa",
+        "value":"RU"
     },
     {
-       "nome":"Saara Ocidental",
-       "sigla":"EH"
+        "display":"Saara Ocidental",
+        "value":"EH"
     },
     {
-       "nome":"Saint Vincente e Granadinas",
-       "sigla":"VC"
+        "display":"Saint Vincente e Granadinas",
+        "value":"VC"
     },
     {
-       "nome":"Samoa Americana",
-       "sigla":"AS"
+        "display":"Samoa Americana",
+        "value":"AS"
     },
     {
-       "nome":"Samoa Ocidental",
-       "sigla":"WS"
+        "display":"Samoa Ocidental",
+        "value":"WS"
     },
     {
-       "nome":"San Marino",
-       "sigla":"SM"
+        "display":"San Marino",
+        "value":"SM"
     },
     {
-       "nome":"Santa Helena",
-       "sigla":"SH"
+        "display":"Santa Helena",
+        "value":"SH"
     },
     {
-       "nome":"Santa Lucia",
-       "sigla":"LC"
+        "display":"Santa Lucia",
+        "value":"LC"
     },
     {
-       "nome":"Sao Bartolomeu",
-       "sigla":"BL"
+        "display":"Sao Bartolomeu",
+        "value":"BL"
     },
     {
-       "nome":"Sao Cristovao e Nevis",
-       "sigla":"KN"
+        "display":"Sao Cristovao e Nevis",
+        "value":"KN"
     },
     {
-       "nome":"Sao Martim",
-       "sigla":"MF"
+        "display":"Sao Martim",
+        "value":"MF"
     },
     {
-       "nome":"Sao Tome e Principe",
-       "sigla":"ST"
+        "display":"Sao Tome e Principe",
+        "value":"ST"
     },
     {
-       "nome":"Senegal",
-       "sigla":"SN"
+        "display":"Senegal",
+        "value":"SN"
     },
     {
-       "nome":"Serra Leoa",
-       "sigla":"SL"
+        "display":"Serra Leoa",
+        "value":"SL"
     },
     {
-       "nome":"Servia",
-       "sigla":"RS"
+        "display":"Servia",
+        "value":"RS"
     },
     {
-       "nome":"Siria",
-       "sigla":"SY"
+        "display":"Siria",
+        "value":"SY"
     },
     {
-       "nome":"Somalia",
-       "sigla":"SO"
+        "display":"Somalia",
+        "value":"SO"
     },
     {
-       "nome":"Sri Lanka",
-       "sigla":"LK"
+        "display":"Sri Lanka",
+        "value":"LK"
     },
     {
-       "nome":"St. Pierre and Miquelon",
-       "sigla":"PM"
+        "display":"St. Pierre and Miquelon",
+        "value":"PM"
     },
     {
-       "nome":"Suazilandia",
-       "sigla":"SZ"
+        "display":"Suazilandia",
+        "value":"SZ"
     },
     {
-       "nome":"Sudao",
-       "sigla":"SD"
+        "display":"Sudao",
+        "value":"SD"
     },
     {
-       "nome":"Suecia",
-       "sigla":"SE"
+        "display":"Suecia",
+        "value":"SE"
     },
     {
-       "nome":"Suica",
-       "sigla":"CH"
+        "display":"Suica",
+        "value":"CH"
     },
     {
-       "nome":"Suriname",
-       "sigla":"SR"
+        "display":"Suriname",
+        "value":"SR"
     },
     {
-       "nome":"Tadjiquistao",
-       "sigla":"TJ"
+        "display":"Tadjiquistao",
+        "value":"TJ"
     },
     {
-       "nome":"Tailandia",
-       "sigla":"TH"
+        "display":"Tailandia",
+        "value":"TH"
     },
     {
-       "nome":"Taiwan",
-       "sigla":"TW"
+        "display":"Taiwan",
+        "value":"TW"
     },
     {
-       "nome":"Tanzania",
-       "sigla":"TZ"
+        "display":"Tanzania",
+        "value":"TZ"
     },
     {
-       "nome":"Territorio Britanico do Oceano indico",
-       "sigla":"IO"
+        "display":"Territorio Britanico do Oceano indico",
+        "value":"IO"
     },
     {
-       "nome":"Territorios do Sul da Franca",
-       "sigla":"TF"
+        "display":"Territorios do Sul da Franca",
+        "value":"TF"
     },
     {
-       "nome":"Territorios Palestinos Ocupados",
-       "sigla":"PS"
+        "display":"Territorios Palestinos Ocupados",
+        "value":"PS"
     },
     {
-       "nome":"Timor Leste",
-       "sigla":"TP"
+        "display":"Timor Leste",
+        "value":"TP"
     },
     {
-       "nome":"Togo",
-       "sigla":"TG"
+        "display":"Togo",
+        "value":"TG"
     },
     {
-       "nome":"Tonga",
-       "sigla":"TO"
+        "display":"Tonga",
+        "value":"TO"
     },
     {
-       "nome":"Trinidad and Tobago",
-       "sigla":"TT"
+        "display":"Trinidad and Tobago",
+        "value":"TT"
     },
     {
-       "nome":"Tunisia",
-       "sigla":"TN"
+        "display":"Tunisia",
+        "value":"TN"
     },
     {
-       "nome":"Turcomenistao",
-       "sigla":"TM"
+        "display":"Turcomenistao",
+        "value":"TM"
     },
     {
-       "nome":"Turquia",
-       "sigla":"TR"
+        "display":"Turquia",
+        "value":"TR"
     },
     {
-       "nome":"Tuvalu",
-       "sigla":"TV"
+        "display":"Tuvalu",
+        "value":"TV"
     },
     {
-       "nome":"Ucrania",
-       "sigla":"UA"
+        "display":"Ucrania",
+        "value":"UA"
     },
     {
-       "nome":"Uganda",
-       "sigla":"UG"
+        "display":"Uganda",
+        "value":"UG"
     },
     {
-       "nome":"Uruguai",
-       "sigla":"UY"
+        "display":"Uruguai",
+        "value":"UY"
     },
     {
-       "nome":"Uzbequistao",
-       "sigla":"UZ"
+        "display":"Uzbequistao",
+        "value":"UZ"
     },
     {
-       "nome":"Vanuatu",
-       "sigla":"VU"
+        "display":"Vanuatu",
+        "value":"VU"
     },
     {
-       "nome":"Vaticano",
-       "sigla":"VA"
+        "display":"Vaticano",
+        "value":"VA"
     },
     {
-       "nome":"Venezuela",
-       "sigla":"VE"
+        "display":"Venezuela",
+        "value":"VE"
     },
     {
-       "nome":"Vietna",
-       "sigla":"VN"
+        "display":"Vietna",
+        "value":"VN"
     },
     {
-       "nome":"Zambia",
-       "sigla":"ZM"
+        "display":"Zambia",
+        "value":"ZM"
     },
     {
-       "nome":"Zimbabue",
-       "sigla":"ZW"
+        "display":"Zimbabue",
+        "value":"ZW"
     }
- ]}
+]

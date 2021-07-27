@@ -1,0 +1,34 @@
+[
+    {
+        "display":"DELTOIDE DIREITO",
+        "value":"DD"
+    },
+    {
+        "display":"DELTOIDE ESQUERDO",
+        "value":"DE"
+    },
+    {
+        "display":"GLUTEO",
+        "value":"G"
+    },
+    {
+        "display":"LOCAL DO FERIMENTO",
+        "value":"FL"
+    },
+    {
+        "display":"VASTO LATERAL DA COXA DIREITO",
+        "value":"VLD"
+    },
+    {
+        "display":"VASTO LATERAL DA COXA ESQUERDA",
+        "value":"VLE"
+    },
+    {
+        "display":"VENTROGLUTEO DIREITO",
+        "value":"VGD"
+    },
+    {
+        "display":"VENTROGLUTEO ESQUERDO",
+        "value":"VGE"
+    }
+]
