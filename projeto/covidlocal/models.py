@@ -4,136 +4,10 @@ from django.core.exceptions import ValidationError
 from multiselectfield import MultiSelectField
 from django.utils.translation import gettext as _
 import datetime
+from validate_docbr import CNS as cns1
+from validate_docbr import CPF as cpf1
 
-import json
-
-def get_paises_exceto_brasil():
-    try:
-        with open('projeto/covidlocal/json/paises.json') as f:
-            json_data = json.load(f)
-            lista = []
-            for i in range(0,len(json_data["paises"])):
-                if json_data["paises"][i]["nome"] != "Brasil":
-                    lista.append(tuple([json_data["paises"][i]["sigla"], json_data["paises"][i]["nome"]]))
-        return tuple(lista)
-    except:
-        try:
-            with open('covidlocal/json/paises.json') as f:
-                json_data = json.load(f)
-                lista = []
-                for i in range(0,len(json_data["paises"])):
-                    lista.append(tuple([json_data["paises"][i]["sigla"], json_data["paises"][i]["nome"]]))
-            return tuple(lista)
-        except:
-            pass
-
-def get_estados():
-    try:
-        with open('projeto/covidlocal/json/estados.json') as f:
-            json_data = json.load(f)
-            lista = []
-            for i in range(0,len(json_data["estados"])):
-                lista.append(tuple([json_data["estados"][i]["sigla"], json_data["estados"][i]["nome"]]))
-        return tuple(lista)
-    except:
-        try:
-            with open('covidlocal/json/estados.json') as f:
-                json_data = json.load(f)
-                lista = []
-                for i in range(0,len(json_data["estados"])):
-                    lista.append(tuple([json_data["estados"][i]["sigla"], json_data["estados"][i]["nome"]]))
-            return tuple(lista)
-        except:
-            pass
-
-# def get_imunobiologicos():
-#     with open('projeto/covidlocal/json/imunobiologicos.json') as f:
-#         json_data = json.load(f)
-#         lista = []
-#         for i in range(0,len(json_data["imunobiologicos"])):
-#             lista.append(tuple([json_data["imunobiologicos"][i]["imunobiologico"], json_data["imunobiologicos"][i]["imunobiologico"]]))
-#     return tuple(lista)
-
-# def get_numero_doses_imunobiologico(imunobiologico):
-#     with open('projeto/covidlocal/json/imunobiologicos.json') as f: 
-#         json_data = json.load(f)
-#         for i in range(0,len(json_data["imunobiologicos"])):
-#             if json_data["imunobiologicos"][i]["imunobiologico"] == imunobiologico:
-#                 return json_data["imunobiologicos"][i]["numero_doses"]
-                             
-
-# def get_dias_aprazamento_imunobiologico(imunobiologico):
-#     with open('projeto/covidlocal/json/imunobiologicos.json') as f: 
-#         json_data = json.load(f)
-#         for i in range(0,len(json_data["imunobiologicos"])):
-#             if json_data["imunobiologicos"][i]["imunobiologico"] == imunobiologico:
-#                 return json_data["imunobiologicos"][i]["dias_aprazamento"]
-
-
-vias_admn = (
-    ("EV", "ENDOVENOSA"),
-    ("ID", "INTRADERMICA"),
-    ("IM", "INTRAMUSCULAR"),
-    ("O", "ORAL"),
-    ("SC", "SUBCUTANEA")
-)
-
-locais_admn = (
-    ("DD", "DELTOIDE DIREITO"),
-    ("DE", "DELTOIDE ESQUERDO"),
-    ("G", "GLUTEO"),
-    ("FL", "LOCAL DO FERIMENTO"),
-    ("VLD", "VASTO LATERAL DA COXA DIREITO"),
-    ("VLE", "VASTO LATERAL DA COXA ESQUERDA"),
-    ("VGD", "VENTROGLUTEO DIREITO"),
-    ("VGE", "VENTROGLUTEO ESQUERDO")
-)
-
-grupos = (
-    ("AEROVIARIOS", "AEROVIARIOS"),
-    ("COMORBIDADE", "COMORBIDADE"),
-    ("ESTUDO CLINICO", "ESTUDO CLINICO"),
-    ("IDOSO", "IDOSO"),
-    ("IDOSO EM ILPI", "IDOSO EM ILPI"),
-    ("INDIGENAS", "INDIGENAS"),
-    ("METROVIARIOS/CPTM", "METROVIARIOS/CPTM"),
-    ("MOTORISTAS E COBRADORES DE ONIBUS", "MOTORISTAS E COBRADORES DE ONIBUS"),
-    ("PESSOA >= 18 ANOS PORTADORA DE DEFICIENCIA RESIDENTES EM RI", "PESSOA >= 18 ANOS PORTADORA DE DEFICIENCIA RESIDENTES EM RI"),
-    ("PESSOA COM DEFICIENCIA", "PESSOA COM DEFICIENCIA"),
-    ("PESSOA COM DEFICIENCIA PERMANENTE SEVERA", "PESSOA COM DEFICIENCIA PERMANENTE SEVERA"),
-    ("POPULACAO EM GERAL", "POPULACAO EM GERAL"),
-    ("POPULACAO EM SITUACAO DE RUA", "POPULACAO EM SITUACAO DE RUA"),
-    ("PORTUARIOS", "PORTUARIOS"),
-    ("QUILOMBOLA", "QUILOMBOLA"),
-    ("RIBEIRINHAS", "RIBEIRINHAS"),
-    ("TRABALHADOR DA EDUCACAO", "TRABALHADOR DA EDUCACAO"),
-    ("TRABALHADOR DA SEGURANCA PUBLICA", "TRABALHADOR DA SEGURANCA PUBLICA"),
-    ("TRABALHADOR DE SAUDE", "TRABALHADOR DE SAUDE")
-)
-
-estrategias = (
-    ("CAMPANHA INDISCRIMINADA", "CAMPANHA INDISCRIMINADA"),
-)
-
-comorbidades = (
-    ("CIRROSE HEPATICA","CIRROSE HEPATICA"),
-    ("DIABETES MELLITUS","DIABETES MELLITUS"),
-    ("DOENCA NEUROLOGICA CRONICA","DOENCA NEUROLOGICA CRONICA"),
-    ("DOENCA RENAL CRONICA","DOENCA RENAL CRONICA"),
-    ("DOENCAS CARDIOVASCULARES E CEREBROVASCULARES","DOENCAS CARDIOVASCULARES E CEREBROVASCULARES"),
-    ("GESTANTE","GESTANTE"),
-    ("HEMOGLOBINOPATIA GRAVE","HEMOGLOBINOPATIA GRAVE"),
-    ("HIPERTENSAO","HIPERTENSAO"),
-    ("IMUNOSSUPRIMIDO","IMUNOSSUPRIMIDO"),
-    ("OBESIDADE GRAVE","OBESIDADE GRAVE"),
-    ("PACIENTE ONCOLOGICO","PACIENTE ONCOLOGICO"),
-    ("PESSOA VIVENDO COM HIV","PESSOA VIVENDO COM HIV"),
-    ("PNEUMOPATIA CRONICA GRAVE","PNEUMOPATIA CRONICA GRAVE"),
-    ("PUERPERA","PUERPERA"),
-    ("SINDROME DE DOWN","SINDROME DE DOWN"),
-    ("TERAPIA RENAL SUBSTITUTIVA/DIALISE","TERAPIA RENAL SUBSTITUTIVA/DIALISE"),
-    ("TRANSPLANTADO DE ORGAO SOLIDO E MEDULA OSSEA","TRANSPLANTADO DE ORGAO SOLIDO E MEDULA OSSEA")
-)
+from .choices import * 
 
 class EmptyStringToNoneField(models.CharField):
     def get_prep_value(self, value):
@@ -142,81 +16,74 @@ class EmptyStringToNoneField(models.CharField):
         return value
 
 class Paciente(models.Model):
-    CPF = EmptyStringToNoneField(null=True,blank=True, default=None, unique=True, max_length=11)
-    CNS = EmptyStringToNoneField(null=True,blank=True, default=None, unique=True, max_length=15)
+    CPF = EmptyStringToNoneField(null=True,blank=True, default=None, unique=True, max_length=11, verbose_name='CPF')
+    CNS = EmptyStringToNoneField(null=True,blank=True, default=None, unique=True, max_length=15, verbose_name='CNS')
 
-    sexos = (
-        ("FEMININO", "FEMININO"),
-        ("MASCULINO", "MASCULINO"),
-        ("IGNORADO", "IGNORADO")
-    )
+    nome = models.CharField(max_length=100, verbose_name='Nome')
+    nomeMae = models.CharField(max_length=100, verbose_name='Nome da Mãe')
+    nomeSocial = models.CharField(max_length=100, blank=True, verbose_name='Nome Social')
+    dataNascimento = models.DateField(verbose_name='Data de Nascimento (dd/mm/aaaa)')
+    sexo = models.CharField(max_length=10, choices=get_choices('sexos'), verbose_name='Sexo')
+    raca = models.CharField(max_length=20, choices=get_choices('racas'), verbose_name='Raça')
+    telefone = models.IntegerField(verbose_name='Telefone')
+    gestante = models.BooleanField(verbose_name='Gestante')
+    puerpera = models.BooleanField(verbose_name='Puérpera')
+    pais = models.CharField(default='BR', max_length=100, verbose_name='País', choices=get_choices('paises'))
+    UF = models.CharField(max_length=2, choices=get_choices('estados'), verbose_name='UF')
+    municipio = models.CharField(max_length=100, verbose_name='Município')
+    zona = models.CharField(max_length=6, choices=get_choices('zonas'), verbose_name='Zona')
+    logradouro = models.CharField(max_length=100, verbose_name='Logradouro')
+    numero = models.IntegerField(verbose_name='Número')
+    bairro = models.CharField(max_length=100, verbose_name='Bairro')
+    complemento = models.CharField(max_length=10, blank=True, verbose_name='Complemento')
+    email = models.CharField(max_length=100, blank=True, verbose_name='Email')
+    modificado = models.BooleanField()
 
-    racas = (
-        ("AMARELA", "AMARELA"),
-        ("BRANCA", "BRANCA"),
-        ("INDIGENA", "INDIGENA"),
-        ("NAO INFORMADA", "NAO INFORMADA"),
-        ("PARDA", "PARDA"),
-        ("PRETA", "PRETA")
-    )
+    # def clean(self, *args, **kwargs):
+    #     errors = {}
 
-    zonas = (
-        ("RURAL", "RURAL"),
-        ("URBANA", "URBANA")
-    )
+    #     # Esta função adiciona a mensagem de erro e o campo correspondente ao dict 'errors'
+    #     def appendError(field, msg):
+    #         if field in errors:
+    #             errors[field].append(msg)
+    #         else:
+    #             errors[field] = [msg]
 
-    UFs = (
-        ("", ""),
-        ("AC", "AC"),
-        ("AL", "AL"),
-        ("AM", "AM"),
-        ("AP", "AP"),
-        ("BA", "BA"),
-        ("CE", "CE"),
-        ("DF", "DF"),
-        ("ES", "ES"),
-        ("GO", "GO"),
-        ("MA", "MA"),
-        ("MT", "MT"),
-        ("MS", "MS"),
-        ("MG", "MG"),
-        ("PA", "PA"),
-        ("PB", "PB"),
-        ("PR", "PR"),
-        ("PE", "PE"),
-        ("PI", "PI"),
-        ("RJ", "RJ"),
-        ("RN", "RN"),
-        ("RS", "RS"),
-        ("RO", "RO"),
-        ("RR", "RR"),
-        ("SC", "SC"),
-        ("SP", "SP"),
-        ("SE", "SE"),
-        ("TO", "TO")
-    )
+    #     # CPF ou CNS devem ser inseridos
+    #     if self.CPF == None and self.CNS == None:
+    #         appendError('CPF', _("CPF ou CNS devem ser inseridos"))
+        
+    #     if not self.CPF == None:
+    #         if not cpf1().validate(self.CPF):
+    #             appendError('CPF', _("CPF inválido"))
+        
+    #     if not self.CNS == None:
+    #         if not cns1().validate(self.CNS):
+    #             appendError('CNS', _("CNS inválido"))
+        
+    #     if self.sexo == 'FEMININO' or self.puerpera or self.gestante:
+    #         if self.sexo != 'FEMININO':
+    #             appendError('sexo', _("Apenas pacientes do sexo feminino podem ser puérperas ou gestantes"))
+    #         elif self.puerpera and self.gestante:
+    #             errors.append(_("Paciente não pode estar com o campo Gestante e Puérpera marcados ao mesmo tempo"))
+        
+    #     if len(str(self.telefone)) < 10 or len(str(self.telefone)) > 11:
+    #         appendError('telefone', _("Digite um número de telefone válido"))
+        
+    #     ddds = ['11', '12', '13', '14', '15', '16', '17', '18', '19', '21', '22', '24', '27', '28', '31', '32', '33', '34', '35', '37', '38', '41', '42', '43', '44', '45', '46', '47', '48', '49', '51', '53', '54', '55', '61', '62', '63', '64', '65', '66', '67', '68', '69', '71', '73', '74', '75', '77', '79', '81', '82', '83', '84', '85', '86', '87', '88', '89', '91', '92', '93', '94', '95', '96', '97', '98', '99']
+        
+    #     if not str(self.telefone)[:2] in ddds:
+    #         appendError('telefone', _("Digite um DDD válido"))
 
-    nome = models.CharField(max_length=100)
-    nomeMae = models.CharField(max_length=100)
-    nomeSocial = models.CharField(max_length=100, blank=True)
-    dataNascimento = models.DateField()
-    sexo = models.CharField(max_length=10, choices=sexos)
-    raca = models.CharField(max_length=20, choices=racas)
-    telefone = models.IntegerField()
-    gestante = models.BooleanField()
-    puerpera = models.BooleanField()
-    pais = models.CharField(max_length=100)
-    UF = models.CharField(max_length=2, choices=UFs)
-    municipio = models.CharField(max_length=100)
-    zona = models.CharField(max_length=6, choices=zonas)
-    logradouro = models.CharField(max_length=100)
-    numero = models.IntegerField()
-    bairro = models.CharField(max_length=100)
-    complemento = models.CharField(max_length=10, blank=True)
-    email = models.CharField(max_length=100, blank=True)
-
-    def __str__(self):
-        return str('CPF: '+str(self.CPF)+', Nome: '+self.nome)
+    #     if errors:
+    #         raise ValidationError(errors)
+    #     super().clean(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.full_clean()
+    #     super().save(*args, **kwargs)
+    
+    # def __str__(self):
+    #     return str('CPF: '+str(self.CPF)+', Nome: '+self.nome)
 
 class Imunobiologico(models.Model):
     imunobiologico = models.CharField(max_length=30)
@@ -237,16 +104,6 @@ class Imunobiologico(models.Model):
         self.full_clean()
         super().save(*args, **kwargs)
 
-class Perdas(models.Model):
-    estabelecimento = models.CharField(max_length=100)
-    data = models.DateField()
-    imunobiologico = models.ForeignKey(Imunobiologico, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Imunobiológico")
-    lote = models.CharField(max_length=100)
-    falha_equip = models.IntegerField()
-    falha_trans = models.IntegerField()
-    falta_energ = models.IntegerField()
-    frasc_trans = models.IntegerField()
-
 class Lote(models.Model):
     lote = models.CharField(max_length=100)
     imunobiologico = models.ForeignKey(Imunobiologico, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Imunobiológico")
@@ -264,7 +121,7 @@ class Imunizacao(models.Model):
 
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Paciente")
     
-    comorbidades = MultiSelectField(default=None, blank=True,choices = comorbidades, verbose_name="Comorbidades") # Se grupo=COMORBIDADE
+    comorbidades = MultiSelectField(default=None, blank=True,choices = get_choices('comorbidades'), verbose_name="Comorbidades") # Se grupo=COMORBIDADE
     CRM_medico_resp = models.IntegerField(null=True, default=None, blank=True, verbose_name="CRM médico responsável") # Se grupo=COMORBIDADE
     
     num_BPC = models.IntegerField(null=True, default=None, blank=True, verbose_name="Número do BPC") # Se grupo=PESSOA COM DEFICIENCIA PERMANENTEMENTE SEVERA
@@ -273,8 +130,8 @@ class Imunizacao(models.Model):
     imunobiologico = models.ForeignKey(Imunobiologico, on_delete=models.CASCADE, blank=False, default=None, verbose_name="Imunobiológico")
     lote = models.ForeignKey(Lote, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Lote")
 
-    via_admn = models.CharField(max_length=20, choices=vias_admn, verbose_name="Via de Administração")
-    local_admn = models.CharField(max_length=20, choices=locais_admn, verbose_name="Local de Administração")
+    via_admn = models.CharField(max_length=20, choices=get_choices('vias_admn'), verbose_name="Via de Administração")
+    local_admn = models.CharField(max_length=20, choices=get_choices('locais_admn'), verbose_name="Local de Administração")
 
     vacinador = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -284,79 +141,66 @@ class Imunizacao(models.Model):
         verbose_name="Vacinador"
     )
 
-    grupo = models.CharField(max_length=100, choices=grupos, verbose_name="Grupo de Atendimento")
+    grupo = models.CharField(max_length=100, choices=get_choices('grupos'), verbose_name="Grupo de Atendimento")
 
-    estrategia = models.CharField(max_length=100, choices=estrategias, verbose_name="Estratégia")
+    estrategia = models.CharField(max_length=100, choices=get_choices('estrategias'), verbose_name="Estratégia")
     
     data_aplic = models.DateField(null=True, verbose_name="Data de Aplicação")
     data_apraz = models.DateField(null=True, blank=True, verbose_name="Data de Aprazamento")
 
-    estado_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_estados(), verbose_name="Estado Primeira Dose")
+    estado_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_choices('estados'), verbose_name="Estado Primeira Dose")
     pais_1_dose = models.CharField(null=True, blank=True, max_length=100, choices=get_paises_exceto_brasil(), verbose_name="País Primeira Dose")
+    modificado = models.BooleanField()
 
     def clean(self, *args, **kwargs):
-        errors = {}
+        errors = {} # Dict que armezena os erros para cada campo
+
+        # Esta função adiciona a mensagem de erro e o campo correspondente ao dict 'errors'
+        def appendError(field, msg):
+            if field in errors:
+                errors[field].append(msg)
+            else:
+                errors[field] = [msg]
+
+        # Se grupo não for 'COMORBIDADE', atribuir nenhuma comorbidade automaticamente
+        if self.grupo != "COMORBIDADE":
+            self.comorbidades = ''
 
         # Exceção se comorbidades forem escolhidas e grupo do paciente não é "COMORBIDADE"
         if len(self.comorbidades) != 0 and self.grupo != "COMORBIDADE":
-            if 'comorbidades' in errors:
-                errors['comorbidades'].append(_("Campo 'Comorbidades' somente se paciente for do grupo 'COMORBIDADE'"))
-            else:
-                errors['comorbidades'] = [_("Campo 'Comorbidades' somente se paciente for do grupo 'COMORBIDADE'")] 
+            appendError('comorbidades', _("Campo 'Comorbidades' somente se paciente for do grupo 'COMORBIDADE'"))
         
         # Exceção se houver número de CRM de médico e grupo do paciente não é "COMORBIDADE"
         if self.CRM_medico_resp != None and self.grupo != "COMORBIDADE":
-            if 'CRM_medico_resp' in errors:
-                errors['CRM_medico_resp'].append(_("Campo 'CRM_medico_resp' somente se paciente for do grupo 'COMORBIDADE'"))
-            else:
-                errors['CRM_medico_resp'] = [_("Campo 'CRM_medico_resp' somente se paciente for do grupo 'COMORBIDADE'")] 
+            appendError('CRM_medico_resp', _("Campo 'CRM_medico_resp' somente se paciente for do grupo 'COMORBIDADE'"))
 
         # Exceção se houver número BPC de médico e grupo do paciente não é "PESSOA COM DEFICIENCIA PERMANENTE SEVERA"
         if self.num_BPC != None and self.grupo != "PESSOA COM DEFICIENCIA PERMANENTE SEVERA":
-            if 'num_BPC' in errors:
-                errors['num_BPC'].append(_("Campo 'Número BPC' somente se paciente for do grupo 'PESSOA COM DEFICIENCIA PERMANENTE SEVERA'"))
-            else:
-                errors['num_BPC'] = [_("Campo 'Número BPC' somente se paciente for do grupo 'PESSOA COM DEFICIENCIA PERMANENTE SEVERA'")]
+            appendError('num_BPC', _("Campo 'Número BPC' somente se paciente for do grupo 'PESSOA COM DEFICIENCIA PERMANENTE SEVERA'"))
         
 
-
-
-        # Se estado de 1ª dose ou país de 1ª dose estiverem preenchidos, então dose automaticamente troca para 2ª
+        # Se estado de 1ª dose ou país de 1ª dose estiverem preenchidos e for 1ª dose, exceção
         if (self.estado_1_dose != None or self.pais_1_dose != None) and self.dose == "1º DOSE":
-            if 'dose' in errors:
-                errors['dose'].append(_("1ª dose já foi tomada em outro país ou estado"))
-            else:
-                errors['dose'] = [_("1ª dose já foi tomada em outro país ou estado")]
+            appendError('dose', _("1ª dose já foi tomada em outro país ou estado"))
 
         # Verificações que dependem de imunobiologico != None, ou seja, foi escolhido um imunobiológico
+        #if self.imunobiologico != None:
         try:
             # Exceção se dose não for UNICA para imunobiologico de dose única
             if int(self.imunobiologico.doses) == 1 and self.dose != "UNICA":
-                if 'dose' in errors:
-                    errors['dose'].append(_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única"))
-                else:
-                    errors['dose'] = [_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única")] 
+                appendError('dose', _("Campo 'Dose' só pode ter valor 'UNICA' para imunobiológico de dose única"))
             
             # Exceção se dose = UNICA para imunobiologico de 2 doses
             if int(self.imunobiologico.doses) == 2 and self.dose == "UNICA":
-                if 'dose' in errors:
-                    errors['dose'].append(_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única"))
-                else:
-                    errors['dose'] = [_("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico que não seja de dose única")] 
+                appendError('dose', _("Campo 'Dose' não pode ter valor 'UNICA' para imunobiológico de 2 doses"))
             
             # Exceção se imunobiológico de dose única e houver uma data de aprazamento
             if int(self.imunobiologico.doses) == 1 and self.data_apraz != None:
-                if 'data_apraz' in errors:
-                    errors['data_apraz'].append(_("Não pode haver data de aprazamento para imunobiológico de dose única"))
-                else:
-                    errors['data_apraz'] = [_("Não pode haver data de aprazamento para imunobiológico de dose única")]
+                appendError('data_apraz', _("Não pode haver data de aprazamento para imunobiológico de dose única"))
             
-            # Exceçãos se for 2ª dose e houver data de aprazamento
+            # Exceção se for 2ª dose e houver data de aprazamento
             if self.dose == "2º DOSE" and self.data_apraz != None:
-                if 'data_apraz' in errors:
-                    errors['data_apraz'].append(_("Não pode haver data de aprazamento para 2ª dose"))
-                else:
-                    errors['data_apraz'] = [_("Não pode haver data de aprazamento para 2ª dose")] 
+                appendError('data_apraz', _("Não pode haver data de aprazamento para 2ª dose"))
             
             # Se for 1ª dose...
             if self.dose == "1º DOSE":
@@ -470,7 +314,6 @@ class Imunizacao(models.Model):
         if errors:
             raise ValidationError(errors)
         super().clean(*args, **kwargs)
-        #raise ValidationError("Teste")
     
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -478,3 +321,10 @@ class Imunizacao(models.Model):
     
     def __str__(self):
         return str('CPF: '+str(self.paciente.CPF)+', Nome: '+self.paciente.nome + ', Imuno.: ' + self.imunobiologico.imunobiologico + ', dose: ' + self.dose)
+
+class AtualizaServer(models.Model):
+    data_atualizacao = models.DateTimeField(verbose_name="Última Atualização")
+    versao_local = models.DateTimeField(verbose_name="Versão Local")
+
+    class Meta:
+        verbose_name_plural = 'Atualiza Server'

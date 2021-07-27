@@ -11,6 +11,9 @@ requests = "*"
 django-constance = {extras = ["database"], version = "*"}
 django-multiselectfield = "*"
 validate-docbr = "*"
+djangorestframework = "*"
+markdown = "*"
+django-filter = "*"
 
 [dev-packages]
 

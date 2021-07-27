@@ -1,20 +1,109 @@
+from django.http import request, response
+from .api.serializers import ImunizacaoSerializer,PacienteSerializer, AtualizaServerSerializer
 from time import sleep
-from .models import Paciente,Imunizacao
-from django.core import serializers
+from .models import AtualizaServer, Paciente,Imunizacao,Imunobiologico,Lote
+from django.contrib.auth.models import User
+from rest_framework import serializers
 import requests
 import json
+from django.contrib import messages
+
+def atualiza_local():
+    headers = {'content-type': 'application/json'}
+    data = 0
+    response = requests.get('https://serverremoto.herokuapp.com/api/Atualizar/', headers=headers)
+    json = response.json()
+    for element in json:
+        element.pop('id')
+        data = AtualizaServer.objects.all()[0]
+        data.data_atualizacao = element.get('data_atualizacao')
+        data.save()
+
+
+
 
 def sincronizar():
+    headers = {'content-type': 'application/json'}
+    numero_de_pacientes = Paciente.objects.all().count()
+    for i in range(0,numero_de_pacientes):
+        paciente = Paciente.objects.all().values()[i]
+        paciente.pop('id')
+        if paciente.get('modificado'):
+            paciente.pop('modificado')
+            serialized_obj = PacienteSerializer(paciente)
+            json1 = json.dumps(serialized_obj.data)
+            response = requests.patch('https://serverremoto.herokuapp.com/api/Pacientes/', data=json1,headers=headers)
+            # print(response.json())
+            # print('\n')
+            # print('Envio de Paciente:')
+            # print(json1)
+            # print(response)
+            # print('\n')
+
     numero_de_imunizacoes = Imunizacao.objects.all().count()
     for i in range(0,numero_de_imunizacoes):
-        imuniz = Imunizacao.objects.all()[i]
-        serialized_obj = serializers.serialize('json', [ imuniz, Paciente.objects.filter(id = int(imuniz.paciente.id))[0],]) # 
-        requests.post('http://127.0.0.1:5000', serialized_obj)
+        imunizacoes = Imunizacao.objects.all().values()[i]
+        imunizacoes.pop('id')
+        if imunizacoes.get('modificado'):
+            imunizacoes.pop('modificado')
+            serialized_obj = ImunizacaoSerializer(imunizacoes)
+            json1 = json.dumps(serialized_obj.data)
+            response = requests.patch('https://serverremoto.herokuapp.com/api/Imunizacoes/', data=json1,headers=headers)
+            # print(response.json())
+            # print('\n')
+            # print('Envio de Imunização:')
+            # print(json1)
+            # print(response)
+            # print('\n')
 
-        print(imuniz.paciente.id)
-        parsed = json.loads(serialized_obj)
-        print(json.dumps(parsed, indent=4, sort_keys=True))
-    # print(serialized_obj)
-    # print(imuniz.paciente.id)
-    # parsed = json.loads(serialized_obj)
-    # print(json.dumps(parsed, indent=4, sort_keys=True))
+    response = requests.get('https://serverremoto.herokuapp.com/api/Pacientes/',headers=headers)
+    for element in response.json():
+        element.pop('id')
+        if Paciente.objects.filter(CPF__iexact=element.get('CPF')):
+            Paciente.objects.filter(CPF__iexact=element.get('CPF')).update(modificado=False,**element)
+            paciente = Paciente.objects.filter(CPF__iexact=element.get('CPF')).values()[0]
+        elif Paciente.objects.filter(CNS__iexact=element.get('CNS')):
+            Paciente.objects.filter(CNS__iexact=element.get('CNS')).update(modificado=False,**element)
+            paciente = Paciente.objects.filter(CPF__iexact=element.get('CNS')).values()[0]
+        else:
+            Paciente.objects.create(modificado = False, **element)
+        # print(element)
+        # print('\n')
+        
+
+
+    response = requests.get('https://serverremoto.herokuapp.com/api/Imunizacoes/',headers=headers)
+    for data in response.json():
+        data.pop('id')
+
+        paciente_pk = 0
+        imunobiologico_pk = 0
+        lote_pk = 0
+        vacinador_pk = 0
+
+        paciente_CPF = data.pop('paciente_CPF')
+        paciente_CNS = data.pop('paciente_CNS')
+        if paciente_CPF:
+            paciente_pk = Paciente.objects.filter(CPF=paciente_CPF).first()
+        else:
+            paciente_pk = Paciente.objects.filter(CNS=paciente_CNS).first()
+
+        imunobiologico = data.pop('imunobiologico')
+        imunobiologico_pk = Imunobiologico.objects.filter(imunobiologico=imunobiologico).first()
+
+        lote = data.pop('lote')
+        lote_pk = Lote.objects.filter(lote=lote).first()
+
+        vacinador = data.pop('vacinador')
+        vacinador_pk = User.objects.filter(username=vacinador).first()
+
+        data['paciente'] = paciente_pk
+        data['imunobiologico'] = imunobiologico_pk
+        data['lote'] = lote_pk
+        data['vacinador'] = vacinador_pk
+
+        if Imunizacao.objects.filter(paciente__exact=data['paciente']).filter(dose__exact=data['dose']):
+            Imunizacao.objects.filter(paciente__exact=data['paciente']).filter(dose__exact=data['dose']).update(modificado=False,**data)
+            imunizacao = Imunizacao.objects.filter(paciente__exact=data['paciente']).filter(dose__exact=data['dose'])[0]
+        else:
+            imunizacao = Imunizacao.objects.create(modificado=False,**data)

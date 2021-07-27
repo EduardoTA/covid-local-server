@@ -1,0 +1,74 @@
+[
+    {
+        "display":"AEROVIARIOS",
+        "value":"AEROVIARIOS"
+    },
+    {
+        "display":"COMORBIDADE",
+        "value":"COMORBIDADE"
+    },
+    {
+        "display":"ESTUDO CLINICO",
+        "value":"ESTUDO CLINICO"
+    },
+    {
+        "display":"IDOSO",
+        "value":"IDOSO"
+    },
+    {
+        "display":"IDOSO EM ILPI",
+        "value":"IDOSO EM ILPI"
+    },
+    {
+        "display":"INDIGENAS",
+        "value":"INDIGENAS"
+    },
+    {
+        "display":"METROVIARIOS/CPTM",
+        "value":"METROVIARIOS/CPTM"
+    },
+    {
+        "display":"MOTORISTAS E COBRADORES DE ONIBUS",
+        "value":"MOTORISTAS E COBRADORES DE ONIBUS"
+    },
+    {
+        "display":"PESSOA >= 18 ANOS PORTADORA DE DEFICIENCIA RESIDENTES EM RI",
+        "value":"PESSOA >= 18 ANOS PORTADORA DE DEFICIENCIA RESIDENTES EM RI"
+    },
+    {
+        "display":"PESSOA COM DEFICIENCIA PERMANENTE SEVERA",
+        "value":"PESSOA COM DEFICIENCIA PERMANENTE SEVERA"
+    },
+    {
+        "display":"POPULACAO EM GERAL",
+        "value":"POPULACAO EM GERAL"
+    },
+    {
+        "display":"POPULACAO EM SITUACAO DE RUA",
+        "value":"POPULACAO EM SITUACAO DE RUA"
+    },
+    {
+        "display":"PORTUARIOS",
+        "value":"PORTUARIOS"
+    },
+    {
+        "display":"QUILOMBOLA",
+        "value":"QUILOMBOLA"
+    },
+    {
+        "display":"RIBEIRINHAS",
+        "value":"RIBEIRINHAS"
+    },
+    {
+        "display":"TRABALHADOR DA EDUCACAO",
+        "value":"TRABALHADOR DA EDUCACAO"
+    },
+    {
+        "display":"TRABALHADOR DA SEGURANCA PUBLICA",
+        "value":"TRABALHADOR DA SEGURANCA PUBLICA"
+    },
+    {
+        "display":"TRABALHADOR DE SAUDE",
+        "value":"TRABALHADOR DE SAUDE"
+    }
+]
