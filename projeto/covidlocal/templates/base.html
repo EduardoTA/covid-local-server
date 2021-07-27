@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/34394b45e0.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     {% load static %}
     <link href="{% static "css/basestyle.css" %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static "css/form.css" %}" rel="stylesheet">
@@ -9,26 +10,31 @@
 </head>
 <body>
     <nav>
-    <ul class = "ul_base">
-        {% if user.is_authenticated %}
-        <li class = "li_base"><a href="/">Home</a></li>
-        <li class = "li_base"><a href="/cadastro_paciente">Cadastro Paciente</a></li>
-        <li class = "li_base"><a href="/busca_cadastro">Cadastro Imunização</a></li>
-        {% else %}
-        <li class = "li_base"><a href="/login">Fazer Login</a></li>
-        {% endif %}
-        {% if user.is_superuser %}
-        <li class = "li_base"><a href="/admin">Página de Administrador</a></li>
-        <li class = "li_base"><a href="/cadastrar_usuario">Criar Usuário</a></li>
-        <li class = "li_base"><a href="#" name="sincronizar">Sincronizar</a></li>
-        {% endif %}
-        {% if user.is_authenticated %}
-        <li class = "li_base"><a href="/logout">Logout</a></li>
-        {% endif %}
-        {% if user.is_authenticated %}
-        <li class="usuario">{{ user.get_username }} </li>
-        {% endif %}
-    </ul>
+        <input type="checkbox" id="check">
+        <label for="check" class="menubtn">
+            <i class="fas  fa-bars"></i>
+        </label>
+        <a class="logo" href="/">VaciServer</a>
+        <ul class = "ul_base">
+            {% if user.is_authenticated %}
+            <!-- <li class = "li_base"><a href="/">Home</a></li> -->
+            <li class = "li_base"><a href="/cadastro_paciente">Cadastro Paciente</a></li>
+            <li class = "li_base"><a href="/busca_cadastro">Cadastro Imunização</a></li>
+            {% else %}
+            <li class = "li_base"><a href="/login">Fazer Login</a></li>
+            {% endif %}
+            {% if user.is_superuser %}
+            <li class = "li_base"><a href="/admin">Página de Administrador</a></li>
+            <li class = "li_base"><a href="/cadastrar_usuario">Criar Usuário</a></li>
+            <li class = "li_base"><a href="#" name="sincronizar">Sincronizar</a></li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li class = "li_base"><a href="/logout">Logout</a></li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li class="usuario">{{ user.get_username }} </li>
+            {% endif %}
+        </ul>
     </nav>
     {% block content %}
     replace me

@@ -30,12 +30,22 @@ input[type=email] {
     resize: vertical;
 }
 
+input[type=password] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+
 label {
     padding: 12px 12px 12px 0;
     display: inline-block;
 }
 
-input[type=submit] {
+input[type=submit], button[type=submit]  {
     padding: 10px 20px;
     border-radius: 5px;
     margin: 20px;
@@ -52,7 +62,7 @@ input[type=submit] {
     border-radius: 5px;
     background-color: #f2f2f2;
     margin-top: 50px;
-    margin-left: 30%;
+    margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 40px;
     height: max-content;
