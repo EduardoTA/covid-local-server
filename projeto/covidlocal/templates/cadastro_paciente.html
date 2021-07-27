@@ -151,18 +151,6 @@
     </form>
     {% endif %}
 </div>
-<script>
-    function teste() {
-        var testeraca = $("#id_raca").val();
-        if (testeraca == "AMARELA") {
-            console.log(testeraca);
-            $("#id_gestante").hide();
-        } else {
-            $("#id_gestante").show();
-        }
-    }
-    teste();
-    $("#id_raca").change(teste)
-</script>
+
 {% endblock %}
  
