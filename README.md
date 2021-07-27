@@ -67,7 +67,7 @@ Lote: tgreye5ry ,
 Imunobiológico: ASTRAZENCA/OXFORD/FIOCRUZ ,  
 Data de Validade: 2021-07-27  
 
-* Saia do menu de administrador, entre na página de cadastro de imunização através do botão adequado na barra de navegação, digite o CPF ou CNS do paciente a ser imunizado, no caso, o CPF 20699307937, verifique as informações do cadastro. Confirme estas informações através do botão no final da página, e então clique Confirmar Dados do Paciente. Então, clique em Registrar Imunização (no final da página), e depois de ser redirecionado à página de imunização, cadastre os seguintes dados:  
+* Saia do menu de administrador, entre na página de cadastro de imunização através do botão adequado na barra de navegação, digite o CPF ou CNS do paciente a ser imunizado, no caso, o CPF 20699307937, verifique as informações do cadastro. Confirme estas informações e então clique Confirmar Dados do Paciente. Então, clique em Registrar Imunização (no final da página), e depois de ser redirecionado à página de imunização, cadastre os seguintes dados:  
 
 Paciente: CPF: 20699307937, Nome: Emily Lara Brenda Fogaça  
 CNS: ,  
