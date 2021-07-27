@@ -17,49 +17,49 @@ Para realizar a sincronização com o servidor remoto, basta clicar no botão "S
 
 Abaixo está uma maneira de realizar testes para verificar o funcionamento correto do sistema:
 
-Primeiro, cadastre um paciente. Um exemplo de valores aceitos no cadastro está abaixo:
-CPF: 20699307937 ,
-CNS: ,
-nome: Emily Lara Brenda Fogaça ,
-Nome da Mae: Maitê Jéssica Letícia ,
-Nome Social: ,
-Data de Nascimento: 1951-08-18 ,
-Telefone: 2147483647 ,
-email: ,
-Sexo: FEMININO ,
-Raça: Nao informada ,
-gestante: ,
-puerpera: ,
-pais: Brasil ,
-UF: BA ,
-Municipio: Salvador ,
-Logradouro: Rua João Moraes ,
-Numero: 250 ,
-Bairro: Fazenda Grande do Retiro ,
-Complemento: ,
+Primeiro, cadastre um paciente. Um exemplo de valores aceitos no cadastro está abaixo:  
+CPF: 20699307937 ,  
+CNS: ,  
+nome: Emily Lara Brenda Fogaça ,  
+Nome da Mae: Maitê Jéssica Letícia ,  
+Nome Social: ,  
+Data de Nascimento: 1951-08-18 ,  
+Telefone: 1147483647 ,  
+email: ,  
+Sexo: FEMININO ,  
+Raça: Nao informada ,  
+gestante: ,  
+puerpera: ,  
+pais: Brasil ,  
+UF: BA ,  
+Municipio: Salvador ,  
+Logradouro: Rua João Moraes ,  
+Numero: 250 ,  
+Bairro: Fazenda Grande do Retiro ,  
+Complemento: ,  
 Zona: URBANA 
 
-Entre então, no menu de administrador, clique para adicionar um lote, e adicione com as informações:
-Lote: tgreye5ry
-Imunobiológico: ASTRAZENCA/OXFORD/FIOCRUZ
-Data de Validade: 2021-07-27
+Entre então, no menu de administrador, clique para adicionar um lote, e adicione com as informações:  
+Lote: tgreye5ry  
+Imunobiológico: ASTRAZENCA/OXFORD/FIOCRUZ  
+Data de Validade: 2021-07-27  
 
-Escolha a opção de registrar uma imunização, e registre com as informações abaixo:
-Paciente: CPF: 20699307937, Nome: Emily Lara Brenda Fogaça
-CNS: ,
-Comorbidades: ,
-CRM_medico_resp: ,
-Numero do BPC: ,
-Dose: 1º DOSE ,
-Imunobiologico: ASTRAZENECA/OXFORD/FIOCRUZ ,
-lote: tgreye5ry ,
-Via de Administração: Endovenosa ,
-Local de Administração: Deltoide Esquerdo ,
-Vacinador: admin ,
-Grupo: Idoso ,
-Estrategia: Campanha Indiscriminada ,
-Dara de Aplicação: 2021-11-11,
-Data de Aprazamento: 2022-02-03,
-Estado 1ªdose: ,
-Pais 1ªdose: 
+Escolha a opção de registrar uma imunização, e registre com as informações abaixo:  
+Paciente: CPF: 20699307937, Nome: Emily Lara Brenda Fogaça  
+CNS: ,  
+Comorbidades: ,   
+CRM_medico_resp: ,  
+Numero do BPC: ,  
+Dose: 1º DOSE ,  
+Imunobiologico: ASTRAZENECA/OXFORD/FIOCRUZ ,  
+lote: tgreye5ry ,  
+Via de Administração: Endovenosa ,  
+Local de Administração: Deltoide Esquerdo ,  
+Vacinador: admin ,  
+Grupo: Idoso ,  
+Estrategia: Campanha Indiscriminada ,  
+Dara de Aplicação: 2021-11-11,  
+Data de Aprazamento: 2022-02-03,  
+Estado 1ªdose: ,  
+Pais 1ªdose:   
         
