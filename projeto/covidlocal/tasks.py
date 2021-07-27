@@ -23,6 +23,7 @@ def atualiza_local():
 
 # Método assíncrono que faz a sincronização do banco de dados local com o remoto
 def sincronizar():
+    print("Sincronizando")
     headers = {'content-type': 'application/json'}
     numero_de_pacientes = Paciente.objects.all().count()
     for i in range(0,numero_de_pacientes):
@@ -33,7 +34,8 @@ def sincronizar():
             serialized_obj = PacienteSerializer(paciente)
             json1 = json.dumps(serialized_obj.data)
             response = requests.patch('https://serverremoto.herokuapp.com/api/Pacientes/', data=json1,headers=headers)
-
+            #print(json1)
+            
     numero_de_imunizacoes = Imunizacao.objects.all().count()
     for i in range(0,numero_de_imunizacoes):
         imunizacoes = Imunizacao.objects.all().values()[i]
@@ -43,6 +45,7 @@ def sincronizar():
             serialized_obj = ImunizacaoSerializer(imunizacoes)
             json1 = json.dumps(serialized_obj.data)
             response = requests.patch('https://serverremoto.herokuapp.com/api/Imunizacoes/', data=json1,headers=headers)
+            #print(json1)
 
     response = requests.get('https://serverremoto.herokuapp.com/api/Pacientes/',headers=headers)
     for element in response.json():

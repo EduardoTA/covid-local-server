@@ -28,7 +28,7 @@ def cadastro_paciente(request):
     if data.data_atualizacao != data.versao_local:
         messages.error(request, 'Favor atualizar o servidor remoto')
     paciente = 0
-    form = PacienteForm()
+    form = PacienteForm(initial={'pais': 'Brasil'})
     if request.method == "POST":
         if request.POST.get('form_cadastro'):
             try:
