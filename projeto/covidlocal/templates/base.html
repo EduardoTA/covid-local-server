@@ -10,7 +10,8 @@
     {% load static %}
     <link href="{% static "css/basestyle.css" %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static "css/form.css" %}" rel="stylesheet">
-    <title>Servidor Local VaciVida</title>
+    <link rel="icon" type="image/png" href="{% static "favicon/favicon-32x32.png" %}" sizes="32x32" />
+    <title>VaciServer</title>
 </head>
 <body>
     <nav>
@@ -18,7 +19,9 @@
         <label for="check" class="menubtn">
             <i class="fas  fa-bars"></i>
         </label>
-        <a class="logo" href="/">VaciServer</a>
+        <a class="logo" href="/">
+            <img src="{% static "logo/VaciServer.png" %}" alt="VaciServer" width="200" height="80" /> 
+        </a>
         <ul class = "ul_base">
             {% if user.is_authenticated %}
             <!-- <li class = "li_base"><a href="/">Home</a></li> -->
