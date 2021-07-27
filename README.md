@@ -1,14 +1,14 @@
 # covid-local-server
 
-## Descrição geral do projeto
+## Descrição geral do projeto  
 
-O projeto realizado trata-se de uma aplicação Web, desenvolvida utilizando do framework Django, que implementa um servidor local que armazena o cadastros de imunizações e pacientes utilizados pelo sistema VaciVida, e então realiza a sincronização desses dados com o banco de dados central de maneira assíncrona num momento oportuno (quando a conexão com a Internet está estável, ou então em horários em que o sistema principal está menos ocupado), a fim de diminuir-se a utilização do servidor central do VaciVida (que pode causar atrasos na vacinação durante o dia), aumentando-se a velocidade dos cadastros de imunizações e pacientes, e assim, aumentando-se o ritmo de vacinações neste período de pandemia.
-Para a simulação do servidor central do VaciVida, foi utilizada uma API hospedada na plataforma Heroku: https://serverremoto.herokuapp.com/api, sincronizada com o repositório no GitHub: https://github.com/lsantos0142/serverremoto .
+O projeto realizado trata-se de uma aplicação Web, desenvolvida utilizando do framework Django, que implementa um servidor local que armazena o cadastros de imunizações e pacientes utilizados pelo sistema VaciVida, e então realiza a sincronização desses dados com o banco de dados central de maneira assíncrona num momento oportuno (quando a conexão com a Internet está estável, ou então em horários em que o sistema principal está menos ocupado), a fim de diminuir-se a utilização do servidor central do VaciVida (que pode causar atrasos na vacinação durante o dia), aumentando-se a velocidade dos cadastros de imunizações e pacientes, e assim, aumentando-se o ritmo de vacinações neste período de pandemia.  
+Para a simulação do servidor central do VaciVida, foi utilizada uma API hospedada na plataforma Heroku: https://serverremoto.herokuapp.com/api, sincronizada com o repositório no GitHub: https://github.com/lsantos0142/serverremoto .  
 
-## Instruções de Instalação e Execução do Servidor Local
+## Instruções de Instalação e Execução do Servidor Local  
 
-Para rodar o projeto em sua máquina, é necessário, primeiramente ter instalado o GIT, um interpretador de **python 3.9**, o framework **Django** e a ferramenta **pipenv**, de criação de ambientes virtuais em python. 
-Tendo essas ferramentas instaladas, clone o repositório GIT (branch main) e siga os seguintes passos: 
+Para rodar o projeto em sua máquina, é necessário, primeiramente ter instalado o GIT, um interpretador de **python 3.9**, o framework **Django** e a ferramenta **pipenv**, de criação de ambientes virtuais em python.  
+Tendo essas ferramentas instaladas, clone o repositório GIT (branch main) e siga os seguintes passos:  
 
 * Abra um terminal ou Command Prompt na pasta onde foi clonado o repositório GIT
 * Utilize do comando **"pipenv install"**, ou caso não funcione, use **"pipenv install -r -requirements.txt"** para instalar as dependências do projeto. 
