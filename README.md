@@ -21,9 +21,17 @@ O usuário administrador irá ter acesso a três principais funções a mais com
 
 ## Utilização da aplicação Web em dispositivos mobile  
 
-Para acessar o servidor local de uma outra máquina na mesma rede local, use o comando "ipcofig" para descobrir o endereço IP local do computador que está sendo usado como servidor, então, através de seu navegador, digite o endereço IP desta máquina na barra de pesquisa.  
+Para acessar o servidor local de uma outra máquina na mesma rede local, utilize o comando "ipcofig" num terminal  ou Command Prompt do computador que está rodando a aplicação do servidor local para descobrir seu endereço IP local. No seu navegador do dispositivo mobile, digite o endereço IP desta máquina na barra de pesquisa seguido de ":8000", por exemplo, caso o IP do seu computador seja 192.168.15.163, digite 192.168.15.163:8000 na barra de endereço do navegador.  
 
-Para realizar a sincronização com o servidor remoto, basta clicar no botão "Sincronizar", e então, os dados deveriam ir para o servidor hospedado no Heroku.  
+## Utilização da aplicação Web  
+
+Primeiramente, ao acessar o servidor local, o usuário será exigido um login, e efetuando-se esta autenticação, será disponibilizada a utilização do software desenvolvido.  
+A aplicação possui uma página inicial, uma página para o cadastro de pacientes, uma página para o cadastro de imunizações e, para administradores, uma página de administradores, uma página para criação de novos usuários e um botão para a sincronização do banco de dados local com o banco de dados remoto, além da função de logout.  
+
+Após o cadastro de pacientes e imunizações, para realizar a sincronização com o servidor remoto, basta clicar no botão "Sincronizar", e então, os dados irão ser enviados ao servidor remoto hospedado no Heroku, e também serão recebidos novos dados de pacientes e imunizações que eventualmente não constarem no servidor local mas existem no servidor remoto.  
+O servidor local possui a funcionalidade de apenas enviar os dados que foram alterados localmente para o servidor remoto, diminuindo-se a quantidade de dados a serem transmitidos, otimizando-se a conexão entre os servidores para que não haja congestionamento no servidor central.  
+
+## Exemplo de utilização do software com dados de teste
 
 Abaixo está uma maneira de realizar testes para verificar o funcionamento correto do sistema:  
 
