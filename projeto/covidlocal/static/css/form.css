@@ -96,6 +96,21 @@ input[type=submit], button[type=submit]  {
     color: white;
 }
 
+#id_gestante, #id_puerpera{
+    display: none;
+}
+.cbximg{
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background-position-y: top;
+    background-image: url(cbx.png);
+}
+
+#id_gestante:checked ~ .cbximg, #id_puerpera:checked ~ .cbximg{
+    background-position-y: bottom;
+}
+
 .bloco{
     margin-top: 20px;
 }

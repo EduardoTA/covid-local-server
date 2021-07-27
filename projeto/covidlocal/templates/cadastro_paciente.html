@@ -84,13 +84,15 @@
                 <div class="fieldWrapper"> 
                     {{ form.gestante.errors }}
                     <label for="{{ form.gestante.id_for_label }}">Gestante:</label><br>
-                    {{ form.gestante }}
+                    <input type="checkbox" id="id_gestante" name="gestante">
+                    <label class= "cbximg" for="id_gestante"></label><br>
                 </div>
 
                 <div class="fieldWrapper"> 
                     {{ form.puerpera.errors }}
                     <label for="{{ form.puerpera.id_for_label }}">Puérpera:</label><br>
-                    {{ form.puerpera }}
+                    <input type="checkbox" id="id_puerpera" name="puerpera">
+                    <label class= "cbximg" for="id_puerpera"></label><br>
                 </div>
             </div>
         </div>
