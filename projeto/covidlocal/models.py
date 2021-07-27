@@ -9,12 +9,14 @@ from validate_docbr import CPF as cpf1
 
 from .choices import * 
 
+# Campo customizado que converte uma string vazia ('') para None
 class EmptyStringToNoneField(models.CharField):
     def get_prep_value(self, value):
         if value == '':
             return None  
         return value
 
+# Modelo para Paciente
 class Paciente(models.Model):
     CPF = EmptyStringToNoneField(null=True,blank=True, default=None, unique=True, max_length=11, verbose_name='CPF')
     CNS = EmptyStringToNoneField(null=True,blank=True, default=None, unique=True, max_length=15, verbose_name='CNS')
@@ -38,53 +40,11 @@ class Paciente(models.Model):
     complemento = models.CharField(max_length=10, blank=True, verbose_name='Complemento')
     email = models.CharField(max_length=100, blank=True, verbose_name='Email')
     modificado = models.BooleanField()
-
-    # def clean(self, *args, **kwargs):
-    #     errors = {}
-
-    #     # Esta função adiciona a mensagem de erro e o campo correspondente ao dict 'errors'
-    #     def appendError(field, msg):
-    #         if field in errors:
-    #             errors[field].append(msg)
-    #         else:
-    #             errors[field] = [msg]
-
-    #     # CPF ou CNS devem ser inseridos
-    #     if self.CPF == None and self.CNS == None:
-    #         appendError('CPF', _("CPF ou CNS devem ser inseridos"))
-        
-    #     if not self.CPF == None:
-    #         if not cpf1().validate(self.CPF):
-    #             appendError('CPF', _("CPF inválido"))
-        
-    #     if not self.CNS == None:
-    #         if not cns1().validate(self.CNS):
-    #             appendError('CNS', _("CNS inválido"))
-        
-    #     if self.sexo == 'FEMININO' or self.puerpera or self.gestante:
-    #         if self.sexo != 'FEMININO':
-    #             appendError('sexo', _("Apenas pacientes do sexo feminino podem ser puérperas ou gestantes"))
-    #         elif self.puerpera and self.gestante:
-    #             errors.append(_("Paciente não pode estar com o campo Gestante e Puérpera marcados ao mesmo tempo"))
-        
-    #     if len(str(self.telefone)) < 10 or len(str(self.telefone)) > 11:
-    #         appendError('telefone', _("Digite um número de telefone válido"))
-        
-    #     ddds = ['11', '12', '13', '14', '15', '16', '17', '18', '19', '21', '22', '24', '27', '28', '31', '32', '33', '34', '35', '37', '38', '41', '42', '43', '44', '45', '46', '47', '48', '49', '51', '53', '54', '55', '61', '62', '63', '64', '65', '66', '67', '68', '69', '71', '73', '74', '75', '77', '79', '81', '82', '83', '84', '85', '86', '87', '88', '89', '91', '92', '93', '94', '95', '96', '97', '98', '99']
-        
-    #     if not str(self.telefone)[:2] in ddds:
-    #         appendError('telefone', _("Digite um DDD válido"))
-
-    #     if errors:
-    #         raise ValidationError(errors)
-    #     super().clean(*args, **kwargs)
-    # def save(self, *args, **kwargs):
-    #     self.full_clean()
-    #     super().save(*args, **kwargs)
     
-    # def __str__(self):
-    #     return str('CPF: '+str(self.CPF)+', Nome: '+self.nome)
+    def __str__(self):
+        return str('CPF: '+str(self.CPF)+', Nome: '+self.nome)
 
+# Modelo para Imunobiológico
 class Imunobiologico(models.Model):
     imunobiologico = models.CharField(max_length=30)
     doses = models.IntegerField()
@@ -104,6 +64,7 @@ class Imunobiologico(models.Model):
         self.full_clean()
         super().save(*args, **kwargs)
 
+# Modelo para Lote
 class Lote(models.Model):
     lote = models.CharField(max_length=100)
     imunobiologico = models.ForeignKey(Imunobiologico, on_delete=models.CASCADE, null=True, blank=False, default=None, verbose_name="Imunobiológico")
@@ -112,6 +73,7 @@ class Lote(models.Model):
     def __str__(self):
         return str('Lote: '+str(self.lote)+', imuno.: '+self.imunobiologico.imunobiologico + ', val.: ' + str(self.validade))
 
+# Modelo para Imunização
 class Imunizacao(models.Model):
     doses = (
         ("UNICA","UNICA"),

@@ -2,6 +2,8 @@ from rest_framework import viewsets
 from .. import models
 from . import serializers
 
+# Estas são as views da API do servidor local
+
 class PacienteViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.PacienteSerializer
     queryset = models.Paciente.objects.all()
