@@ -5,6 +5,8 @@ from .models import Imunizacao, Paciente
 from validate_docbr import CNS as cns1
 from validate_docbr import CPF as cpf1
 
+from .choices import * 
+
 # Forms do Paciente
 class PacienteForm(forms.Form):
     CPF = forms.CharField(label = 'CPF', required= False)
@@ -43,9 +45,9 @@ class PacienteForm(forms.Form):
     nomeSocial = forms.CharField(label = 'Nome Social', required= False)
     dataNascimento = forms.DateField(label = 'Data de Nascimento (dd/mm/aaaa)')
     telefone = forms.IntegerField(label = 'Telefone')
-    gestante = forms.BooleanField(label = 'Gestante', required= False)
+    gestante = forms.BooleanField(label = 'Gestante', required=False)
     puerpera = forms.BooleanField(label = 'Puérpera', required = False)
-    pais = forms.CharField(label = 'País')
+    pais = forms.ChoiceField(label = 'País', choices=get_choices('paises'))
 
     UFs_escolhas = (
         ("", ""),

@@ -30,7 +30,7 @@ class Paciente(models.Model):
     telefone = models.IntegerField(verbose_name='Telefone')
     gestante = models.BooleanField(verbose_name='Gestante')
     puerpera = models.BooleanField(verbose_name='Puérpera')
-    pais = models.CharField(default='BR', max_length=100, verbose_name='País', choices=get_choices('paises'))
+    pais = models.CharField(max_length=100, verbose_name='País', choices=get_choices('paises'))
     UF = models.CharField(max_length=2, choices=get_choices('estados'), verbose_name='UF')
     municipio = models.CharField(max_length=100, verbose_name='Município')
     zona = models.CharField(max_length=6, choices=get_choices('zonas'), verbose_name='Zona')
@@ -219,6 +219,7 @@ class Imunizacao(models.Model):
 
         # Verificação se a pessoa já fez alguma imunização
         if Imunizacao.objects.filter(paciente=self.paciente):
+            print("Já fez imunização")
             # Verifica se paciente já tomou vacina de dose única
             if Imunizacao.objects.filter(paciente=self.paciente, dose="UNICA"):
                 raise ValidationError("Paciente já recebeu dose única")
