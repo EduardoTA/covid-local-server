@@ -25,7 +25,7 @@ O usuário administrador irá ter acesso a três principais funções a mais com
 
 ## Utilização da aplicação Web em dispositivos mobile  
 
-Para acessar o servidor local de uma outra máquina na mesma rede local, utilize o comando "ipcofig" num terminal  ou Command Prompt do computador que está rodando a aplicação do servidor local para descobrir seu endereço IP local. No seu navegador do dispositivo mobile, digite o endereço IP desta máquina na barra de pesquisa seguido de ":8000", por exemplo, caso o IP do seu computador seja 192.168.15.163, digite 192.168.15.163:8000 na barra de endereço do navegador.  
+Para acessar o servidor local de uma outra máquina na mesma rede local, utilize o comando "ipconfig" num terminal  ou Command Prompt do computador que está rodando a aplicação do servidor local para descobrir seu endereço IP local. No seu navegador do dispositivo mobile, digite o endereço IP desta máquina na barra de pesquisa seguido de ":8000", por exemplo, caso o IP do seu computador seja 192.168.15.163, digite 192.168.15.163:8000 na barra de endereço do navegador.  
 
 ## Utilização da aplicação Web  
 
