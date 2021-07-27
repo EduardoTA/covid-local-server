@@ -1,4 +1,4 @@
 projeto/covidlocal/migrations
 projeto/db.sqlite3
-projeto\covidlocal\__pycache__
-projeto\projeto\__pycache__
+projeto/covidlocal/__pycache__
+projeto/projeto/__pycache__
