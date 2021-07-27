@@ -17,7 +17,7 @@ Para realizar a sincronização com o servidor remoto, basta clicar no botão "S
 
 Abaixo está uma maneira de realizar testes para verificar o funcionamento correto do sistema:
 
-Primeiro, cadastre um paciente. Um exemplo de valores aceitos no cadastro está abaixo:  
+* Primeiro, cadastre um paciente. Um exemplo de valores aceitos no cadastro está abaixo:  
 CPF: 20699307937 ,  
 CNS: ,  
 nome: Emily Lara Brenda Fogaça ,  
@@ -39,12 +39,12 @@ Bairro: Fazenda Grande do Retiro ,
 Complemento: ,  
 Zona: URBANA 
 
-Entre então, no menu de administrador, clique para adicionar um lote, e adicione com as informações:  
+* Entre então, no menu de administrador, clique para adicionar um lote, e adicione com as informações:  
 Lote: tgreye5ry ,  
 Imunobiológico: ASTRAZENCA/OXFORD/FIOCRUZ ,  
 Data de Validade: 2021-07-27  
 
-Escolha a opção de registrar uma imunização, e registre com as informações abaixo:  
+* Escolha a opção de registrar uma imunização, e registre com as informações abaixo:  
 Paciente: CPF: 20699307937, Nome: Emily Lara Brenda Fogaça  
 CNS: ,  
 Comorbidades: ,   
@@ -63,4 +63,4 @@ Data de Aprazamento: 2022-02-03,
 Estado 1ªdose: ,  
 Pais 1ªdose:   
         
-Aperte então no botão "Sincronizar", e deverá ser possível observar o novo cadastro em: https://serverremoto.herokuapp.com/api
+* Aperte então no botão "Sincronizar", e deverá ser possível observar o novo cadastro em: https://serverremoto.herokuapp.com/api
