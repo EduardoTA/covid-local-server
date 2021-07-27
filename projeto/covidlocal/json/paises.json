@@ -1,5 +1,9 @@
 [
     {
+        "display":"Brasil",
+        "value":"BR"
+    },
+    {
         "display":"Afeganistao",
         "value":"AF"
     },
@@ -118,10 +122,6 @@
     {
         "display":"Botsuana",
         "value":"BW"
-    },
-    {
-        "display":"Brasil",
-        "value":"BR"
     },
     {
         "display":"Brunei",
