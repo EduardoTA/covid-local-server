@@ -43,6 +43,10 @@ class Paciente(models.Model):
     
     def __str__(self):
         return str('CPF: '+str(self.CPF)+', Nome: '+self.nome)
+    
+    class Meta:
+        verbose_name_plural = 'Pacientes'
+
 
 # Modelo para Imunobiológico
 class Imunobiologico(models.Model):
@@ -64,6 +68,10 @@ class Imunobiologico(models.Model):
         self.full_clean()
         super().save(*args, **kwargs)
 
+    class Meta:
+        verbose_name_plural = 'Imunobiológicos'
+
+
 # Modelo para Lote
 class Lote(models.Model):
     lote = models.CharField(max_length=100)
@@ -72,6 +80,10 @@ class Lote(models.Model):
 
     def __str__(self):
         return str('Lote: '+str(self.lote)+', imuno.: '+self.imunobiologico.imunobiologico + ', val.: ' + str(self.validade))
+
+    class Meta:
+        verbose_name_plural = 'Lotes'
+
 
 # Modelo para Imunização
 class Imunizacao(models.Model):
@@ -284,6 +296,9 @@ class Imunizacao(models.Model):
     
     def __str__(self):
         return str('CPF: '+str(self.paciente.CPF)+', Nome: '+self.paciente.nome + ', Imuno.: ' + self.imunobiologico.imunobiologico + ', dose: ' + self.dose)
+
+    class Meta:
+        verbose_name_plural = 'Imunizações'
 
 class AtualizaServer(models.Model):
     data_atualizacao = models.DateTimeField(verbose_name="Última Atualização")
