@@ -20,13 +20,14 @@
                     {{ form.comorbidades.errors }}
                     <label for="{{ form.comorbidades.id_for_label }}">Comorbidades:</label><br>
                     <div id="list1" class="dropdown-check-list" tabindex="100">
-                    <span class="anchor">Select Fruits</span>
+                    <span class="anchor">Selecione a comorbidade:</span>
                     {{ form.comorbidades }}
-                    </div>
+                    </div> <br>
+                    <div id="BPC">
                     {{ form.id_num_BPC.errors }}
                     <label for="{{ form.id_num_BPC }}">Número do BPC</label><br>
                     {{form.num_BPC}}
-                    
+                    </div>  
             </div>
         </div>
         <div class='bloco'>
@@ -104,5 +105,8 @@
 			$('select option:contains({{paciente_cns}})').prop('selected',true);
 	    </script>
 	{% endif %}
+    <script>
+        $("#BPC").hide()
+    </script>
 </div>
 {% endblock %}
