@@ -4,7 +4,7 @@
         {% include 'messages.html' %}
         <div class="formulario">
             <h1>Bem Vindo ao Menu do Projeto </h1>
-            <p>O projeto realizado trata-se de uma aplicação Web, desenvolvida utilizando do framework Django,
+            <p>O projeto VaciServer trata-se de uma aplicação Web, desenvolvida utilizando do framework Django,
                 que implementa um servidor local que armazena o cadastros de imunizações e pacientes utilizados pelo sistema VaciVida, 
                 e então realiza a sincronização desses dados com o banco de dados central de maneira assíncrona num momento oportuno 
                 (quando a conexão com a Internet está estável, ou então em horários em que o sistema principal está menos ocupado), 
@@ -25,10 +25,12 @@
             <h3>Utilização da aplicação Web</h3>  
                 
             <p>Primeiramente, ao acessar o servidor local, o usuário será exigido um login, e efetuando-se esta autenticação,
-             será disponibilizada a utilização do software desenvolvido.  </p>
+             será disponibilizada a utilização do software desenvolvido. Para criar um superusuário, rode o script "DJANGO_CREATESUPERUSER.bat",
+             e recomendamos que o usuário criado tenha nome "admin", para conseguir sincronizar corretamente com a API.  </p>
+
             <p>A aplicação possui uma página inicial, uma página para o cadastro de pacientes,
-             uma página para o cadastro de imunizações e, para administradores, uma página de administradores,
-              uma página para criação de novos usuários e um botão para a sincronização do banco de dados local com o banco de dados remoto,
+               uma página para o cadastro de imunizações, uma página de administradores (disponível somente para superusuários),
+               uma página para criação de novos usuários e um botão para a sincronização do banco de dados local com o banco de dados remoto,
                além da função de logout.  </p>
                 
             <p>Após o cadastro de pacientes e imunizações, para realizar a sincronização com o servidor remoto, basta clicar no botão "Sincronizar", 
