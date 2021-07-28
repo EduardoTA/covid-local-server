@@ -1,4 +1,7 @@
-# covid-local-server
+# covid-local-server: 
+
+Projeto do Servidor Local hospedado em https://github.com/EduardoTA/covid-local-server  
+API para simulação do servidor central do VaciVida hospedado em https://github.com/lsantos0142/serverremoto e site encontrado em https://serverremoto.herokuapp.com/api/
 
 ## Descrição geral do projeto  
 
