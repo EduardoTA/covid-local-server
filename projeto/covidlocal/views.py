@@ -96,7 +96,7 @@ def busca_cadastro(request):
                     form_dict["CNS"] = form_dict.get("CNS").replace(" ","")
                     pk = ''
                     paciente = 0
-                    if form_dict.get('CPF') != '':
+                    if form_dict.get('CPF') != None:
                         pk = form_dict.get('CPF')
                         Paciente.objects.filter(CPF=pk).update(modificado=True,**form_dict)
                         paciente = Paciente.objects.filter(CPF=pk).values()[0]

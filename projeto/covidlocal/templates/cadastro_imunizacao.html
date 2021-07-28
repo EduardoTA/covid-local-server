@@ -87,8 +87,6 @@
         <input type='submit' value='Registrar Imunização'/>
     </form>
     <script>
-        $('select option:contains({{paciente_CPF}})').prop('selected',true);
-        $('select option:contains({{paciente_CNS}})').prop('selected',true);
         var checkList = document.getElementById('list1');
         checkList.getElementsByClassName('anchor')[0].onclick = function(evt) {
         if (checkList.classList.contains('visible'))
@@ -97,5 +95,14 @@
             checkList.classList.add('visible');
         }
     </script>
+	{% if paciente_CPF %}
+		<script>
+			$('select option:contains({{paciente_CPF}})').prop('selected',true);
+		</script>
+	{% else %}
+	    <script>
+			$('select option:contains({{paciente_cns}})').prop('selected',true);
+	    </script>
+	{% endif %}
 </div>
 {% endblock %}
