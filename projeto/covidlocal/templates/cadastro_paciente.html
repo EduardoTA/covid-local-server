@@ -86,6 +86,7 @@
                         <label for="id_gestante_view">Gestante:</label><br>
                         <input type="checkbox" id="id_gestante_view" name="gestante">
                         <label class= "cbximg" for="id_gestante_view"></label><br>
+                        {{ form.gestante }}
                     </div>
 
                     <div class="fieldWrapper"> 
@@ -93,6 +94,7 @@
                         <label for="id_puerpera_view">Puérpera:</label><br>
                         <input type="checkbox" id="id_puerpera_view" name="puerpera">
                         <label class= "cbximg" for="id_puerpera_view"></label><br>
+                        {{ form.puerpera }}
                     </div>
                 </div>
             </div>
@@ -158,10 +160,10 @@
         $(document).ready(function(){
             $("[name='sexo']").change(function(){
                 if($(this).val() != 'FEMININO'){
-                    $('#id_gestante').prop('checked', false)
-                    $('#id_puerpera').prop('checked', false)
                     $('#campos_feminina').hide()
 
+                    $('#id_gestante_view').prop('checked', false)
+                    $('#id_puerpera_view').prop('checked', false)
                 }else{
                     $('#campos_feminina').show()
                 }
@@ -173,8 +175,7 @@
     <script>
         $('#id_gestante_view').prop('checked', $("#id_gestante").prop('checked'));
         $('#id_puerpera_view').prop('checked', $("#id_puerpera").prop('checked'));
-    </script> -->
+    </script>
 </div>
 
 {% endblock %}
- 
