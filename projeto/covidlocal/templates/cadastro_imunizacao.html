@@ -36,53 +36,54 @@
             </div>
             <div class='campos'>
                 {{ form.non_field_errors }}
-                    {{ form.CRM_medico_resp.errors }}
+                    
                     <label for="{{ form.id_CRM_medico_resp }}">CRM do médico responsável:</label><br>
                     {{form.CRM_medico_resp}}
+                    {{ form.CRM_medico_resp.errors }}
 
-                    {{ form.dose.errors }}
                     <label for="{{ form.id_dose }}">Dose:</label><br>
                     {{form.dose}}
+                    {{ form.dose.errors }}
 
-                    {{ form.imunobiologico.errors }}
                     <label for="{{ form.id_imunobiologico }}">Imunobiológico:</label><br>
                     {{form.imunobiologico}}
+                    {{ form.imunobiologico.errors }}
 
-                    {{ form.lote.errors }}
                     <label for="{{ form.id_lote }}">Lote:</label><br>
                     {{form.lote}}
-
-                    {{ form.via_admn.errors }}
+                    {{ form.lote.errors }}
+                    
                     <label for="{{ form.id_via_admn }}">Via de Administração:</label><br>
                     {{form.via_admn}}
-
-                    {{ form.local_admn.errors }}
+                    {{ form.via_admn.errors }}
+                    
                     <label for="{{ form.id_local_admn }}">Local de Administração:</label><br>
                     {{form.local_admn}}
+                    {{ form.local_admn.errors }}
 
-                    {{ form.vacinador.errors }}
                     <label for="{{ form.id_vacinador }}">Vacinador:</label><br>
                     {{form.vacinador}}
+                    {{ form.vacinador.errors }}
 
-                    {{ form.estrategia.errors }}
                     <label for="{{ form.id_estrategia }}">Estratégia:</label><br>
                     {{form.estrategia}}
+                    {{ form.estrategia.errors }}
 
-                    {{ form.data_aplic.errors }}
                     <label for="{{ form.id_data_aplic }}">Data de Aplicação:</label><br>
                     {{form.data_aplic}}
+                    {{ form.data_aplic.errors }}
 
-                    {{ form.data_apraz.errors }}
                     <label for="{{ form.id_data_apraz }}">Data de Aprazamento:</label><br>
                     {{form.data_apraz}}
+                    {{ form.data_apraz.errors }}
 
-                    {{ form.estado_1_dose.errors }}
                     <label for="{{ form.id_estado_1_dose }}">Estado Primeira Dose</label><br>
                     {{form.estado_1_dose}}
+                    {{ form.estado_1_dose.errors }}
 
-                    {{ form.pais_1_dose.errors }}
                     <label for="{{ form.id_pais_1_dose }}">País Primeira Dose:</label><br>
                     {{form.pais_1_dose}}
+                    {{ form.pais_1_dose.errors }}
             </div>
         </div>
         <input type='submit' value='Registrar Imunização'/>

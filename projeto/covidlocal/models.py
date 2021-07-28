@@ -233,7 +233,7 @@ class Imunizacao(models.Model):
 
 
         # Verificação se a pessoa já fez alguma imunização
-        if Imunizacao.objects.filter(paciente=self.paciente):
+        if Imunizacao.objects.filter(paciente=self.paciente) and Imunizacao.objects.filter(paciente=self.paciente, dose="1º DOSE").first() != None:
             print("Já fez imunização")
             # Verifica se paciente já tomou vacina de dose única
             if Imunizacao.objects.filter(paciente=self.paciente, dose="UNICA"):

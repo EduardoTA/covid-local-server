@@ -45,7 +45,7 @@ def sincronizar():
             serialized_obj = ImunizacaoSerializer(imunizacoes)
             json1 = json.dumps(serialized_obj.data)
             response = requests.patch('https://serverremoto.herokuapp.com/api/Imunizacoes/', data=json1,headers=headers)
-            #print(json1)
+            print(json1)
 
     response = requests.get('https://serverremoto.herokuapp.com/api/Pacientes/',headers=headers)
     for element in response.json():
