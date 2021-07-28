@@ -50,10 +50,10 @@ def sincronizar():
     response = requests.get('https://serverremoto.herokuapp.com/api/Pacientes/',headers=headers)
     for element in response.json():
         element.pop('id')
-        if Paciente.objects.filter(CPF__iexact=element.get('CPF')):
+        if Paciente.objects.filter(CPF__iexact=element.get('CPF')) and element.get('CPF') != "null":
             Paciente.objects.filter(CPF__iexact=element.get('CPF')).update(modificado=False,**element)
             paciente = Paciente.objects.filter(CPF__iexact=element.get('CPF')).values()[0]
-        elif Paciente.objects.filter(CNS__iexact=element.get('CNS')):
+        elif Paciente.objects.filter(CNS__iexact=element.get('CNS')) and element.get('CNS') != "null":
             Paciente.objects.filter(CNS__iexact=element.get('CNS')).update(modificado=False,**element)
             paciente = Paciente.objects.filter(CPF__iexact=element.get('CNS')).values()[0]
         else:

@@ -41,7 +41,7 @@ def cadastro_paciente(request):
                 messages.error(request,'Paciente já cadastrado!')
                 pass
         elif request.POST.get('imunizar'):
-            return redirect('/cadastro_imunizacao', {})
+            return redirect('/busca_cadastro', {})
     context = {
         'form': form,
         'paciente': paciente
@@ -166,8 +166,6 @@ def busca_cadastro(request):
 # Esta é a view de cadastro de imunização, chamada logo após a busca de paciente
 @login_required
 def cadastro_imunizacao(request, paciente_CPF, paciente_CNS):
-    print(paciente_CPF)
-    print(paciente_CNS)
     data = AtualizaServer.objects.all()[0]
     if data.data_atualizacao != data.versao_local:
         messages.error(request, 'Favor atualizar o servidor remoto')
@@ -182,4 +180,4 @@ def cadastro_imunizacao(request, paciente_CPF, paciente_CNS):
             messages.error(request,e)
     else:
         form = ImunizacaoForm()
-    return render(request, 'cadastro_imunizacao.html', {'form': form})
+    return render(request, 'cadastro_imunizacao.html', {'form': form, 'paciente_CPF': paciente_CPF, 'paciente_CNS':paciente_CNS})
