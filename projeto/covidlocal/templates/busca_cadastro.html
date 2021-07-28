@@ -10,13 +10,13 @@
         <input class="searchfield" id="searchbox" name="pesquisa" type="text" value="{{ request.GET.pesquisa }}" placeholder="CPF ou CNS"/>
         <input type="submit" value="Pesquisar Paciente" name="pesquisa_paciente"/>
     {% if paciente %}
-        <p>
         <h2>Cadastro de Paciente</h2>
             <form method="POST"> {% csrf_token %}
                 <!-- {{ form.as_p }} -->
 
                 <div class='bloco'>
                     <hr>
+                    <br>
                     <br>
                     <div class='titulos'>
                         <p>Identificação</p>
@@ -165,7 +165,6 @@
         {% if pesquisa %}
             <input type="submit" value="Cadastrar Paciente" name="cadastra"/>
         {% endif %}
-        </p>
     {% endif %}
     </form>
 </div>
