@@ -34,6 +34,9 @@ def cadastro_paciente(request):
             try:
                 form = PacienteForm(request.POST)
                 if form.is_valid():
+                    form.cleaned_data["CPF"] = form.cleaned_data.get("CPF").replace(".","")
+                    form.cleaned_data["CPF"] = form.cleaned_data.get("CPF").replace("-","")
+                    form.cleaned_data["CNS"] = form.cleaned_data.get("CNS").replace(" ","")
                     paciente = Paciente.objects.create(modificado=True,**form.cleaned_data)
                     messages.success(request, 'Cadastro criado com sucesso!')
             except Exception as e:
@@ -88,6 +91,9 @@ def busca_cadastro(request):
                 form = PacienteForm(request.POST)
                 if form.is_valid():
                     form_dict = form.cleaned_data
+                    form_dict["CPF"] = form_dict.get("CPF").replace(".","")
+                    form_dict["CPF"] = form_dict.get("CPF").replace("-","")
+                    form_dict["CNS"] = form_dict.get("CNS").replace(" ","")
                     pk = ''
                     paciente = 0
                     if form_dict.get('CPF') != '':
@@ -106,6 +112,9 @@ def busca_cadastro(request):
                     form = PacienteForm(request.POST)
                     if form.is_valid():
                         form_dict = form.cleaned_data
+                        form_dict["CPF"] = form_dict.get("CPF").replace(".","")
+                        form_dict["CPF"] = form_dict.get("CPF").replace("-","")
+                        form_dict["CNS"] = form_dict.get("CNS").replace(" ","")
                         pk = ''
                         paciente = 0
                         if form_dict.get('CNS') != '':
@@ -127,6 +136,9 @@ def busca_cadastro(request):
             form = PacienteForm(request.POST)
             if form.is_valid():
                 form_dict = form.cleaned_data
+                form_dict["CPF"] = form_dict.get("CPF").replace(".","")
+                form_dict["CPF"] = form_dict.get("CPF").replace("-","")
+                form_dict["CNS"] = form_dict.get("CNS").replace(" ","")
                 pk = ''
                 paciente1 = 0
                 if form_dict.get('CPF') != '':
@@ -143,6 +155,9 @@ def busca_cadastro(request):
             pesquisa = request.POST.get('pesquisa')
             try:
                 paciente = 0
+                pesquisa = pesquisa.replace(".","")
+                pesquisa = pesquisa.replace("-","")
+                pesquisa = pesquisa.replace(" ","")
                 if Paciente.objects.filter(CPF__iexact=pesquisa):
                     paciente = Paciente.objects.filter(CPF__iexact=pesquisa).values()[0]
                     paciente.pop('id')

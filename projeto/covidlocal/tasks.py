@@ -55,7 +55,7 @@ def sincronizar():
             paciente = Paciente.objects.filter(CPF__iexact=element.get('CPF')).values()[0]
         elif Paciente.objects.filter(CNS__iexact=element.get('CNS')) and element.get('CNS') != "null":
             Paciente.objects.filter(CNS__iexact=element.get('CNS')).update(modificado=False,**element)
-            paciente = Paciente.objects.filter(CPF__iexact=element.get('CNS')).values()[0]
+            paciente = Paciente.objects.filter(CNS__iexact=element.get('CNS')).values()[0]
         else:
             Paciente.objects.create(modificado = False, **element)
 
