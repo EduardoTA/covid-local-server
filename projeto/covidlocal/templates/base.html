@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://kit.fontawesome.com/34394b45e0.js" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     
     <!-- Não tirar, JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -11,17 +9,18 @@
     <link href="{% static "css/basestyle.css" %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static "css/form.css" %}" rel="stylesheet">
     <link rel="icon" type="image/png" href="{% static "favicon/favicon-32x32.png" %}" sizes="32x32" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VaciServer</title>
 </head>
 <body>
     <nav>
-        <input type="checkbox" id="check">
-        <label for="check" class="menubtn">
-            <i class="fas  fa-bars"></i>
-        </label>
         <a class="logo" href="/">
             <img src="{% static "logo/VaciServer.png" %}" alt="VaciServer" width="200" height="80" /> 
         </a>
+        <input type="checkbox" id="check">
+        <label for="check" class="menubtn">
+            <img src="{% static "icons/hbmenu.png" %}" class="icon-bars"> </img>
+        </label>
         <ul class = "ul_base">
             {% if user.is_authenticated %}
             <!-- <li class = "li_base"><a href="/">Home</a></li> -->
