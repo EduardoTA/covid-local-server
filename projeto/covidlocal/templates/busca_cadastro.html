@@ -13,6 +13,8 @@
         <br>
         <br>
         <br>
+        {{form.gestante}}
+        {{form.puerpera}}
         <h2>⠀</h2>
             <form method="POST"> {% csrf_token %}
                 <!-- {{ form.as_p }} -->
@@ -94,16 +96,17 @@
                         </div>
                         <div class="fieldWrapper"> 
                             {{ form.gestante.errors }}
-                            <label for="{{ form.gestante.id_for_label }}">Gestante:</label><br>
-                            <input type="checkbox" id="id_gestante" name="gestante">
-                            <label class= "cbximg" for="id_gestante"></label><br>
+                            <label for="id_gestante_view">Gestante:</label><br>
+                            <input type="checkbox" id="id_gestante_view" name="gestante">
+                            <label class= "cbximg" for="id_gestante_view"></label><br>
+                            
                         </div>
         
                         <div class="fieldWrapper"> 
                             {{ form.puerpera.errors }}
-                            <label for="{{ form.puerpera.id_for_label }}">Puérpera:</label><br>
-                            <input type="checkbox" id="id_puerpera" name="puerpera">
-                            <label class= "cbximg" for="id_puerpera"></label><br>
+                            <label for="id_puerpera_view">Puérpera:</label><br>
+                            <input type="checkbox" id="id_puerpera_view" name="puerpera">
+                            <label class= "cbximg" for="id_puerpera_view"></label><br>
                         </div>
                     </div>
                 </div>
@@ -171,5 +174,11 @@
     {% endif %}
     </form>
 </div>
+
+<script>
+    $('#id_gestante_view').prop('checked', $("#id_gestante").prop('checked'));
+    $('#id_puerpera_view').prop('checked', $("#id_puerpera").prop('checked'));
+</script>
+
 
 {% endblock %}
