@@ -8,7 +8,7 @@ Para a simulação do servidor central do VaciVida, foi utilizada uma API hosped
 
 ## Instruções de Instalação e Execução do Servidor Local  
 
-Para rodar o projeto em sua máquina, é necessário, primeiramente ter instalado o GIT, um interpretador de **python 3.9**, o framework **Django** e a ferramenta **pipenv**, de criação de ambientes virtuais em python.  
+Para rodar o projeto em sua máquina, é necessário, primeiramente ter instalado o GIT, um interpretador de **python 3.9**, o framework **Django**, o Redis (versão utilizada: https://github.com/tporadowski/redis/releases/download/v5.0.10/Redis-x64-5.0.10.msi) e a ferramenta **pipenv**, de criação de ambientes virtuais em python.  
 
 Tendo essas ferramentas instaladas, clone o repositório GIT (branch main) e siga os seguintes passos:  
 
