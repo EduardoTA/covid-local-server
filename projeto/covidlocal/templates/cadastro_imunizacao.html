@@ -4,7 +4,7 @@
     {% include 'messages.html' %}
     <h2>Registrar Imunização</h2>    
     <form method="POST"> {% csrf_token %}
-        {{form.errors}}
+        <!-- {{form.errors}} -->
         <div class='bloco'>
             <div class='titulos'>
                 <p>Identificação</p>
@@ -18,7 +18,7 @@
                     <label for="{{ form.id_grupo }}">Grupo de atendimento:</label><br>
                     {{form.grupo}}
                     {{ form.comorbidades.errors }}
-                    <label for="{{ form.comorbidades.id_for_label }}">Comorbidades:</label><br>
+                    <label id="comorb_label"  for="{{ form.comorbidades.id_for_label }}">Comorbidades:</label><br>
                     <div id="list1" class="dropdown-check-list" tabindex="100">
                     <span class="anchor">Selecione a comorbidade:</span>
                     {{ form.comorbidades }}
@@ -105,8 +105,32 @@
 			$('select option:contains({{paciente_cns}})').prop('selected',true);
 	    </script>
 	{% endif %}
+
     <script>
-        $("#BPC").hide()
+        $("#BPC").hide();
+        $("#list1").hide();
+        $("#comorb_label").hide();
+        $(document).ready(function(){
+            $("#id_grupo").change(function(){
+                if($(this).val() != 'COMORBIDADE'){
+                    $("#list1").hide();
+                    $("#comorb_label").hide();
+
+                }else{
+                    $("#list1").show();
+                    $("#comorb_label").show();
+
+                }
+            });
+            $("#id_grupo").change(function(){
+                if($(this).val() != 'PESSOA COM DEFICIENCIA PERMANENTE SEVERA'){
+                    $("#BPC").hide();
+
+                }else{
+                    $("#BPC").show();
+                }
+            });
+        });
     </script>
 </div>
 {% endblock %}
