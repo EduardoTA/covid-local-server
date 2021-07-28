@@ -80,18 +80,20 @@
                     <label for="{{ form.raca.id_for_label }}">Raça:</label><br>
                     {{ form.raca }}
                 </div>
-                <div class="fieldWrapper"> 
-                    {{ form.gestante.errors }}
-                    <label for="{{ form.gestante.id_for_label }}">Gestante:</label><br>
-                    <input type="checkbox" id="id_gestante" name="gestante">
-                    <label class= "cbximg" for="id_gestante"></label><br>
-                </div>
+                <div id="campos_feminina">
+                    <div class="fieldWrapper"> 
+                        {{ form.gestante.errors }}
+                        <label for="id_gestante_view">Gestante:</label><br>
+                        <input type="checkbox" id="id_gestante_view" name="gestante">
+                        <label class= "cbximg" for="id_gestante_view"></label><br>
+                    </div>
 
-                <div class="fieldWrapper"> 
-                    {{ form.puerpera.errors }}
-                    <label for="{{ form.puerpera.id_for_label }}">Puérpera:</label><br>
-                    <input type="checkbox" id="id_puerpera" name="puerpera">
-                    <label class= "cbximg" for="id_puerpera"></label><br>
+                    <div class="fieldWrapper"> 
+                        {{ form.puerpera.errors }}
+                        <label for="id_puerpera_view">Puérpera:</label><br>
+                        <input type="checkbox" id="id_puerpera_view" name="puerpera">
+                        <label class= "cbximg" for="id_puerpera_view"></label><br>
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,6 +153,27 @@
         <input type="submit" value="Registrar Imunizacao" name="imunizar"/>
     </form>
     {% endif %}
+
+    <script>
+        $(document).ready(function(){
+            $("[name='sexo']").change(function(){
+                if($(this).val() != 'FEMININO'){
+                    $('#campos_feminina').hide()
+
+                    $('#id_gestante').prop('checked', false)
+                    $('#id_puerpera').prop('checked', false)
+                }else{
+                    $('#campos_feminina').show()
+                }
+            });
+        });
+    </script>
+
+    <!-- Modifica os valores de campos de gestante e puérpera, baseado na resposta do servidor local -->
+    <script>
+        $('#id_gestante_view').prop('checked', $("#id_gestante").prop('checked'));
+        $('#id_puerpera_view').prop('checked', $("#id_puerpera").prop('checked'));
+    </script> -->
 </div>
 
 {% endblock %}

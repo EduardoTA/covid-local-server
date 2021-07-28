@@ -99,7 +99,6 @@
                             <label for="id_gestante_view">Gestante:</label><br>
                             <input type="checkbox" id="id_gestante_view" name="gestante">
                             <label class= "cbximg" for="id_gestante_view"></label><br>
-                            
                         </div>
         
                         <div class="fieldWrapper"> 
@@ -175,6 +174,7 @@
     </form>
 </div>
 
+<!-- Modifica os valores de campos de gestante e puérpera, baseado na resposta do servidor local -->
 <script>
     $('#id_gestante_view').prop('checked', $("#id_gestante").prop('checked'));
     $('#id_puerpera_view').prop('checked', $("#id_puerpera").prop('checked'));

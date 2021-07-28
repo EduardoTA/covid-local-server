@@ -40,7 +40,7 @@ def cadastro_paciente(request):
                     paciente = Paciente.objects.create(modificado=True,**form.cleaned_data)
                     messages.success(request, 'Cadastro criado com sucesso!')
             except Exception as e:
-                print(e)
+                #print(e)
                 messages.error(request,'Paciente já cadastrado!')
                 pass
         elif request.POST.get('imunizar'):
@@ -49,6 +49,7 @@ def cadastro_paciente(request):
         'form': form,
         'paciente': paciente
     }
+    print(form)
     return render(request, "cadastro_paciente.html", context)
 
 # Esta é a view da home da aplicação web
@@ -175,6 +176,7 @@ def busca_cadastro(request):
             except:
                 messages.error(request,'Erro!')
                 pass
+            print(form)
             return render(request, 'busca_cadastro.html', {'pesquisa':pesquisa,'paciente':paciente, 'form':form, 'confirmado': confirmado})
     return render(request, "busca_cadastro.html", {'confirmado': confirmado})
 
