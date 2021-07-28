@@ -13,7 +13,6 @@
                 {{ form.non_field_errors }}
                 <div class="fieldWrapper"> 
                     {{ form.CPF.errors }}
-                    {{paciente_CPF}}
                     <label for="{{ form.CPF.id_for_label }}">CPF:</label><br>
                     {{form.paciente}}
                     {{ form.comorbidades }}
@@ -23,9 +22,14 @@
         
         <input type='submit' formnovalidate  value='Registrar Imunização'/>
     </form>
-    <script>
-        $('select option:contains({{paciente_CPF}})').prop('selected',true);
-        $('select option:contains({{paciente_CNS}})').prop('selected',true);
-    </script>
+	{% if paciente_CPF %}
+		<script>
+			$('select option:contains({{paciente_CPF}})').prop('selected',true);
+		</script>
+	{% else %}
+	    <script>
+			$('select option:contains({{paciente_cns}})').prop('selected',true);
+	    </script>
+	{% endif %}
 </div>
 {% endblock %}
