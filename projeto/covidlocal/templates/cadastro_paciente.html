@@ -158,10 +158,10 @@
         $(document).ready(function(){
             $("[name='sexo']").change(function(){
                 if($(this).val() != 'FEMININO'){
-                    $('#campos_feminina').hide()
-
                     $('#id_gestante').prop('checked', false)
                     $('#id_puerpera').prop('checked', false)
+                    $('#campos_feminina').hide()
+
                 }else{
                     $('#campos_feminina').show()
                 }

@@ -44,6 +44,7 @@
             <li class = "li_base"><a href="#" name="sincronizar">Sincronizar</a></li>
             {% endif %}
             {% if user.is_authenticated %}
+            <li><p>Usuário: {{user.get_username}}</p></li>
             <li class = "li_base"><a href="/logout">Logout</a></li>
             {% endif %}
             {% if user.is_authenticated %}

@@ -49,6 +49,17 @@ nav ul li a:hover {
     color: rgb(67, 18, 83);
 }
 
+nav ul li p {
+    height: auto;
+    font-size: 18px;
+    color: rgb(38, 199, 129);
+    text-decoration: none;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+
 .logo {
     display: inline-block;
     line-height: 80px;
@@ -94,7 +105,7 @@ li.usuario {
     left: 20px;
 }
 
-@media screen and (max-width:1200px) {
+@media screen and (max-width:1356px) {
 
     .menubtn {
         display: inline-block;
