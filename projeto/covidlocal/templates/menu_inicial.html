@@ -2,9 +2,45 @@
 {% block content %}
     <div class="pagina_principal">
         {% include 'messages.html' %}
-        <h1>Bem Vindo ao Menu do Projeto </h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla pariatur omnis fugiat repudiandae possimus obcaecati rerum veniam provident, distinctio labore hic odit libero cum neque, quis maiores aliquid. Ad, cum.</p>
-    </div>
+        <div class="formulario">
+            <h1>Bem Vindo ao Menu do Projeto </h1>
+            <p>O projeto realizado trata-se de uma aplicação Web, desenvolvida utilizando do framework Django,
+                que implementa um servidor local que armazena o cadastros de imunizações e pacientes utilizados pelo sistema VaciVida, 
+                e então realiza a sincronização desses dados com o banco de dados central de maneira assíncrona num momento oportuno 
+                (quando a conexão com a Internet está estável, ou então em horários em que o sistema principal está menos ocupado), 
+                a fim de diminuir-se a utilização do servidor central do VaciVida (que pode causar atrasos na vacinação durante o dia), 
+                aumentando-se a velocidade dos cadastros de imunizações e pacientes, e assim, aumentando-se o ritmo de vacinações neste 
+                período de pandemia.</p>
+               
+            <p>Para a simulação do servidor central do VaciVida, foi utilizada uma API hospedada na plataforma Heroku:
+            https://serverremoto.herokuapp.com/api, sincronizada com o repositório no GitHub: https://github.com/lsantos0142/serverremoto.</p>  
+            
+            <h3>Utilização da aplicação Web em dispositivos mobile </h3> 
+
+            <p>Para acessar o servidor local de uma outra máquina na mesma rede local, utilize o comando "ipconfig" num terminal  ou Command Prompt
+                 do computador que está rodando a aplicação do servidor local para descobrir seu endereço IP local. No seu navegador do dispositivo 
+                 mobile, digite o endereço IP desta máquina na barra de pesquisa seguido de ":8000", por exemplo, caso o IP do seu computador seja 
+                 192.168.15.163, digite 192.168.15.163:8000 na barra de endereço do navegador.</p>  
+                
+            <h3>Utilização da aplicação Web</h3>  
+                
+            <p>Primeiramente, ao acessar o servidor local, o usuário será exigido um login, e efetuando-se esta autenticação,
+             será disponibilizada a utilização do software desenvolvido.  </p>
+            <p>A aplicação possui uma página inicial, uma página para o cadastro de pacientes,
+             uma página para o cadastro de imunizações e, para administradores, uma página de administradores,
+              uma página para criação de novos usuários e um botão para a sincronização do banco de dados local com o banco de dados remoto,
+               além da função de logout.  </p>
+                
+            <p>Após o cadastro de pacientes e imunizações, para realizar a sincronização com o servidor remoto, basta clicar no botão "Sincronizar", 
+                e então, os dados irão ser enviados ao servidor remoto hospedado no Heroku, e também serão recebidos novos dados de pacientes e 
+                imunizações que eventualmente não constarem no servidor local mas existem no servidor remoto.</p>  
+                
+            <p>O servidor local possui a funcionalidade de apenas enviar os dados que foram alterados localmente para o servidor remoto, 
+                diminuindo-se a quantidade de dados a serem transmitidos, otimizando-se a conexão entre os servidores para que não haja 
+                congestionamento no servidor central.</p>  
+
+        </div>
+        </div>
 
         
 {% endblock %}
