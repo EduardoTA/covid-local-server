@@ -42,7 +42,10 @@ class Paciente(models.Model):
     modificado = models.BooleanField()
     
     def __str__(self):
-        return str('CPF: '+str(self.CPF)+', Nome: '+self.nome)
+        if self.CPF != None:
+            return str('CPF: '+str(self.CPF)+', Nome: '+self.nome)
+        else:
+            return str('CNS: '+str(self.CNS)+', Nome: '+self.nome)
     
     class Meta:
         verbose_name_plural = 'Pacientes'
