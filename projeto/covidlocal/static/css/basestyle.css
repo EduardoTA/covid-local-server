@@ -133,7 +133,7 @@ li.usuario {
     
 }
 
-ul.messagelist {
+ul.messagelist, ul.errorlist {
     padding: 0;
     margin: 0;
 }
@@ -150,7 +150,7 @@ ul.messagelist li.success {
     border-radius: 4px;
 }
 
-ul.messagelist li.error {
+ul.messagelist li.error, ul.errorlist.nonfield li{
     display: block;
     font-weight: 400;
     font-size: 18px;
