@@ -3,6 +3,7 @@
 Projeto do Servidor Local hospedado em https://github.com/EduardoTA/covid-local-server  
 API para simulação do servidor central do VaciVida hospedado em https://github.com/lsantos0142/serverremoto e site encontrado em https://serverremoto.herokuapp.com/api/
 Link do vídeo com a apresentação da entrega final: https://www.youtube.com/watch?v=BGC8BmZ2E70
+Link do Miro utilizado durante a apresentação: https://miro.com/app/board/o9J_l4zM_Hc=/
 
 ## Descrição geral do projeto  
 
