@@ -89,3 +89,6 @@ Pais 1ªdose:
         
 * Após registrar os dados, clique em Registrar Imunização, e assim o cadastro da imunização estará finalizado.  
 * Para sincronizar os dados cadastrados com o servidor remoto hospedado no Heroku, clique no botão Sincronizar na barra de navegação e assim será possível observar o novo cadastro em: https://serverremoto.herokuapp.com/api , clicando nos links referentes ao Paciente e à Imunização.  
+
+**Link do vídeo com a apresentação da entrega final: https://www.youtube.com/watch?v=BGC8BmZ2E70**  
+**Link do Miro utilizado durante a apresentação: http://gg.gg/VaciServerMiro**  
